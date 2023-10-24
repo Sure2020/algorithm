@@ -54,4 +54,10 @@ public class Tools {
             System.out.println(val);
         }
     }
+    public static void listPriter(char[] s){
+        for (char c: s ) {
+            System.out.print(c);
+        }
+        System.out.println();
+    }
 }
