@@ -48,4 +48,10 @@ public class Tools {
             head = head.next;
         }
     }
+
+    public static void listPriter(int[] nums){
+        for (int val: nums ) {
+            System.out.println(val);
+        }
+    }
 }
