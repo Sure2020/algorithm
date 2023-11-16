@@ -32,7 +32,8 @@ public class LC104_maximum_depth_of_binary_tree {
         tempNode.left = new TreeNode(15);
         tempNode.right = new TreeNode(7);
 
-        System.out.println(maxDepth(root));
+        //System.out.println(maxDepth(root));
+        System.out.println(recurse(root));
 
         res=0;
 
@@ -40,7 +41,8 @@ public class LC104_maximum_depth_of_binary_tree {
         TreeNode tempNode2 = new TreeNode();
         TreeNode root2 = new TreeNode(1);
         root2.right = new TreeNode(2);
-        System.out.println(maxDepth(root2));
+        //System.out.println(maxDepth(root2));
+        System.out.println(recurse(root2));
 
     }
     // 记录最大深度
@@ -71,5 +73,12 @@ public class LC104_maximum_depth_of_binary_tree {
         depth--;
     }
 
-
+    static int recurse(TreeNode root){
+        if (root==null){
+            return 0;
+        }
+        int left = recurse(root.left);
+        int right = recurse(root.right);
+        return Math.max(left, right)+1;
+    }
 }
