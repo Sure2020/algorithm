@@ -17,6 +17,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @program: PACKAGE_NAME
@@ -57,6 +58,13 @@ public class Tools {
     public static void listPriter(char[] s){
         for (char c: s ) {
             System.out.print(c);
+        }
+        System.out.println();
+    }
+
+    public static void listPriter(List<Integer> list){
+        for (Integer i: list ) {
+            System.out.print(i);
         }
         System.out.println();
     }
