@@ -22,9 +22,9 @@
  * @author: w15021
  * @create: 2023-10-16
  **/
-public class LinkedList {
+public class MyLinkedList {
     ListNode head;
-    public LinkedList (){
+    public MyLinkedList(){
         head = null;
     }
     public void append(int val){
