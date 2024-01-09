@@ -24,6 +24,8 @@
  **/
 public class TestLinkedList {
     public static void main(String[] args) {
+        String str = "kth-node-from-end-of-list-lcci";
+        System.out.println(str.replaceAll("-","_"));
         System.out.println("testing");
         ListNode listNode = new ListNode(-1);
         ListNode head = listNode;
