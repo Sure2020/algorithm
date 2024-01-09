@@ -24,38 +24,48 @@
  **/
 public class MST02_06_palindrome_linked_list_lcci {
     public static void main(String[] args) {
-//        int[] listInt = new int[]{1,1,2,1};
-        int[] listInt = new int[]{1,2};
+        int[] listInt = new int[]{1,1,2,1};
+//        int[] listInt = new int[]{1,2};
         ListNode listNode1=Tools.listNodeCreater(listInt);
-        //System.out.println(isPalindrome(listNode1));
+        System.out.println(isPalindrome(listNode1));
         //Tools.listNodePrinter(reverseLinkedList(listNode1));
+        Tools.listNodePrinter(listNode1);
     }
-    public boolean isPalindrome(ListNode head) {
+    public static boolean isPalindrome(ListNode head) {
         if(head==null||head.next==null){
             return true;
         }
+        // half
         ListNode fasterPoint = head, slowerPoint=head;
         while(fasterPoint!=null && fasterPoint.next!=null){
             slowerPoint = slowerPoint.next;
             fasterPoint = fasterPoint.next.next;
         }
-        if (fasterPoint!=null){
-            slowerPoint = slowerPoint.next;
-        }
+
+        //judge
         ListNode reversedLinkedList = reverseLinkedList(slowerPoint);
         ListNode point1 = head, point2 = reversedLinkedList;
+        boolean result = true;
         while(point1!=null&&point2!=null){
             if(point1.val != point2.val){
-                return false;
+                result = false;
+                break;
             }
             point1 = point1.next;
             point2 = point2.next;
         }
-        return true;
+        // recover head
+        ListNode reversedLinkedListAgain =reverseLinkedList(reversedLinkedList);
+        ListNode reversedLinkedListAgainCursor = reversedLinkedListAgain;
+        if(fasterPoint==null){
+            reversedLinkedListAgainCursor = reversedLinkedListAgainCursor.next;
+        }
+        slowerPoint.next = reversedLinkedListAgainCursor;
 
+        return result;
 
     }
-    public ListNode reverseLinkedList (ListNode head){
+    public static ListNode reverseLinkedList (ListNode head){
         if(head==null||head.next==null){
             return head;
         }
