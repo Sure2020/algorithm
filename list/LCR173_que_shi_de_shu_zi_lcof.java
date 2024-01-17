@@ -49,6 +49,7 @@ public class LCR173_que_shi_de_shu_zi_lcof {
         return records[left-1]+1;
 
     }
+    //left <=right
     public int takeAttendance2(int[] records) {
         int left = 0,right=records.length-1;
         while (left<=right){
@@ -57,6 +58,19 @@ public class LCR173_que_shi_de_shu_zi_lcof {
                 left = mid+1;
             }else{
                 right = mid-1;
+            }
+        }
+        return left;
+    }
+    // left < right;
+    public int takeAttendance3(int[] records) {
+        int left = 0, right = records.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (records[mid] == mid) {
+                left = mid + 1;
+            } else if (records[mid] > mid) {
+                right = mid;
             }
         }
         return left;
