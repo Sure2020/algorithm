@@ -16,6 +16,9 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
@@ -80,5 +83,33 @@ public class LC104_maximum_depth_of_binary_tree {
         int left = recurse(root.left);
         int right = recurse(root.right);
         return Math.max(left, right)+1;
+    }
+
+    // BFS
+    public int minDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        Queue<TreeNode> q = new LinkedList();
+        q.offer(root);
+        int depth = 1;
+        while(!q.isEmpty()){
+            int size = q.size();
+            for (int i = 0; i< size; i++){
+                TreeNode currentNode = q.poll();
+                if(currentNode.left == null&& currentNode.right==null){
+                    return depth;
+                }
+                if(currentNode.left!=null){
+                    q.offer(currentNode.left);
+                }
+                if(currentNode.right!=null){
+                    q.offer(currentNode.right);
+                }
+
+            }
+            depth ++;
+        }
+        return depth;
     }
 }
