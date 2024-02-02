@@ -17,18 +17,11 @@
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-/**
- * @program: PACKAGE_NAME
- * @description: xxx
- * @author: Admin
- * @create: 2024-02-01
- **/
 public class LC257_binary_tree_paths {
     public static void main(String[] args) {
-        TreeNode tempNode = new TreeNode();
+        TreeNode tempNode;
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
@@ -38,9 +31,9 @@ public class LC257_binary_tree_paths {
         tempNode = root.right;
         tempNode.left = new TreeNode(10);
         //path2(root,"");
-        path(root,"");
-        List<String> res = new ArrayList<>();
-        res.addAll(result);
+        //path(root,"");
+        path3(root);
+        List<String> res = new ArrayList<>(result);
         result.clear();
         System.out.println(res);
     }
@@ -78,5 +71,22 @@ public class LC257_binary_tree_paths {
             path2(root.right, onePath);
         }
 
+    }
+    static StringBuilder stringBuilderPath = new StringBuilder();
+    //dfs
+    public static void path3(TreeNode root){
+        if(root==null){
+            return;
+        }
+        int size = stringBuilderPath.length();
+        stringBuilderPath.append(Integer.toString(root.val));
+        if(root.left==null&&root.right==null){
+            result.add(stringBuilderPath.toString());
+        }else {
+            stringBuilderPath.append("->");
+        }
+        path3(root.left);
+        path3(root.right);
+        stringBuilderPath.delete(size, stringBuilderPath.length());
     }
 }
