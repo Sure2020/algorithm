@@ -30,8 +30,8 @@ public class LC257_binary_tree_paths {
 
         tempNode = root.right;
         tempNode.left = new TreeNode(10);
-        //path2(root,"");
-        //path(root,"");
+        path2(null,"");
+        path(null,"");
         path3(root);
         List<String> res = new ArrayList<>(result);
         result.clear();
@@ -79,7 +79,7 @@ public class LC257_binary_tree_paths {
             return;
         }
         int size = stringBuilderPath.length();
-        stringBuilderPath.append(Integer.toString(root.val));
+        stringBuilderPath.append(root.val);
         if(root.left==null&&root.right==null){
             result.add(stringBuilderPath.toString());
         }else {
