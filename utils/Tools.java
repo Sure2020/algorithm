@@ -94,4 +94,23 @@ public class Tools {
         treePrinterPreorder(root.left);
         treePrinterPreorder(root.right);
     }
+
+    public static void printTree(TreeNode root) {
+        printTree(root, 0);
+    }
+
+    private static void printTree(TreeNode node, int level) {
+        if (node == null)
+            return;
+
+        printTree(node.right, level + 1);
+        if (level != 0) {
+            for (int i = 0; i < level - 1; i++)
+                System.out.print("|\t");
+            System.out.println("|-------" + node.val);
+        } else {
+            System.out.println(node.val);
+        }
+        printTree(node.left, level + 1);
+    }
 }
