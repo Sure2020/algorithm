@@ -16,7 +16,6 @@
  * --------------------------------------------------------------------
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +25,10 @@ import java.util.List;
  * @create: 2023-10-18
  **/
 public class Tools {
+    public static void main(String[] args) {
+        TreeNode root = treeCreater(new int[] {1,2,3,-1,5,-1,4});
+        treePrinterPreorder(root);
+    }
     public static ListNode listNodeCreater(int[] sourceList) {
         if (sourceList == null || sourceList.length == 0) {
             return null;
@@ -67,5 +70,28 @@ public class Tools {
             System.out.print(i);
         }
         System.out.println();
+    }
+
+    public static TreeNode treeCreater(int[] source){
+        return treeCreaterRecursor(source, 0);
+    }
+    public static TreeNode treeCreaterRecursor(int[] source, int index){
+        if(index>=source.length||source[index]==-1){
+            return null;
+        }
+        TreeNode root = new TreeNode(source[index]);
+        root.left = treeCreaterRecursor(source, 2*index+1);
+        root.right = treeCreaterRecursor(source, 2*index+2);
+
+        return root;
+    }
+
+    public static void treePrinterPreorder(TreeNode root){
+        if(root==null){
+            return;
+        }
+        System.out.println(root.val);
+        treePrinterPreorder(root.left);
+        treePrinterPreorder(root.right);
     }
 }
