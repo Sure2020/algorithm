@@ -31,7 +31,7 @@ public class BFS {
         Tools.printTree(root);
         bfs(root);//12354
         System.out.println("############");
-        bfs_practise1(root);
+        bfs_practise2(root);
     }
     public static void bfs(TreeNode root){
         if(root==null){
@@ -66,6 +66,27 @@ public class BFS {
                 TreeNode tempNode = q.poll();
                 System.out.print(tempNode.val);
                 if(tempNode.left !=null){
+                    q.offer(tempNode.left);
+                }
+                if(tempNode.right !=null){
+                    q.offer(tempNode.right);
+                }
+            }
+        }
+    }
+
+    public static void bfs_practise2(TreeNode root){
+        if(root==null){
+            return;
+        }
+        Queue<TreeNode> q = new LinkedList();
+        q.offer(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i=0;i<size;i++){
+                TreeNode tempNode = q.poll();
+                System.out.print(tempNode.val);
+                if(tempNode.left!=null){
                     q.offer(tempNode.left);
                 }
                 if(tempNode.right !=null){
