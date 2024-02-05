@@ -25,7 +25,7 @@
 public class DFS {
     public static void main(String[] args) {
         TreeNode root = Tools.treeCreater(new int[]{1,2,3,-1,5,-1,4});
-        Tools.printTree(root);
+        Tools.treePrettyPrinter(root);
         dfs(root);//12534
     }
     public static void dfs(TreeNode root){

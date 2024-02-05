@@ -28,7 +28,7 @@ import java.util.Queue;
 public class BFS {
     public static void main(String[] args) {
         TreeNode root = Tools.treeCreater(new int[]{1,2,3,-1,5,-1,4});
-        Tools.printTree(root);
+        Tools.treePrettyPrinter(root);
         bfs(root);//12354
         System.out.println("############");
         bfs_practise2(root);
