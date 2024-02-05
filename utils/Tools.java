@@ -75,7 +75,7 @@ public class Tools {
     public static TreeNode treeCreater(int[] source){
         return treeCreaterRecursor(source, 0);
     }
-    public static TreeNode treeCreaterRecursor(int[] source, int index){
+    private static TreeNode treeCreaterRecursor(int[] source, int index){
         if(index>=source.length||source[index]==-1){
             return null;
         }
@@ -95,7 +95,7 @@ public class Tools {
         treePrinterPreorder(root.right);
     }
 
-    public static void printTree(TreeNode root) {
+    public static void treePrettyPrinter(TreeNode root) {
         printTree(root, 0);
     }
 
