@@ -49,6 +49,7 @@ public class LC662_maximum_width_of_binary_tree {
         root.right.left.left.left.left.left.left = new TreeNode(0);
         Tools.treePrettyPrinter(root);
         //System.out.println(widthOfBinaryTree(root));
+        //System.out.println(widthOfBinaryTreePractise1(root));
     }
     // 记录节点和对应编号
     class Pair {
@@ -154,6 +155,52 @@ public class LC662_maximum_width_of_binary_tree {
             }
             System.out.println("width: "+ width);
 
+        }
+    }
+
+
+    //按labuladong练习1
+    class NodeAndId{
+        TreeNode node;
+        int id;
+        public NodeAndId(TreeNode node, int id){
+            this.node = node;
+            this.id = id;
+        }
+    }
+    public int widthOfBinaryTreePractise1(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        bfsPractise1(root);
+        return widthPractise1;
+    }
+    int widthPractise1=0;
+    public void bfsPractise1(TreeNode root){
+        if(root==null){
+            return;
+        }
+        Queue<NodeAndId> q = new LinkedList<>();
+        q.offer(new NodeAndId(root, 1));
+        while(!q.isEmpty()){
+            int size = q.size();
+            int start=0,end =0;
+            for(int i = 0;i< size;i++){
+                NodeAndId nodeAndId = q.poll();
+                if (i==0){
+                    start = nodeAndId.id;
+                }
+                if (i==size-1){
+                    end = nodeAndId.id;
+                }
+                if(nodeAndId.node.left!=null){
+                    q.offer(new NodeAndId(nodeAndId.node.left, 2*nodeAndId.id));
+                }
+                if(nodeAndId.node.right!=null){
+                    q.offer(new NodeAndId(nodeAndId.node.right, 2*nodeAndId.id+1));
+                }
+            }
+            widthPractise1 = Math.max(widthPractise1, end-start+1);
         }
     }
 }
