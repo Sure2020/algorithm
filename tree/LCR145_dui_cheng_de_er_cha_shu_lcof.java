@@ -19,6 +19,7 @@
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
+ * 这道题又是差点独立完成。看被注释掉的部分，太急于返回true了。返回true的条件是所有子树都对称，所以需要递归，而返回false的条件则是只需发现不对称即可立马返回false
  * @author: Admin
  * @create: 2024-02-07
  **/
@@ -49,7 +50,7 @@ public class LCR145_dui_cheng_de_er_cha_shu_lcof {
             if(root1.val != root2.val){
                 return false;
             }
-            //这道题又是差点独立完成。看被注释掉的部分，太急于返回true了。返回true的条件是所有子树都对称，所以需要递归，而只需发现不对称即可立马返回false
+            //这道题又是差点独立完成。看被注释掉的部分，太急于返回true了。返回true的条件是所有子树都对称，所以需要递归，而返回false的条件则是只需发现不对称即可立马返回false
             /*if(root1.val==root2.val){
                 return true;
             }*/
