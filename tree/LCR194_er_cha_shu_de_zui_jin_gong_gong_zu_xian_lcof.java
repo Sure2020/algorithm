@@ -24,7 +24,13 @@
  * @create: 2024-02-08
  **/
 public class LCR194_er_cha_shu_de_zui_jin_gong_gong_zu_xian_lcof {
-    class Solution {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        TreeNode root = Tools.treeCreater(new int[]{3,5,1,6,2,0,8,-1,-1,7,4});
+        Tools.treePrettyPrinter(root);
+        System.out.println(solution.lowestCommonAncestor(root, new TreeNode(7), new TreeNode(4)).val);
+    }
+    static class Solution {
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
             return dfs(root, p.val, q.val);
         }
@@ -38,10 +44,12 @@ public class LCR194_er_cha_shu_de_zui_jin_gong_gong_zu_xian_lcof {
             }
             TreeNode left = dfs(root.left, val1, val2);
             TreeNode right = dfs( root.right, val1, val2);
+            //对应情况1
             if(left != null && right !=null){
                 return root;
             }
-            //对应情况1
+            //我起初不理解的地方是，深处的节点是怎么一层一层返回上去的，下面这行代码是关键。
+            //两处return root的地方，return的是最终的结果。return给上一层迭代后，势必会造成left或right一方不为空，于是一层层return给了最外层的调用。
             return left!= null ? left:right;
         }
     }
