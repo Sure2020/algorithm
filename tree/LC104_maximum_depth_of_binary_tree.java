@@ -112,4 +112,24 @@ public class LC104_maximum_depth_of_binary_tree {
         }
         return depth;
     }
+
+    //第三次做，独立解出来，只改了一次。记录一下
+    class Solution {
+        int result = 0;
+        public int maxDepth(TreeNode root) {
+            return dfs(root,1);
+        }
+        public int dfs(TreeNode root, int currentDepth){
+            if(root==null){
+                return 0;
+            }
+            if(root.left==null&&root.right==null){
+
+                result = Math.max(result, currentDepth);
+            }
+            dfs(root.left, currentDepth+1);
+            dfs(root.right,currentDepth+1);
+            return result;
+        }
+    }
 }
