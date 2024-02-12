@@ -49,19 +49,21 @@ public class LC872_leaf_similar_trees {
                 return false;
             }
             int size = leafList1.size();
-            for(int i =0;i< size;i++){
-                 /*int leaf1 = leafList1.get(i);
+            /*for(int i =0;i< size;i++){
+                 *//*int leaf1 = leafList1.get(i);
                  int leaf2 = leafList2.get(i);
                  if(leaf1!=leaf2){
                      return false;
-                 }*/
+                 }*//*
                 // 注意这里实际是对比的两个对象是否是同一个，而不是对比的值是否相等。改成用equals方法对比，或者先转成int再对比
                 //if(leafList1.get(i)!=leafList2.get(i)){
                 if(!leafList1.get(i).equals(leafList2.get(i))){
                     return false;
                 }
             }
-            return true;
+            return true;*/
+            //原来Arraylist的equals方法可以对比两个list的值是否相等
+            return leafList1.equals(leafList2);
         }
         public void getLeafList(TreeNode root, List<Integer> leafList){
             if(root==null){
