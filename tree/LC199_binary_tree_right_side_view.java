@@ -57,4 +57,34 @@ public class LC199_binary_tree_right_side_view {
             }
         }
     }
+    //再次写，还算顺利，但是还是有点问题，就是没有考虑空节点的情况，以及返回时没返回空list，但都独立调试改正了
+    class Solution20240215 {
+        List<Integer> result = new ArrayList<>();
+        public List<Integer> rightSideView(TreeNode root) {
+            if(root==null){
+                return new ArrayList<>();
+            }
+            bfs(root);
+            return result;
+        }
+        public void bfs(TreeNode root){
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
+            while(!q.isEmpty()){
+                int size = q.size();
+                for(int i = 0;i< size;i++){
+                    TreeNode tempNode = q.poll();
+                    if(i==size-1){
+                        result.add(tempNode.val);
+                    }
+                    if(tempNode.left!=null){
+                        q.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        q.offer(tempNode.right);
+                    }
+                }
+            }
+        }
+    }
 }
