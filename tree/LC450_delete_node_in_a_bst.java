@@ -73,4 +73,64 @@ public class LC450_delete_node_in_a_bst {
             return tempNode;
         }
     }
+
+    class Solution20240216 {
+        public TreeNode deleteNode(TreeNode root, int key) {
+            if(root==null){
+                return null;
+            }
+
+            if(root.val==key){
+                if(root.left==null&&root.right==null){
+                    //第二次写,这里误写成了root=null
+                    // root=null;
+                    return null;
+
+                }
+                if(root.left==null){
+                    //第二次写
+                    // root=root.right;
+                    return root.right;
+                }
+                if(root.right==null){
+                    //第二次写
+                    // root=root.left;
+                    return root.left;
+                }
+                //case 3
+                if(root.left!=null&&root.right!=null){
+                    ////第二次写,误将root.right写成root,犯了第一次写时同样的错啊,不应该
+                    TreeNode tempNode = findMin(root.right);
+
+                    root.right = deleteNode(root.right,tempNode.val);
+                    tempNode.left=root.left;
+                    tempNode.right=root.right;
+                    root=tempNode;
+                    //labuladong解法没有这个return,感觉写上更有助于理解,存疑~
+                    return root;
+                }
+            }
+            // TreeNode left = root.left;
+            // TreeNode right = root.right;
+            if(key>root.val){
+                //root.left = deleteNode(root.left,key);
+                root.right = deleteNode(root.right,key);
+            }
+            if(key<root.val){
+                //root.right = deleteNode(root.right,key);
+                root.left = deleteNode(root.left,key);
+            }
+            // root.left = left;
+            // root.right = right;
+            return root;
+
+        }
+        public TreeNode findMin(TreeNode root){
+            TreeNode tempNode = root;
+            while(tempNode.left!=null){
+                tempNode = tempNode.left;
+            }
+            return tempNode;
+        }
+    }
 }
