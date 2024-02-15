@@ -56,3 +56,22 @@ public class LC66_plus_one {
         return result;
     }
 }
+class Solution20240216 {
+    public int[] plusOne(int[] digits) {
+        //补充思路描述,分三种情况,全部没9,有部分9,全部是9
+        //情况1和2,倒序遍历数组,将遇到的9都置为0,将遇到第一个不为9的+1,直接返回
+        for(int i=digits.length-1;i>=0;i--){
+            if(digits[i]==9){
+                digits[i]=0;
+            }else{
+
+                digits[i] +=1;
+                return digits;
+            }
+        }
+        //情况3,全为9,构造一个多一个元素的数组,默认所有元素为0,将最左一位置为1即可
+        int[] result = new int[digits.length+1];
+        result[0]=1;
+        return result;
+    }
+}
