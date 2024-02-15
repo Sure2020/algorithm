@@ -52,4 +52,23 @@ public class LC700_search_in_a_binary_search_tree {
             return left!=null ? left:right;
         }
     }
+
+    class Solution20240215 {
+        public TreeNode searchBST(TreeNode root, int val) {
+            if(root==null){
+                return null;
+            }
+            if(root.val==val){
+                return root;
+            }
+            if(val < root.val){
+                return searchBST(root.left, val);
+            }
+            if(val > root.val){
+                return searchBST(root.right,val);
+            }
+            return null;
+        }
+
+    }
 }
