@@ -1,0 +1,8 @@
+# 用时中等，对比了自己和官解，都是差不多的用时
+# Write your MySQL query statement below
+#select p.firstName,p.lastName,a.city,a.state from Person as p left join Address as a on p.personId=a.personId;
+#select firstName,lastName,city,state from Person left join Address on Person.personId=Address.personId;
+select FirstName, LastName, City, State
+from Person left join Address
+on Person.PersonId = Address.PersonId
+;
