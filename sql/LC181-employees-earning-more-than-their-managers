@@ -1,0 +1,4 @@
+#LC181-employees-earning-more-than-their-managers
+# Write your MySQL query statement below
+select a.name as  Employee from Employee as a inner join Employee as b on a.managerId=b.id and a.salary>b.salary;
+# 经过短暂考虑也独立做出来了，有一点点难度
