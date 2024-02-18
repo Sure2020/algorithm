@@ -39,7 +39,7 @@ public class LC374_guess_number_higher_or_lower {
         }
         public int chose(int left, int right){
             int mid = left+(right-left)/2;
-            int guessFlag = guess(mid);
+            int guessFlag = 0;//guess(mid);
             if(guessFlag==-1){
                 right = mid-1;
             }
