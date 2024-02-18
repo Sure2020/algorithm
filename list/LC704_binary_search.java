@@ -37,4 +37,26 @@ public class LC704_binary_search {
         }
         return -1;
     }
+
+    class Solution20240218 {
+        public int search(int[] nums, int target) {
+            //一开始写成了right=nums.length忘了减1
+            //忘了初始化为0
+            int left=0,right=nums.length-1,mid=0;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                if(nums[mid]<target){
+                    left=mid+1;
+                }
+                if(nums[mid]>target){
+                    right=mid-1;
+                }
+                //两个等号写成了一个
+                if(nums[mid]==target){
+                    return mid;
+                }
+            }
+            return -1;
+        }
+    }
 }
