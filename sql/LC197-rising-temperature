@@ -1,0 +1,11 @@
+# Write your MySQL query statement below
+# select a.id from Weather as a inner join Weather as b on a.id-1=b.id and a.Temperature >b.Temperature;
+# 考察datadiff或timestampdiff的用法
+#datediff(日期1, 日期2)：
+ 得到的结果是日期1与日期2相差的天数。
+ 如果日期1比日期2大，结果为正；如果日期1比日期2小，结果为负
+#timestampdiff(时间类型, 日期1, 日期2)
+ 这个函数和上面diffdate的正、负号规则刚好相反。
+ 日期1大于日期2，结果为负，日期1小于日期2，结果为正。
+ 在“时间类型”的参数位置，通过添加“day”, “hour”, “second”等关键词，来规定计算天数差、小时数差、还是分钟数差
+select a.id from Weather as a inner join Weather as b on timestampdiff(day,a.recordDate ,b.recordDate)=-1 where a.Temperature >b.Temperature ;
