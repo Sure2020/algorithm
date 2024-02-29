@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
- * 唉，这正负电子的思路真秒，记一下吧
+ * 唉，这正负电子的思路真妙，记一下吧
  * @author: Admin
  * @create: 2024-02-28
  **/
