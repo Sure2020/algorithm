@@ -19,6 +19,7 @@
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
+ * 再次写，依稀对head.next.next=head有印象，但仍无法独立写出来，需要巩固！
  * @author: Admin
  * @create: 2024-01-05
  **/
@@ -45,5 +46,17 @@ public class LC206_reverse_linked_list {
             cursorPoint = cursorPoint.next;
         }
 
+    }
+    class Solution20240302 {
+        public ListNode reverseList(ListNode head) {
+            //这里忘了写head.next的情况，造成空指针异常
+            if(head==null ||head.next==null){
+                return head;
+            }
+            ListNode last = reverseList(head.next);
+            head.next.next=head;
+            head.next=null;
+            return last;
+        }
     }
 }
