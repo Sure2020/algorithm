@@ -19,6 +19,7 @@
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
+ * 虽然再次写，也是短时间内一次通过，但这里写了while循环去逐个拼接，其实直接接到后面即可
  * @author: w15021
  * @create: 2023-10-16
  **/
@@ -93,5 +94,43 @@ public class LC21_merge_two_sorted_lists {
             return null;
         }
         return result;
+    }
+
+    class Solution20240302 {
+        public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+            if(list1==null){
+                return list2;
+            }
+            ListNode dummy = new ListNode();
+            ListNode p1 = list1,p2=list2,p3=dummy;
+            while(p1!=null&&p2!=null){
+                if(p1.val<=p2.val){
+                    p3.next=p1;
+                    p1=p1.next;
+                    //p3=p3.next;
+                }else{
+                    p3.next=p2;
+                    p2=p2.next;
+                    // p3=p3.next;
+                }
+                p3=p3.next;
+            }
+            // 这里，虽然再次写，也是短时间内一次通过，但这里写了while循环去逐个拼接，其实直接接到后面即可
+            //while(p1!=null){
+            if(p1!=null){
+                // p3.next=p1;
+                // p1=p1.next;
+                // p3=p3.next;
+                p3.next=p1;
+            }
+            //while(p2!=null){
+            if(p2!=null){
+                // p3.next=p2;
+                // p2=p2.next;
+                // p3=p3.next;
+                p3.next=p2;
+            }
+            return dummy.next;
+        }
     }
 }
