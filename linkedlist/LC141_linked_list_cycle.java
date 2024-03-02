@@ -41,4 +41,23 @@ public class LC141_linked_list_cycle {
         }
         return false;
     }
+    //再次做，竟然用不到一分钟的时候一次性通过，而且比原先写得更精简，不愧是我！
+    public class Solution20240302 {
+        public boolean hasCycle(ListNode head) {
+            if(head==null||head.next==null){
+                return false;
+            }
+            ListNode slow = head;
+            ListNode fast = head.next;
+            while(fast!=null&&fast.next!=null){
+                if(slow!=fast){
+                    slow=slow.next;
+                    fast=fast.next.next;
+                }else{
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
