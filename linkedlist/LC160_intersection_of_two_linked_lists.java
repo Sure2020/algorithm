@@ -91,4 +91,55 @@ public class LC160_intersection_of_two_linked_lists {
 
         return currentNodeA2;
     }
+    public class Solution202403030826 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            if(headA==null/*||headA.next==null*/||headB==null/*||headB.next==null*/){
+                return null;
+            }
+            // if(headA==headB){
+            //     return headA;
+            // }
+            ListNode p1=headA,p2=headB;
+            while(p1!=null&&p2!=null){
+                //System.out.println("###"+p1.val+"###"+p2.val);
+                if(p1==p2){
+                    return p1;
+                }
+                p1=p1.next;
+                p2=p2.next;
+                if(p1==null&&p2==null){
+                    return null;
+                }
+
+                if(p1==null){
+                    p1=headB;
+                }
+                if(p2==null){
+                    p2=headA;
+                }
+
+            }
+            return null;
+        }
+    }
+
+    //当没有交点，最后p1==p2==null，也就是结束的条件，有一点技巧性，记一下
+    public class Solution202403030831 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode p1=headA,p2=headB;
+            while(p1!=p2){
+                if(p1==null){
+                    p1 = headB;
+                }else{
+                    p1=p1.next;
+                }
+                if(p2==null){
+                    p2=headA;
+                }else{
+                    p2=p2.next;
+                }
+            }
+            return p1;
+        }
+    }
 }
