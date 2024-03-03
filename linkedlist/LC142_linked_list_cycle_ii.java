@@ -19,6 +19,7 @@
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
+ * 第二次做，一来思路忘了，二来有一处失误导致死循环，需要反复巩固
  * @author: w15021
  * @create: 2023-10-23
  **/
@@ -78,5 +79,34 @@ public class LC142_linked_list_cycle_ii {
             }
         }
         return null;
+    }
+    public class Solution20240303 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null||head.next==null){
+                return null;
+            }
+            //这里出现了失误，要假定双指针都从起点开始走。一开始写成了slow=head，导致死循环
+            ListNode slow=head.next, fast = head.next.next;
+            while(fast!=null&&fast.next!=null){
+                //System.out.println("###"+slow.val+"###"+fast.val);
+                if(slow==fast){
+                    break;
+                }else{
+                    slow=slow.next;
+                    fast=fast.next.next;
+                }
+            }
+            if(slow==fast){
+                slow=head;
+                while(slow!=fast){
+                    //System.out.println(slow.val+"###"+fast.val);
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+                return slow;
+            }else{
+                return null;
+            }
+        }
     }
 }
