@@ -42,4 +42,17 @@ public class LC876_middle_of_the_linked_list {
         }
         return slowerPoint;
     }
+    class Solution20240304 {
+        public ListNode middleNode(ListNode head) {
+            if(head==null){
+                return null;
+            }
+            ListNode slow=head, fast=head;
+            while(fast!=null&&fast.next!=null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return slow;
+        }
+    }
 }
