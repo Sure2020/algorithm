@@ -46,4 +46,21 @@ public class MST02_02_kth_node_from_end_of_list_lcci {
         return slowerPoint.val;
 
     }
+
+    //在着急下班并且思路混乱的情况下，一直认为这个需要用到递归，而没想到快慢指针的技巧！值得多次练！
+    class Solution20240304 {
+
+        public int kthToLast(ListNode head, int k) {
+            ListNode slow=head,fast=head;
+            while(k!=0){
+                fast=fast.next;
+                k--;
+            }
+            while(fast!=null){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return slow.val;
+        }
+    }
 }
