@@ -55,4 +55,30 @@ public class LC19_remove_nth_node_from_end_of_list {
         slowerHead.next = slowerHead.next.next;
         return dummy.next;
     }
+
+    //第二次做，虽然有点曲折，但还是独立做出来了
+    class Solution20240304 {
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return null;
+            }
+            if(head.next==null&&n==1){
+                return null;
+            }
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode slow=dummy,fast=dummy;
+
+            for(int i=1;i<=n;i++){
+                fast=fast.next;
+
+            }
+            while(fast!=null&&fast.next!=null){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            slow.next=slow.next.next;
+            return dummy.next;
+        }
+    }
 }
