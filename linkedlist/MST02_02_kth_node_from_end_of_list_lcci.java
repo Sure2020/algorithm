@@ -63,4 +63,27 @@ public class MST02_02_kth_node_from_end_of_list_lcci {
             return slow.val;
         }
     }
+
+    //舒服了，我一开始就是想的这个方法，但着急下班越想越乱，过了一天静下心来搞定了
+    //关键思路是参考二叉树的前中后序遍历的递归，感受递归的关键，尤其是base case，再考虑链表的倒序打印，再考虑打印倒数第k个，循序渐进！！！
+    class Solution20240305 {
+        int count = 0;
+        int result = -1;
+        public int kthToLast(ListNode head, int k) {
+            print(head, k);
+            return result;
+        }
+        public void print(ListNode head, int k){
+            if(head==null){
+                return ;
+            }
+            print(head.next, k);
+            //System.out.println(head.val);
+            count++;
+            if(count==k){
+                //System.out.println(head.val);
+                result=head.val;
+            }
+        }
+    }
 }
