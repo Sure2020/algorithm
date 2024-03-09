@@ -81,4 +81,21 @@ public class LC206_reverse_linked_list {
             return last;
         }
     }
+
+    //看了labuladong的迭代解释，然后自己“独立”写出，迭代的空间复杂度为o(1)，还是值得记忆的
+    class Solution20240309Iterative {
+        public ListNode reverseList(ListNode head) {
+            if(head==null||head.next==null){
+                return head;
+            }
+            ListNode previous=null,current=head,next=head;
+            while(current!=null){
+                next=current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+            }
+            return previous;
+        }
+    }
 }
