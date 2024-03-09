@@ -20,6 +20,7 @@
  * @program: PACKAGE_NAME
  * @description: xxx
  * 有很强的技巧性，需要记忆
+ * 更新了用迭代的方式实现，空间复杂度有优势，为o(1)，注意一步一步来，理清思路，也没那么难，哈哈哈哈哈！！！
  * @author: Admin
  * @create: 2024-03-03
  **/
@@ -118,6 +119,60 @@ public class LC92_reverse_linked_list_ii {
             head.next.next=head;
             head.next=successor;
             return last;
+        }
+    }
+
+    //迭代的方式，注意一步一步来，理清思路，也没那么难，哈哈哈哈哈！！！
+    class Solution20240309Iterative {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            if(head==null || head.next==null || left==right){
+                return head;
+            }
+            //因为left可能是第一个节点，那么就搞个dummy节点当做前驱节点precurssor
+            ListNode dummy = new ListNode(-1);
+            dummy.next=head;
+
+            //找到待截取的左节点的前一个节点，和右节点
+            ListNode precurssor=null, successor=null;
+            ListNode leftNode = null, rightNode=null;
+            ListNode p=dummy;
+            //这里纠结了半天，要从0开始，因为dummy的序号是0
+            for(int i=0;i<=right;i++){
+                if(i==left-1){
+                    precurssor=p;
+                }else if(i==right){
+                    rightNode=p;
+                    break;
+                }
+                p=p.next;
+            }
+            leftNode=precurssor.next;
+            successor=rightNode.next;
+            //System.out.println("##"+leftNode.val+"##"+rightNode.val);
+            //断开
+            precurssor.next=null;
+            rightNode.next=null;
+            //翻转
+            reverse(leftNode);
+            //拼接
+            //precurssor.next=leftNode;
+            //successor.next=rightNode.next;
+            precurssor.next=rightNode;
+            leftNode.next=successor;
+            return dummy.next;
+        }
+        public void reverse(ListNode head){
+            if(head==null || head.next == null){
+                return;
+            }
+            ListNode precurssor=null,current=head,next=head;
+            while(current!=null){
+                next=current.next;
+                current.next=precurssor;
+                precurssor=current;
+                current=next;
+            }
+            //return precurssor;
         }
     }
 }
