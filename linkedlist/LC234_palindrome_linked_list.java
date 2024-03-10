@@ -19,7 +19,8 @@
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
- * 第三次看这题，才意识到这个思路是从labuladong那里学来的，第二次看提交记录我以为是自己的思路。。。
+ * 1.第三次看这题，才意识到递归这个思路是从labuladong那里学来的，第二次看提交记录我以为是自己的思路。。。
+ * 2.空间复杂度O(1)的解法，看了labuladong的题解，自己写了一遍
  * @author: Admin
  * @create: 2024-01-05
  **/
@@ -49,5 +50,42 @@ public class LC234_palindrome_linked_list {
         }
         return false;
 
+    }
+    class Solution20240310 {
+        public boolean isPalindrome(ListNode head) {
+            if(head==null){
+                return false;
+            }
+            //找到链表中点
+            ListNode slow=head,fast=head;
+            while(fast!=null &&fast.next!=null){
+                slow=slow.next;
+                fast = fast.next.next;
+            }
+            //从中点开始，翻转链表后半部分
+            ListNode p1=head, p2=reverse(slow);
+            //开始比对，判断
+            while(p1!=null&&p2!=null){
+                if(p1.val!=p2.val){
+                    return false;
+                }
+                p1=p1.next;
+                p2=p2.next;
+            }
+            return true;
+        }
+        public ListNode reverse(ListNode head){
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode pre=null,cur=head,nxt=head;
+            while(cur!=null){
+                nxt=cur.next;
+                cur.next=pre;
+                pre=cur;
+                cur=nxt;
+            }
+            return pre;
+        }
     }
 }
