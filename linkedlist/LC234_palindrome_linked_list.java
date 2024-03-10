@@ -19,17 +19,22 @@
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
+ * 第三次看这题，才意识到这个思路是从labuladong那里学来的，第二次看提交记录我以为是自己的思路。。。
  * @author: Admin
  * @create: 2024-01-05
  **/
 public class LC234_palindrome_linked_list {
-    ListNode curser = new ListNode();
-    public boolean isPalindrome(ListNode head) {
+    public static void main(String[] args) {
+        ListNode head = Tools.listNodeCreater(new int[]{1,2,2,1});
+        System.out.println(isPalindrome(head));
+    }
+    static ListNode curser = new ListNode();
+    static public boolean isPalindrome(ListNode head) {
         curser = head;
         return recurse(head);
 
     }
-    public boolean recurse(ListNode head){
+    static public boolean recurse(ListNode head){
         if(head==null){
             return false;
         }
