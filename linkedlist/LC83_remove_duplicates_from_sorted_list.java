@@ -51,4 +51,22 @@ public class LC83_remove_duplicates_from_sorted_list {
         slowerPoint.next = null;
         return head;
     }
+    //第二次写稍微有点失误，一开始想用单节点，结果无法处理所有节点值都相同的情况，最后还是逃不过快慢双指针
+    class Solution20240310 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null||head.next==null){
+                return head;
+            }
+            ListNode slow = head,fast=head.next;
+            while(fast!=null){
+                if(slow.val==fast.val){
+                    slow.next=fast.next;
+                }else{
+                    slow=slow.next;
+                }
+                fast=fast.next;
+            }
+            return head;
+        }
+    }
 }
