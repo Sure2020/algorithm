@@ -24,6 +24,7 @@ import java.util.Queue;
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
+ * 第二次写，没搞清楚两层循环咋写，只写出来一层，需要再练
  * @author: Admin
  * @create: 2024-02-15
  **/
@@ -65,6 +66,37 @@ public class LC102_binary_tree_level_order_traversal {
                 }
             }
             return result;
+        }
+    }
+    class Solution20240311 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> result = new LinkedList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<TreeNode>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+
+                int size = queue.size();
+                List<Integer> tempList = new LinkedList<>();
+                for(int i=1;i<=size;i++){
+
+                    TreeNode tempNode = queue.poll();
+                    tempList.add(tempNode.val);
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+
+                }
+                result.add(tempList);
+
+            }
+            return result;
+
         }
     }
 }
