@@ -87,4 +87,33 @@ public class LC199_binary_tree_right_side_view {
             }
         }
     }
+
+    class Solution20240312 {
+        public List<Integer> rightSideView(TreeNode root) {
+            List<Integer> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                // LIst<Integer> tempList = new ArrayList<>();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    // tempList.add(tempNode.val);
+                    if(i==size){
+                        result.add(tempNode.val);
+                    }
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+            }
+            return result;
+        }
+    }
 }
