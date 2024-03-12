@@ -68,4 +68,47 @@ public class LC98_validate_binary_search_tree {
             return left && right;
         }
     }
+
+    class Solution20240312SelfWrong {
+        public boolean isValidBST(TreeNode root) {
+            if(root==null){
+                return true;
+            }
+            if(root.left==null && root.right==null){
+                return true;
+            }
+            boolean leftFlag = true;
+            boolean rightFlag = true;
+            if(root.left!=null){
+                if(root.val<=root.left.val){
+                    //leftFlag=false;
+                    return false;
+                }
+            }
+            if(root.right!=null){
+                if(root.val>=root.right.val){
+                    //rightFlag=false;
+                    return false;
+                }
+            }
+            return isValidBST(root.left) && isValidBST(root.right);
+        }
+    }
+    class Solution20240312 {
+        public boolean isValidBST(TreeNode root) {
+            return judge(root, null, null);
+        }
+        public boolean judge(TreeNode root, TreeNode min, TreeNode max){
+            if(root==null){
+                return true;
+            }
+            if(min!=null && root.val<=min.val){
+                return false;
+            }
+            if(max!=null &&root.val>=max.val){
+                return false;
+            }
+            return judge(root.left, min, root) &&judge(root.right,root,max);
+        }
+    }
 }
