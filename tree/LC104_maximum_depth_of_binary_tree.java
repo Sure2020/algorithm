@@ -132,4 +132,23 @@ public class LC104_maximum_depth_of_binary_tree {
             return result;
         }
     }
+
+    //自己竟然直接写出来了，一次通过，得益于对前序位置和后序位置的理解吧
+    class Solution20240313 {
+        int maxDepth = 0;
+        int currentDepth = 0;
+        public int maxDepth(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            //前序位置
+            currentDepth++;
+            maxDepth = Math.max(currentDepth, maxDepth);
+            maxDepth(root.left);
+            maxDepth(root.right);
+            //后序位置
+            currentDepth--;
+            return maxDepth;
+        }
+    }
 }
