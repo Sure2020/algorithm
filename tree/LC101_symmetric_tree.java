@@ -16,7 +16,9 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -63,6 +65,68 @@ class LC101_symmetric_tree {
             q.offer(p2.left);
         }
         return true;
+
+    }
+
+    //想当然地用到了层序遍历的方法，结果无法通过镜像对称的测试用例，切记别再掉到坑里
+    class SolutionSelfWrong {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return true;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                List<Integer> tempList = new ArrayList<>();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    tempList.add(tempNode.val);
+                    //
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                if(!isSame(tempList)){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public boolean isSame (List<Integer> list){
+            if(list==null){
+                return true;
+            }
+            int size = list.size();
+            if(size==1){
+                return true;
+            }
+            for(int i=0,j=size-1; i<=j; i++,j--){
+                if(list.get(i) != list.get(j)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    class Solution20240313 {
+        public boolean isSymmetric(TreeNode root) {
+            return check(root, root);
+        }
+        public boolean check (TreeNode nodeA, TreeNode nodeB){
+            if(nodeA ==null &&nodeB==null){
+                return true;
+            }
+            if(nodeA==null||nodeB==null){
+                return false;
+            }
+            return nodeA.val==nodeB.val && check(nodeA.left, nodeB.right) && check(nodeA.right, nodeB.left);
+        }
 
     }
 }
