@@ -76,4 +76,27 @@ public class LC543_diameter_of_binary_tree {
         maxLength = Math.max(left + right, maxLength);
         return Math.max(left, right)+1;
     }
+
+    //不错不错，自己又一次短时间独立、一次修改后通过。不过速度为1ms，比不上第一次提交的0ms，把第一次0ms的写法重新提交，也是1ms，应该是leetcode系统有变化导致的，不用纠结
+    class Solution20240313 {
+        int max = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            depth(root);
+            return max;
+
+        }
+
+        public int depth(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int leftDepth = depth(root.left);
+            int rightDepth=depth(root.right);
+            max = Math.max(leftDepth+rightDepth, max);
+            return Math.max(leftDepth, rightDepth)+1;
+        }
+    }
 }
