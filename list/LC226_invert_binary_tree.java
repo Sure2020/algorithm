@@ -47,4 +47,19 @@ public class LC226_invert_binary_tree {
     //     traverse(root.left);
     //     traverse(root.right);
     // }
+    //吹一波，这题自己看完十几秒就独立、一次性解出，但毕竟是简单题目，还是别太高兴
+    class Solution20240314 {
+        public TreeNode invertTree(TreeNode root) {
+            if(root==null){
+                return null;
+            }
+            invertTree(root.left);
+            invertTree(root.right);
+            //实践发现交换的动作放在前序还是后序位置，都可以
+            TreeNode tempNode = root.left;
+            root.left=root.right;
+            root.right=tempNode;
+            return root;
+        }
+    }
 }
