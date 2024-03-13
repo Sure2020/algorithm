@@ -111,4 +111,32 @@ public class LC98_validate_binary_search_tree {
             return judge(root.left, min, root) &&judge(root.right,root,max);
         }
     }
+    class Solution20240313MidOrder {
+        public boolean isValidBST(TreeNode root) {
+            return midOrder(root);
+            // return true;
+
+        }
+        //pre的最小值需要比int的最小值还要小，所以这里需要用long类型
+        long pre = Long.MIN_VALUE;
+        public boolean midOrder(TreeNode root){
+            if(root==null){
+                return true;
+            }
+
+            //System.out.println(root.val + "###" + pre);
+
+            //return的时机我当时没考虑好
+            if(!midOrder(root.left)){
+                return false;
+            }
+            //System.out.println(root.val);
+            if(root.val<=pre){
+                return false;
+            }
+            pre = root.val;
+            return midOrder(root.right);
+
+        }
+    }
 }
