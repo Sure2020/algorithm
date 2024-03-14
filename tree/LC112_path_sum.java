@@ -119,4 +119,17 @@ public class LC112_path_sum {
             return left || right;
         }
     }
+
+    class Solution20240314Labuladong {
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            if(root==null){
+                return false;
+            }
+            //一开始把base case搞错了，漏掉了是叶子节点的前提
+            if(root.left==null && root.right==null && root.val==targetSum){
+                return true;
+            }
+            return hasPathSum(root.left, targetSum-root.val) || hasPathSum(root.right, targetSum-root.val);
+        }
+    }
 }
