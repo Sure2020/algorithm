@@ -93,4 +93,30 @@ public class LC112_path_sum {
             return dfs(root.left,currentSum+root.val,targetSum) || dfs(root.right, currentSum+root.val, targetSum);
         }
     }
+
+    //这个吧，虽然自己短时间、独立、一次性通过，但还是没想起来用target-val的小技巧，值得留意一下。
+    //但自己能想到用做抉择和撤销抉择的思路，并精准确定了在子树执行完立即撤销抉择的位置，还是很难得的，证明对撤销抉择有了一定的理解
+    class Solution20240314 {
+        int totalSum = 0;
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            if(root==null){
+                return false;
+            }
+            totalSum +=root.val;
+
+            //base case
+            if(root.left==null && root.right==null && totalSum == targetSum){
+                return true;
+            }
+            boolean left = hasPathSum(root.left, targetSum);
+            if(root.left!=null){
+                totalSum-=root.left.val;
+            }
+            boolean right = hasPathSum(root.right, targetSum);
+            if(root.right!=null){
+                totalSum-=root.right.val;
+            }
+            return left || right;
+        }
+    }
 }
