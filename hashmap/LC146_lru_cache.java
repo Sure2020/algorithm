@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
  * @program: PACKAGE_NAME
  * @description: xxx
  * 感觉这题还挺有意思的，记一下吧
+ * 20240320第二次做，这里踩坑了，这里要用else if，不能再if，比如容量2，插入第二组时，上面插入完了，下面这个if会误删一组数据，我真是靠北了
  * @author: Admin
  * @create: 2024-02-27
  **/
@@ -67,6 +68,43 @@ public class LC146_lru_cache {
             cache.remove(key);
             //放到队尾，队尾是最常用的
             cache.put(key,val);
+        }
+    }
+
+    class LRUCache20240320 {
+        LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+        int size;
+
+        public LRUCache20240320(int capacity) {
+            this.size = capacity;
+        }
+
+        public int get(int key) {
+            if(!cache.containsKey(key)){
+                return -1;
+            }
+            mackRecent(key);
+            return cache.get(key);
+        }
+
+        public void put(int key, int value) {
+            if(cache.containsKey(key)){
+                //cache.put(key, value);
+                mackRecent(key);
+                //return;
+                //cache.put(key, value);
+                //第二次做，这里踩坑了，这里要用else if，不能再if，比如容量2，插入第二组时，上面插入完了，下面这个if会误删一组数据，我真是靠北了
+            }else if(cache.size()==this.size){
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+                //cache.put(key, value);
+            }
+            cache.put(key, value);
+        }
+        public void mackRecent(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key, value);
         }
     }
 }
