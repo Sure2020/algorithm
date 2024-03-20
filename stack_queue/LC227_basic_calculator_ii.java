@@ -66,7 +66,7 @@ public class LC227_basic_calculator_ii {
                 }
                 //遇到右括号结束递归
                 if(currentChar==')'){
-                    break;;
+                    break;
                 }
             }
             int res = 0;
