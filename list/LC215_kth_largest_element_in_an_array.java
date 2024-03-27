@@ -1,0 +1,104 @@
+/*
+ * Copyright (c) 2018, New H3C Technologies Co., Ltd All rights reserved
+ * <http://www.h3c.com/>
+ * --------------------------------------------------------------------
+ * Product      : XXX
+ * Module Name  : LC215_kth_largest_element_in_an_array
+ * Date Created : 2024-03-28
+ * Creator      : Admin
+ * Description  : xxx
+ *
+ * --------------------------------------------------------------------
+ * Modification History
+ * DATE             NAME                DESCRIPTION
+ * --------------------------------------------------------------------
+ * 2024-03-28       Admin     xxx
+ * --------------------------------------------------------------------
+ */
+
+import java.util.Random;
+
+/**
+ * @program: PACKAGE_NAME
+ * @description: 偷懒排序，小顶堆（优先队列），快速选择，需要练
+ * @author: Admin
+ * @create: 2024-03-28
+ **/
+public class LC215_kth_largest_element_in_an_array {
+    class Solution {
+        public int findKthLargest(int[] nums, int k) {
+            // 排序
+            // Arrays.sort(nums);
+            // return nums[nums.length-k];
+            // 小顶堆
+            // PriorityQueue<Integer> pq = new PriorityQueue<>();
+            // for(int i=0;i<nums.length;i++){
+            //     pq.offer(nums[i]);
+            //     if(pq.size()>k){
+            //         pq.poll();
+            //     }
+            // }
+            // return pq.peek();
+
+
+            //快速选择算法
+
+            // 假设升序排序，这里转换成找第k个元素
+            k = nums.length-k;
+            //System.out.println("###"+k);
+            int p = 0;
+            int left = 0,right = nums.length-1;
+            shuffle(nums);
+            while(left<=right){
+                p = partition(nums, left, right);
+                //System.out.println(p);
+                //当目标元素下标比基准元素小，那目标元素肯定在基准元素左边
+                if(k<p){
+                    right=p-1;
+                }
+                //当目标元素下标比基准元素大，那目标元素肯定在基准元素右边
+                else if(k>p){
+                    left=p+1;
+                } else{
+                    return nums[p];
+                }
+            }
+            return -10001;
+        }
+        public int partition(int[] nums, int i, int j){
+            int pivot = nums[i];
+            int start = i;
+            while(i<j){
+                //注意注意，这里大于等于和小于等于与下面的搞反了，一定要细心啊！
+                while(i<j && nums[j]>=pivot){
+                    j--;
+                }
+                while(i<j && nums[i]<=pivot){
+                    i++;
+                }
+                if(i>=j){
+                    break;
+                }
+                swap(nums,i,j);
+                // i++;
+                // j--;
+            }
+            swap(nums, start, i);
+            return i;
+        }
+        public void swap(int[] nums, int i, int j){
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+        public void shuffle(int[] nums){
+            int n = nums.length;
+            Random random = new Random();
+            for(int i = 0;i<n; i++){
+                int r = random.nextInt(n-i);
+                swap(nums, i,r);
+            }
+
+        }
+    }
+}
