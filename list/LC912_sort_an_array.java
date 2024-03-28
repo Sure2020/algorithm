@@ -25,8 +25,16 @@ import java.util.Random;
  * @create: 2024-03-27
  **/
 public class LC912_sort_an_array {
+    public static void main(String[] args) {
+        SolutionMergeSort solutionMergeSort = new SolutionMergeSort();
+        int[] nums = new int[]{5,2,3,1};
+        Tools.listPriter(nums);
+        solutionMergeSort.sortArray(nums);
+        System.out.println("#");
+        Tools.listPriter(nums);
+    }
     //相比于labuladong，我更喜欢这篇题解：https://leetcode.cn/problems/sort-an-array/solutions/650112/dong-hua-mo-ni-yi-ge-kuai-su-pai-xu-wo-x-7n7g/
-    class Solution {
+    class SolutionQuickSort {
         public int[] sortArray(int[] nums) {
             // 洗牌，将元素随机打乱，防止极端耗时的情况
             shufle(nums);
@@ -89,6 +97,59 @@ public class LC912_sort_an_array {
                 // int r = random.nextInt(nums.length);
                 // System.out.println(r);
                 swap(nums, i, r);
+            }
+        }
+    }
+
+    //归并排序，思路相比快速排序要简单一些，但细心很重要，自己被自己的马虎搞了，1分钟写代码，10分钟调试！！！
+    static class SolutionMergeSort {
+        private static int[] temp;
+        public int[] sortArray(int[] nums) {
+            temp = new int[nums.length];
+            sort(nums, 0, nums.length-1);
+            return nums;
+        }
+        public void sort(int[] nums, int left, int right){
+            if(left>=right){
+                return;
+            }
+            int mid = left+(right-left)/2;
+            sort(nums, left, mid);
+            sort(nums, mid+1, right);
+            merge(nums, left, mid, right);
+        }
+        public void merge(int[] nums, int left, int mid , int right){
+            for(int i = left; i<=right; i++){
+                temp[i] = nums[i];
+            }
+            //合并两个有序数组，p负责遍历nums，i和j分别从两个待合并的数组头部开始遍历
+            int i=left, j=mid+1;
+            for (int p = left;p<=right;p++) {
+                //System.out.println(i+"###"+j);
+                //左边部分已全写入nums
+                if(i>=mid+1){
+                    nums[p]=temp[j];
+                    j++;
+                }
+                //右边部分已全写入nums
+                //这里竟然错把>=写成了<=，粗心！
+                else if(j>=right+1){
+                    nums[p] = temp[i];
+                    i++;
+                }
+                //左边数组的元素比右边数组元素大，把较小的右边数组的元素放入nums
+                else if(temp[i]>=temp[j]){
+                    nums[p]=temp[j];
+                    j++;
+                }
+                //左边数组的元素比右边数组元素小，把较小的左边数组的元素放入nums
+                else{
+                    //瞧瞧！错把temp写成了nums，what have you done!
+                    //nums[p]=nums[i];
+                    nums[p]=temp[i];
+                    i++;
+                }
+
             }
         }
     }
