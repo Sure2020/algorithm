@@ -116,7 +116,9 @@ public class LC162_find_peak_element {
                 }
 
             }
-            return left;
+            //return left;
+            //因为结束条件是left=right，所以返回谁都行
+            return right;
         }
     }
 }
