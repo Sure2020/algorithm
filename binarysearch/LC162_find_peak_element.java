@@ -80,4 +80,43 @@ public class LC162_find_peak_element {
             return left;
         }
     }
+    class Solution20240329 {
+        public int findPeakElement(int[] nums) {
+            // if(nums==null || nums.length<3){
+            //     return -1;
+            // }
+            // int left =0,right=nums.length-1;
+            // int mid=0;
+            // while(left<=right){
+            //     mid = left+(right-left)/2;
+            //     if(mid==0||mid==nums.length-1){
+            //         return -1;
+            //     }
+            //     else if(nums[mid]>nums[mid-1]){
+            //         if(nums[mid]<nums[mid+1]){
+            //             return mid;
+            //         }else{
+            //             left=mid;
+            //         }
+
+            //     }else if(nums[mid]<nums[mid-1]){
+            //         right=mid-1;
+            //     }
+            // }
+            // return -1;
+            //唉思路真的厉害，不能抠细节（反例在上面），要有大局观，具体看第二次的提交
+            int left=0,right=nums.length-1;
+            int mid=0;
+            while(left<right){
+                mid = left+(right-left)/2;
+                if(nums[mid]>nums[mid+1]){
+                    right=mid;
+                }else{
+                    left=mid+1;
+                }
+
+            }
+            return left;
+        }
+    }
 }
