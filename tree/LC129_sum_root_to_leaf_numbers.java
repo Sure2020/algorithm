@@ -137,7 +137,7 @@ public class LC129_sum_root_to_leaf_numbers {
     }
 
 
-    class Solution20240331 {
+    static class Solution20240331 {
         // 有意识地在用撤销选择的方法，结果没成功
         // 后来，看了labuladong的思路又不甘心，又调试了一会儿，结果成功了！我真厉害啊
         int result = 0;
