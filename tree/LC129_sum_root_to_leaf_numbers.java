@@ -57,6 +57,9 @@ public class LC129_sum_root_to_leaf_numbers {
         /*traverseReversely(root);
         System.out.println(pathReversely);
         System.out.println(allPathReversely);*/
+        System.out.println("#######");
+        Solution20240331 solution20240331 = new Solution20240331();
+        System.out.println(solution20240331.sumNumbers(root));
     }
     //LinkedList<Integer> path = new LinkedList();
     static List<Integer> path = new ArrayList<>();
@@ -131,5 +134,32 @@ public class LC129_sum_root_to_leaf_numbers {
         traverse2(root.left);
         traverse2(root.right);
         sb.deleteCharAt(sb.length()-1);
+    }
+
+
+    class Solution20240331 {
+        // 有意识地在用撤销选择的方法，结果没成功
+        // 后来，看了labuladong的思路又不甘心，又调试了一会儿，结果成功了！我真厉害啊
+        int result = 0;
+
+        public int sumNumbers(TreeNode root) {
+            // int result = 0;
+            dfs(root, 0);
+            return result;
+        }
+
+        public void dfs(TreeNode root, int currentSum) {
+            if (root == null) {
+                return;
+            }
+            // 这一步是关键，阻止继续向下传递*10
+            if (root.left == null && root.right == null) {
+                result = result + currentSum + root.val;
+                return;
+            }
+            currentSum += root.val;
+            dfs(root.left, currentSum * 10);
+            dfs(root.right, currentSum * 10);
+        }
     }
 }
