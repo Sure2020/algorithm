@@ -27,6 +27,7 @@ import java.util.Map;
  **/
 public class LC567_permutation_in_string {
     //还行，较短时间独立写出来了，且只调试了个位数次（当然我承认是通过单步调试去调的）
+    //这题我才真正体会到窗口的扩大和缩小时对一些变量的操作是对称的
     class Solution {
         public boolean checkInclusion(String s1, String s2) {
             Map<Character, Integer> window = new HashMap<>();
