@@ -67,4 +67,33 @@ public class LC46_permutations {
             used[i] = false;
         }
     }
+    class Solution20240410 {
+        List<List<Integer>> res = new ArrayList<>();
+        public List<List<Integer>> permute(int[] nums) {
+            LinkedList<Integer> track = new LinkedList<>();
+            boolean[] used = new boolean[nums.length];
+            backtrack(nums, track, used);
+            return res;
+        }
+        public void backtrack(int[] nums, LinkedList<Integer> track, boolean[] used){
+            if(track.size() == nums.length){
+                res.add(new ArrayList(track));
+                return;
+            }
+            for(int i = 0;i<nums.length;i++){
+                //这里如果期望used[i]的值为false，执行完后面的逻辑，下一次backtrack时used[i]为true,会陷入死循环
+                // if(!used[i]){
+                //     track.add(nums[i]);
+                // }
+                if(used[i]){
+                    continue;
+                }
+                track.add(nums[i]);
+                used[i]=true;
+                backtrack(nums, track, used);
+                track.removeLast();
+                used[i]=false;
+            }
+        }
+    }
 }
