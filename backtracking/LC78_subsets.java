@@ -51,4 +51,21 @@ public class LC78_subsets {
             track.removeLast();
         }
     }
+    //对回溯掌握得不是太熟练，再练练
+    class Solution20240412 {
+        List<List<Integer>> result = new ArrayList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        public List<List<Integer>> subsets(int[] nums) {
+            backtrack(nums, 0);
+            return result;
+        }
+        public void backtrack(int[] nums , int start){
+            result.add(new ArrayList<Integer>(track));
+            for(int i=start;i<nums.length;i++){
+                track.addLast(nums[i]);
+                backtrack(nums, i+1);
+                track.removeLast();
+            }
+        }
+    }
 }
