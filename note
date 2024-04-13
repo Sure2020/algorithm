@@ -1,0 +1,4 @@
+2024.04.12，感觉回溯有点难，虽然算法框架简单，但变种有点难
+2024.04.13，从LC22学到两个提升性能的技巧：
+            1.结果数组中的元素是字符串的回溯，将track的类型由链表改为stringbuilder，可提升性能，因为最后链表需要join("",track)，而stringbuilder直接tostring即可；
+            2.删除最后一个字符这里用setLength方法，总用时由1ms将为0ms，因为setLength方法不用像deleteCharAt方法那样需要遍历并挪动字符
