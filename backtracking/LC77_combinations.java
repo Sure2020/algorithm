@@ -52,4 +52,27 @@ public class LC77_combinations {
             track.removeLast();
         }
     }
+    class Solution20240416 {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        public List<List<Integer>> combine(int n, int k) {
+            backtrack(1,n,k);
+            return res;
+        }
+        //用start控制下一个元素只取没取过的
+        public void backtrack(int start, int n, int k){
+            if(k==track.size()){
+                res.add(new ArrayList(track));
+                //实践证明这里不写return，运行时长会变长，可以解释为去继续找了大于k个元素的组合，做了多余的工作。只是没被写入res。
+                return;
+            }
+            //错写成了i<n，应该是i<=n。记住这不是在遍历数组。这里从start开始，到n结束，
+            for(int i =start; i<=n; i++){
+                track.add(i);
+                backtrack(i+1,n, k);
+                track.removeLast();
+            }
+
+        }
+    }
 }
