@@ -70,6 +70,7 @@ public class LC46_permutations {
     class Solution20240410 {
         List<List<Integer>> res = new ArrayList<>();
         public List<List<Integer>> permute(int[] nums) {
+            //track用链表，因为会频繁删除和插入，且链表有removeLast方法
             LinkedList<Integer> track = new LinkedList<>();
             boolean[] used = new boolean[nums.length];
             backtrack(nums, track, used);
@@ -82,6 +83,7 @@ public class LC46_permutations {
             }
             for(int i = 0;i<nums.length;i++){
                 //这里如果期望used[i]的值为false，执行完后面的逻辑，下一次backtrack时used[i]为true,会陷入死循环
+                //这里去判断user[i]为true就continue，无非就是代码嵌套层数少，美观。没其他原因，自己想复杂了，之所以有上面的说法，是自己没把回溯的逻辑也写入大括号此
                 // if(!used[i]){
                 //     track.add(nums[i]);
                 // }
@@ -93,6 +95,35 @@ public class LC46_permutations {
                 backtrack(nums, track, used);
                 track.removeLast();
                 used[i]=false;
+            }
+        }
+    }
+
+    class Solution20240416 {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<Integer> track = new LinkedList<>();
+        boolean[] used;
+        public List<List<Integer>> permute(int[] nums) {
+            used = new boolean[nums.length];
+            backtrack(nums);
+            return res;
+        }
+        public void backtrack(int[] nums){
+            //base case
+            if(track.size() == nums.length){
+                res.add(new ArrayList(track));
+                return;
+            }
+            for(int i=0;i<nums.length;i++){
+                //这里去判断user[i]为true就continue，无非就是代码嵌套层数少，美观。没其他原因，自己想复杂了
+                if(!used[i]){
+                    //continue;
+                    track.add(nums[i]);
+                    used[i]=true;
+                    backtrack(nums);
+                    track.removeLast();
+                    used[i]=false;
+                }
             }
         }
     }
