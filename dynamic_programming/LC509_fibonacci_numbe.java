@@ -16,6 +16,9 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
@@ -79,5 +82,59 @@ public class LC509_fibonacci_numbe {
             tempb=result;
         }
         return result;
+    }
+    class Solution20240417 {
+
+        public int fib1(int n) {
+            //暴力
+            if(n==1||n==0){
+                return n;
+            }
+            return fib1(n-1) + fib1(n-2);
+
+        }
+
+        Map<Integer,Integer> map = new HashMap<>();
+        Solution20240417(){
+            map.put(0,0);
+            map.put(1,1);
+        }
+        //自顶向下
+        public int fib2(int n) {
+            if(map.containsKey(n)){
+                return map.get(n);
+            }
+            map.put(n, fib2(n-1) + fib2(n-2));
+            return map.get(n);
+        }
+
+        //自底向上
+        public int fib3(int n) {
+            int[] dp = new int[n+1];
+            if(n == 0 || n==1){
+                return n;
+            }
+            dp[0]=0;
+            dp[1]=1;
+            for(int i=2;i<=n;i++){
+                dp[i]=dp[i-1]+dp[i-2];
+            }
+            return dp[n];
+        }
+        //降低空间复杂度
+        public int fib(int n) {
+            if(n == 0 || n==1){
+                return n;
+            }
+            int dp1=0;
+            int dp2=1;
+            int res=0;
+            for(int i=2;i<=n;i++){
+                res= dp1+dp2;
+                dp1=dp2;
+                dp2=res;
+            }
+            return res;
+        }
     }
 }
