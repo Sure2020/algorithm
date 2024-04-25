@@ -17,6 +17,8 @@
  */
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @program: PACKAGE_NAME
@@ -25,12 +27,12 @@ import java.util.concurrent.Semaphore;
  * @create: 2024-04-21
  **/
 class LC1115_print_foobar_alternately {
-    class FooBar {
+    class FooBarSemaphore {
         private int n;
         private Semaphore fooSema = new Semaphore(1);
         private Semaphore barSema = new Semaphore(0);
 
-        public FooBar(int n) {
+        public FooBarSemaphore(int n) {
             this.n = n;
         }
 
@@ -56,4 +58,56 @@ class LC1115_print_foobar_alternately {
             }
         }
     }
+
+    //容易超时
+    class FooBarLock {
+        private int n;
+        private Lock lock;
+        volatile boolean fooPrinted;
+        public FooBarLock(int n) {
+            this.n = n;
+            lock = new ReentrantLock(true);
+            fooPrinted = false;
+        }
+
+        public void foo(Runnable printFoo) throws InterruptedException {
+            //一开始把lock写在了外面，肯定要写for里面，因为要逐次上锁
+            //lock.lock();
+            //后来忘了把默认的代码中这里的i++去掉，太坑了
+            //for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n;) {
+                lock.lock();
+                try{
+                    if(!fooPrinted){
+                        // printFoo.run() outputs "foo". Do not change or remove this line.
+                        printFoo.run();
+                        i++;
+                        fooPrinted = true;
+                    }
+                }finally {
+                    lock.unlock();
+                }
+
+            }
+        }
+
+        public void bar(Runnable printBar) throws InterruptedException {
+            //lock.lock();
+            //for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; ) {
+                lock.lock();
+                try{
+                    if (fooPrinted){
+                        // printBar.run() outputs "bar". Do not change or remove this line.
+                        printBar.run();
+                        i++;
+                        fooPrinted=false;
+                    }
+                }finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+
 }
