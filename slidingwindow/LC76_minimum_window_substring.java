@@ -169,4 +169,58 @@ public class LC76_minimum_window_substring {
             return minLength==Integer.MAX_VALUE?"":s.substring(start, start + minLength);
         }
     }
+
+    class Solution20240514 {
+        public String minWindow(String s, String t) {
+            // 需要的字符和个数
+            Map<Character, Integer> need = new HashMap<>();
+            // 窗口中的字符和个数
+            Map<Character, Integer> window = new HashMap<>();
+            //先将target读入need
+            // 注意4，也是最致命的一处，对比了好几次，发现。。。竟然把t写成了s!!!
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c, need.getOrDefault(c, 0) + 1);
+            }
+            //初始化窗口的左右边界
+            int left = 0;
+            int right = 0;
+            int start = left;//注意1，要记住最小覆盖字串的其实位置，因为left可能不是最小字串的起始位置
+            int valid = 0;
+            int minLength = Integer.MAX_VALUE;
+            //开始滑动窗口
+            while(right<s.length()){
+                char c = s.charAt(right);
+                right++;
+                // tips: 注意window最终要达到和need一样的值，而不是所有字符都存
+                if(need.containsKey(c)){
+                    window.put(c, window.getOrDefault(c,0)+1);
+                    //注意3，又掉坑里了，Integer类型，比较值不能用等号要用equals
+                    if(window.get(c).equals(need.get(c))){
+                        valid ++;
+                    }
+                }
+                //该判断要不要收缩窗口了
+                while(valid == need.size()){
+                    //注意2，更新最小长度时要同时更新start
+                    //minLength=Math.max(minLength, right-left+1);
+                    if(right-left < minLength){
+                        start = left;
+                        minLength = right-left;
+                    }
+                    char d = s.charAt(left);
+                    left ++;
+                    if(need.containsKey(d)){
+                        //注意3，又掉坑里了，Integer类型，比较值不能用等号要用equals
+                        if(need.get(d).equals(window.get(d))){
+                            valid--;
+                        }
+                        window.put(d, window.get(d)-1);
+                    }
+                }
+                //什么时候更新maxLength
+            }
+            return minLength==Integer.MAX_VALUE?"":s.substring(start, start + minLength);
+        }
+    }
 }
