@@ -78,4 +78,64 @@ public class LC3_longest_substring_without_repeating_characters {
             return maxLength;
         }
     }
+
+    //还行，时隔一个月，短时间写出来了，调试了一小会儿。虽然和labuladong细节不太一样，（没用map）,但我这个思路比他快1ms！
+    class Solution20240514 {
+        public int lengthOfLongestSubstring(String s) {
+            Set<Character> set = new HashSet<>();
+            int left=0,right=0,len=Integer.MIN_VALUE;
+            int l = s.length();
+            // 注意1，也不算是坑，只需多加个判断
+            if(l==0){
+                return 0;
+            }
+            while(right<l){
+                char c = s.charAt(right);
+                if(!set.contains(c)){
+                    set.add(c);
+                    // 注意3，这里+1修正一下，写个例子就能明白
+                    if(right-left+1 > len){
+                        len = right-left+1;
+                    }
+                    right ++;
+                }else {
+                    //注意2，收缩窗口时，缩的是左边，所以要从左边开始删
+                    char d = s.charAt(left);
+                    //set.remove(c);
+                    set.remove(d);
+                    left ++;
+                }
+            }
+            return len;
+        }
+    }
+
+    class Solution202405142113 {
+        public int lengthOfLongestSubstring(String s) {
+            Set<Character> set = new HashSet<>();
+            int left=0,right=0,len = 0;
+            int l = s.length();
+            if(l==0){
+                return 0;
+            }
+            while(right<l){
+                char c = s.charAt(right);
+                if(!set.contains(c)){
+                    set.add(c);
+                    // 注意1，忘了right++;
+                    //right ++;
+                    if(right - left + 1 > len){
+                        len = right - left +1;
+                    }
+                    // 注意2，用完right再++，写得太心急了，稳住
+                    right ++;
+                }else{
+                    char d = s.charAt(left);
+                    set.remove(d);
+                    left ++;
+                }
+            }
+            return len;
+        }
+    }
 }
