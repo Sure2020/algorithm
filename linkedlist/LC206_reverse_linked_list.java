@@ -98,4 +98,21 @@ public class LC206_reverse_linked_list {
             return previous;
         }
     }
+    class Solution20240514 {
+        public ListNode reverseList(ListNode head) {
+            return reverse(head);
+        }
+        //定义函数：返回翻转后的链表，返回的是尾部节点
+
+        ListNode reverse(ListNode root){
+            if(root==null || root.next ==null){
+                return root;
+            }
+            // 注意！！！这个last，是head这个链表的尾部！我一开始一直认定它是链表头部，绕晕了！想好reverse函数的含义！那它的返回值也就明朗了！
+            ListNode last = reverse(root.next);
+            root.next.next = root;
+            root.next=null;
+            return last;
+        }
+    }
 }
