@@ -223,4 +223,48 @@ public class LC76_minimum_window_substring {
             return minLength==Integer.MAX_VALUE?"":s.substring(start, start + minLength);
         }
     }
+
+    // 还好，短时间写的第二遍，只是语法错误，没逻辑错误
+    class Solution202405141826 {
+        public String minWindow(String s, String t) {
+            // 注意1，Character 单词写错
+            Map<Character, Integer> need = new HashMap<>();
+            Map<Character, Integer> window = new HashMap<>();
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c, need.getOrDefault(c, 0) +1);
+            }
+            int left=0, right=0, valid = 0, start = 0;
+            int len = Integer.MAX_VALUE;
+            while(right < s.length()){
+                char c = s.charAt(right);
+                right ++;
+                // 注意2，containsKey，不是contains
+                if(need.containsKey(c)){
+                    //注意3， 忘了给默认值
+                    window.put(c, window.getOrDefault(c, 0) +1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid ++;
+                    }
+                }
+                while(valid == need.size()){
+                    if(right - left < len){
+                        start = left;
+                        len = right - left;
+                    }
+                    char d = s.charAt(left);
+                    left ++;
+                    if(need.containsKey(d)){
+                        if(window.get(d).equals(need.get(d))){
+                            valid --;
+                        }
+                        //注意4，忘了写key
+                        window.put(d, window.get(d)-1);
+                    }
+                }
+            }
+            // 注意5，substring，不是subString
+            return len==Integer.MAX_VALUE?"":s.substring(start, start + len);
+        }
+    }
 }
