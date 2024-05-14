@@ -11,3 +11,16 @@
 			1.元素不重复，不可复选，组合子集：用start控制；排列：用used控制
 			2.元素可重复，不可复选，组合子集：start控制 + sort再剪枝； 排列：used控制 + sort再剪枝，注意剪枝时要判断！used(i-1)->continue
 			3.元素不重复，可以复选，组合子集：用start控制，且下一次从i开始，而不是i+1；排列：不used，不sort
+
+2024.05.14，滑动窗口的框架：
+    1.先将target读入map
+    need 存target
+    window 存s
+    while(right<t.size()){
+    
+    如果右指针指向的字符在need存在，设置window，并更新valid
+        如果valid==need.size(),开始收缩窗口，
+            先判断最小长度是否需要更新，再判断valid是否需要更新，再更新window
+    
+    }
+（感觉这么写框架没多大用，还是直接看代码吧）
