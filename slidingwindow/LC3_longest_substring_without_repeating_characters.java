@@ -138,4 +138,26 @@ public class LC3_longest_substring_without_repeating_characters {
             return len;
         }
     }
+
+    class Solution20240515 {
+        public int lengthOfLongestSubstring(String s) {
+            Set<Character> set = new HashSet<>();
+            int left=0,right=0,len=0;
+            while(right<s.length()){
+                char c  = s.charAt(right);
+                if(!set.contains(c)){
+                    set.add(c);
+                    if(right-left+1>len){
+                        len = right-left+1;
+                    }
+                    right++;
+                }else{
+                    char d = s.charAt(left);
+                    set.remove(d);
+                    left ++;
+                }
+            }
+            return len;
+        }
+    }
 }
