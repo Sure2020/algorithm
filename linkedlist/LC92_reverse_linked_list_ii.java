@@ -175,4 +175,27 @@ public class LC92_reverse_linked_list_ii {
             //return precurssor;
         }
     }
+
+    class Solution20240515 {
+        ListNode successor = null;
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            if(left==1){
+                return reverseN(head, right);
+            }
+            ListNode last = reverseBetween(head.next, left-1, right-1);
+            head.next = last;
+            return head;
+        }
+        public ListNode reverseN(ListNode head, int m){
+            if(m==1){
+                successor = head.next;
+                // 注意1，忘了return
+                return head;
+            }
+            ListNode last = reverseN(head.next, m-1);
+            head.next.next = head;
+            head.next = successor;
+            return last;
+        }
+    }
 }
