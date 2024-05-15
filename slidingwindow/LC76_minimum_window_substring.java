@@ -267,4 +267,41 @@ public class LC76_minimum_window_substring {
             return len==Integer.MAX_VALUE?"":s.substring(start, start + len);
         }
     }
+
+    class Solution20240515 {
+        public String minWindow(String s, String t) {
+            Map<Character, Integer> need = new HashMap<>();
+            Map<Character, Integer> window = new HashMap<>();
+            int left=0,right=0,valid=0,start=0,len=Integer.MAX_VALUE;
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c, need.getOrDefault(c,0)+1);
+            }
+            while(right<s.length()){
+                char c = s.charAt(right);
+                right++;
+                if(need.containsKey(c)){
+                    window.put(c, window.getOrDefault(c,0)+1);
+                    if(need.get(c).equals(window.get(c))){
+                        valid++;
+                    }
+                }
+                while(valid==need.size()){
+                    if(right-left<len){
+                        start=left;
+                        len = right-left;
+                    }
+                    char d = s.charAt(left);
+                    left ++;
+                    if(need.containsKey(d)){
+                        if(window.get(d).equals(need.get(d))){
+                            valid --;
+                        }
+                        window.put(d, window.get(d)-1);
+                    }
+                }
+            }
+            return len==Integer.MAX_VALUE?"":s.substring(start, start+len);
+        }
+    }
 }
