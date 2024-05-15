@@ -55,4 +55,35 @@ public class LC25_reverse_nodes_in_k_group {
             return pre;
         }
     }
+
+    class Solution20240515 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if(head==null){
+                return null;
+            }
+            ListNode a=head,b=head;
+            for(int i=0;i<k;i++){
+                if(b==null){
+                    return head;
+                }
+                b=b.next;
+            }
+            //注意1，忘了把reverse用上
+            ListNode newHead = reverse(a,b);
+            a.next=reverseKGroup(b,k);
+            return newHead;
+        }
+        //[a,b)
+        public ListNode reverse(ListNode a, ListNode b){
+            ListNode previous=null,current=a,next=null;
+            //注意2，这里是将区间[a,b)翻转，所以结束条件是current!=b，而不是current!=null!
+            while(current!=b){
+                next = current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+            }
+            return previous;
+        }
+    }
 }
