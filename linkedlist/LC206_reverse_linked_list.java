@@ -143,4 +143,19 @@ public class LC206_reverse_linked_list {
             return p2;
         }
     }
+    class Solution20240515Iterater {
+        public ListNode reverseList(ListNode head) {
+
+            ListNode previous = null;
+            ListNode current = head;
+            ListNode next = null;
+            while(current!=null){
+                next = current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+            }
+            return previous;
+        }
+    }
 }
