@@ -60,4 +60,21 @@ public class LC141_linked_list_cycle {
             return false;
         }
     }
+    //双指针，哎心急了，忘了把双指针向前推进，要不然有又一道速通！
+    public class Solution20240516 {
+        public boolean hasCycle(ListNode head) {
+            if(head==null|| head.next==null){
+                return false;
+            }
+            ListNode slow=head, fast=head.next.next;
+            while(fast!=null && fast.next!=null){
+                if(slow==fast){
+                    return true;
+                }
+                slow=slow.next;
+                fast=fast.next.next;
+            }
+            return false;
+        }
+    }
 }
