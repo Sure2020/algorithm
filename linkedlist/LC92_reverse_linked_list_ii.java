@@ -246,6 +246,7 @@ public class LC92_reverse_linked_list_ii {
                 return reverseN(head, right);
             }
             //注意3，主要思路是想清楚：对于head，是翻转left->right,那对于head.next，就是翻转left-1,right-1,直到left-n=1触发base case开始真正翻转。
+            //在未到达base case之前，相当于head.next=head.next.next,就是原样拼接了一遍
             head.next = reverseBetween(head.next, left-1,right-1);
             return head;
 
