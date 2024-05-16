@@ -268,4 +268,28 @@ public class LC92_reverse_linked_list_ii {
 
         }
     }
+
+    //先理一下思路：先实现翻转前m个节点，再将head慢慢移动到第left个
+    class Solution202405161518 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            //base case
+            if(left==1){
+                return reverseN(head, right);
+            }
+            head.next = reverseBetween(head.next, left-1,right-1);
+            return head;
+        }
+        ListNode successor = null;
+        public ListNode reverseN(ListNode head, int m){
+            //base case
+            if(m==1){
+                successor = head.next;
+                return head;
+            }
+            ListNode last = reverseN(head.next, m-1);
+            head.next.next=head;
+            head.next=successor;
+            return last;
+        }
+    }
 }
