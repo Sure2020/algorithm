@@ -122,4 +122,33 @@ public class LC25_reverse_nodes_in_k_group {
             return previous;
         }
     }
+
+
+    //先理思路：翻转整个链表相当于翻转从Head到null之间的链表，稍作修改就能写出翻转从head到p节点之间节点的方法
+    //然后不断调用reverseBetween打到最终效果
+    class Solution202405161544 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            //base case
+            ListNode p = head;
+            for(int i=0;i<k;i++){
+                if(p==null){
+                    return head;
+                }
+                p=p.next;
+            }
+            ListNode newHead = reverseBetween(head, p);
+            head.next = reverseKGroup(p, k);
+            return newHead;
+        }
+        public ListNode reverseBetween(ListNode head, ListNode p){
+            ListNode previous=null, current=head, next=null;
+            while(current!=p){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
 }
