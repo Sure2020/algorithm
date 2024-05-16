@@ -86,4 +86,40 @@ public class LC25_reverse_nodes_in_k_group {
             return previous;
         }
     }
+
+    class Solution20240516 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            // if(head==null || head.next==null){
+            //     return head;
+            // }
+            ListNode p=head;
+            //base case不足k个，原样返回
+
+            for(int i=0;i<k;i++){
+                if(p==null){
+                    return head;
+                }
+                p=p.next;
+            }
+            //此时[head,p)区间内有k个待翻转的元素
+
+            ListNode newHead = reverseBetween(head, p);
+            // 注意2，这里写成了reverseKGroup(p.next,k)，显然是没搞清楚区间，记住区间是[head,p)
+            head.next = reverseKGroup(p, k);
+            return newHead;
+
+
+        }
+        public ListNode reverseBetween(ListNode a, ListNode b){
+            ListNode previous=null, current=a,next=null;
+            //注意1，这里，又双写成了current!=null，又双是思维定式，应该是current!=b，因为现在的右边界是b呀
+            while(current!=b){
+                next = current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+            }
+            return previous;
+        }
+    }
 }
