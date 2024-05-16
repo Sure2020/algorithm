@@ -126,4 +126,36 @@ public class LC206_reverse_linked_list {
             return last;
         }
     }
+    class Solution20240515IteraterSelf {
+        public ListNode reverseList(ListNode head) {
+            if(head==null ||head.next==null){
+                return head;
+            }
+            ListNode p1 = null;
+            ListNode p2 = head;
+            while(p2.next!=null){
+                ListNode temp = p2.next;
+                p2.next=p1;
+                p1=p2;
+                p2=temp;
+            }
+            p2.next=p1;
+            return p2;
+        }
+    }
+    class Solution20240515Iterater {
+        public ListNode reverseList(ListNode head) {
+
+            ListNode previous = null;
+            ListNode current = head;
+            ListNode next = null;
+            while(current!=null){
+                next = current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+            }
+            return previous;
+        }
+    }
 }
