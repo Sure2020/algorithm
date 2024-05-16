@@ -219,4 +219,52 @@ public class LC92_reverse_linked_list_ii {
             return last;
         }
     }
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     *     int val;
+     *     ListNode next;
+     *     ListNode() {}
+     *     ListNode(int val) { this.val = val; }
+     *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+    class Solution20240516 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            // if(head==null || head.next==null){
+            //     return head;
+            // }
+            // ListNode p = head;
+            // for(int i=0;i<left;i++){
+            //     p=p.next;
+            // }
+            // p.next = reverseN(p.next,right-left);
+            // return head;
+            //注意2，前进到left节点不是上面这么前进的，递归先想清楚base case，这是关键
+            if(left==1){
+                return reverseN(head, right);
+            }
+            //注意3，主要思路是想清楚：对于head，是翻转left->right,那对于head.next，就是翻转left-1,right-1,直到left-n=1触发base case开始真正翻转。
+            head.next = reverseBetween(head.next, left-1,right-1);
+            return head;
+
+        }
+        ListNode successor=null;
+        public ListNode reverseN(ListNode head, int m){
+            if(head==null || head.next==null){
+                return head;
+            }
+            if(m==1){
+                successor = head.next;
+                return head;
+            }
+            ListNode last = reverseN(head.next, m-1);
+            head.next.next=head;
+            //注意1，这里要和后继节点接上，不能思维定势地在后面接null
+            head.next=successor;
+            return last;
+
+        }
+    }
 }
