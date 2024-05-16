@@ -58,4 +58,35 @@ public class LC24_swap_nodes_in_pairs {
             return pre;
         }
     }
+
+    //恍然大悟，原来这就是k个一组翻转链表的简化版，k为2
+    class Solution20240516 {
+        public ListNode swapPairs(ListNode head) {
+            return reverseKGroup(head, 2);
+        }
+        public ListNode reverseKGroup(ListNode head, int k){
+            ListNode p = head;
+            for(int i=0;i<k;i++){
+                if(p==null){
+                    return head;
+                }
+                p=p.next;
+            }
+            //根据函数定义，先翻转前k个，翻转后，newHead为头，head为尾
+            ListNode newHead = reverseBetween(head, p);
+            //将尾部跟后面的接起来
+            head.next = reverseKGroup(p, k);
+            return newHead;
+        }
+        public ListNode reverseBetween(ListNode a, ListNode b){
+            ListNode previous=null, current=a, next=null;
+            while(current!=b){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
 }
