@@ -187,4 +187,32 @@ public class LC23_merge_k_sorted_lists {
             return dummy.next;
         }
     }
+
+    //小顶堆，先将各链表头节点放入堆，再取节点
+    class Solution20240517 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if(lists.length==0){
+                return null;
+            }
+            PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a,b)->(a.val-b.val));
+            for(int i=0;i<lists.length;i++){
+
+                ListNode head = lists[i];
+                if(head!=null){
+                    pq.add(head);
+                }
+            }
+            ListNode dummy = new ListNode();
+            ListNode p = dummy;
+            while(!pq.isEmpty()){
+                ListNode node = pq.poll();
+                p.next=node;
+                p=p.next;
+                if(node.next!=null){
+                    pq.add(node.next);
+                }
+            }
+            return dummy.next;
+        }
+    }
 }
