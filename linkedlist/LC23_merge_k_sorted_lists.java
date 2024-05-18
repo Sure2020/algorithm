@@ -215,4 +215,37 @@ public class LC23_merge_k_sorted_lists {
             return dummy.next;
         }
     }
+
+    //先理思路：利用小顶堆。注意：先将各列表的头节点放入小顶堆，再逐个向后取，放，拼
+    class Solution20240518 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if(lists.length==0){
+                return null;
+            }
+            //注意1 new 后面的尖括号别落下
+            PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a,b)->(a.val-b.val));
+            for(int i=0;i<lists.length;i++){
+                ListNode head = lists[i];
+                if(head!=null){
+                    queue.add(head);
+                }
+            }
+            ListNode dummy = new ListNode();
+            // 注意2 p要指向dummy，别觉得自己滚瓜烂熟就思路松懈，要想清楚每一步的意图！
+            // ListNode p = new ListNode();
+            ListNode p = dummy;
+            while(!queue.isEmpty()){
+                ListNode node = queue.poll();
+                p.next=node;
+                if(node.next!=null){
+
+                    queue.add(node.next);
+                }
+                p=p.next;
+            }
+            // 注意3，要return dummy.next.......看来按记忆做题真的很危险
+            // return dummy;
+            return dummy.next;
+        }
+    }
 }

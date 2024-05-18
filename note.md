@@ -24,3 +24,7 @@
     
     }
 （感觉这么写框架没多大用，还是直接看代码吧）
+
+2024.05.18,LC23. 合并 K 个升序链表
+//注意new 后面的尖括号别落下
+PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a,b)->(a.val-b.val));
