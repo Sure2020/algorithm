@@ -84,4 +84,34 @@ public class LC82_remove_duplicates_from_sorted_list_ii {
             return dummy.next;
         }
     }
+
+    //先理思路，肯定是快慢双指针了，
+    //浪费了地铁上的半个多小时，最终还是看题解，所以以后果断看题解吧，时间最重要
+    class Solution20240520 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode dummy = new ListNode(-101);
+            //老忘掉这一步
+            dummy.next=head;
+            ListNode slow=dummy,fast=dummy.next;
+            while(fast!=null){
+                //跳过重复节点
+                while(fast.next!=null && fast.val==fast.next.val){
+                    fast = fast.next;
+                }
+                //这一步是关键步骤，也是我一直没想起来的步骤，就是当slow和fast之间没元素时，才移动slow.
+                if(slow.next==fast){
+                    slow=slow.next;
+                }else{
+                    //指向fast.next，相当于跳过了所有重复的元素。
+                    slow.next = fast.next;
+                }
+                fast=fast.next;
+
+            }
+            return dummy.next;
+        }
+    }
 }
