@@ -142,4 +142,37 @@ public class LC160_intersection_of_two_linked_lists {
             return p1;
         }
     }
+
+    //先理清思路：双指针，拼成ab和ba两条链表，并搞两个指针分别遍历，如果相交则肯定会有个位置，两个指针指向同一个节点
+    //还行，自己调了几次解决了，简单题确实简单
+    public class Solution20240520 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            if(headA==null || headB== null){
+                return null;
+            }
+            ListNode p1 = headA, p2 = headB;
+            while(true){
+                //说明已到达尾部
+                if(p1==null && p2==null){
+                    return null;
+                }
+                if(p1==p2){
+                    break;
+                }
+                if(p1==null){
+                    p1=headB;
+                }else{
+                    p1=p1.next;
+                }
+                if(p2==null){
+                    p2=headA;
+                }else{
+                    p2=p2.next;
+                }
+                // p1=p1.next;
+                // p2=p2.next;
+            }
+            return p1;
+        }
+    }
 }
