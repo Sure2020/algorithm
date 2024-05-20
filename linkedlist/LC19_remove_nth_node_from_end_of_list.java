@@ -32,6 +32,10 @@ public class LC19_remove_nth_node_from_end_of_list {
         System.out.println("case3");
         ListNode list3 = Tools.listNodeCreater(new int[]{1, 2});
         Tools.listNodePrinter(removeNthFromEnd(list3, 1));
+
+        System.out.println("new test");
+        Solution20240520 solution20240520 = new Solution20240520();
+        Tools.listNodePrinter(solution20240520.removeNthFromEnd(list1, 2));
     }
 
     public static ListNode removeNthFromEnd(ListNode head, int n) {
@@ -80,5 +84,23 @@ public class LC19_remove_nth_node_from_end_of_list {
             slow.next=slow.next.next;
             return dummy.next;
         }
+    }
+
+    //先理清思路：递归先找到倒数第n
+    static class Solution20240520 {
+        int count =0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return head;
+            }
+            //注意，一开始没写这个head.next = ，导致删除节点后的链表没载体能够传递给最开始的调用者
+            head.next = removeNthFromEnd(head.next,n);
+            count ++;
+            if(count==n){
+                return head.next;
+            }
+            return  head;
+        }
+
     }
 }
