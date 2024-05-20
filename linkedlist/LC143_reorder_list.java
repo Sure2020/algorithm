@@ -16,6 +16,8 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.Stack;
+
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
@@ -142,6 +144,32 @@ public class LC143_reorder_list {
                 l2.next = l1;
                 l2 = l2_tmp;
             }
+        }
+    }
+
+
+    //用了思路最简单的方法，虽然比较耗时，但时间复杂度低的算法太难，时间紧迫先这样
+    class Solution20240520 {
+        public void reorderList(ListNode head) {
+            if(head==null || head.next==null){
+                return;
+            }
+            Stack<ListNode> stack = new Stack<>();
+            ListNode p = head;
+            while(p!=null){
+                stack.push(p);
+                p=p.next;
+            }
+            // ListNode newHead=head;
+            ListNode left=head,right=null;
+            // 这个while 条件值得记忆，分别对于链表偶数和奇数个的情况
+            while(left.next!=right ||left.next.next!=right){
+                right = stack.pop();
+                right.next = left.next;
+                left.next = right;
+                left = right.next;
+            }
+            left.next=null;
         }
     }
 }
