@@ -87,6 +87,7 @@ public class LC19_remove_nth_node_from_end_of_list {
     }
 
     //先理清思路：递归先找到倒数第n
+    // 同理，删除倒数第n个节点，用快慢指针也是更简单！！！
     static class Solution20240520 {
         int count =0;
         public ListNode removeNthFromEnd(ListNode head, int n) {
