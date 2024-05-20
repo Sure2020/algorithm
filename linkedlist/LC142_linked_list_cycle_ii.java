@@ -35,6 +35,8 @@ public class LC142_linked_list_cycle_ii {
         pos1 = pos1.next;
         head1.next = pos1;
         System.out.println(detectCycle(list1).val);
+//        Solution20240520 solution20240520 = new Solution20240520();
+//        System.out.println(solution20240520.detectCycle(list1).val);
 
         System.out.println("case2, pos=0");
         ListNode list2 = Tools.listNodeCreater(new int[]{1, 2});
@@ -107,6 +109,38 @@ public class LC142_linked_list_cycle_ii {
             }else{
                 return null;
             }
+        }
+    }
+
+    //先理清思路：自己想到了k，2k和k-x，没想到关键的一步，就是快慢指针相遇后，再同速走k-x步，再次相等的点就是目标节点
+    public class Solution20240520 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            //注意，自己给自己挖的大坑，这里slow指向head,没动位置，而fast却已走两步。。。
+            // 以后还是把移动的逻辑放到while里面，这样能规避这个低级错误
+            ListNode /*slow=head*/slow=head.next,fast=head.next.next;
+            boolean hasCycle = false;
+            while(fast!=null && fast.next!=null){
+                slow = slow.next;
+                fast=fast.next.next;
+                if(fast==slow){
+                    hasCycle = true;
+                    break;
+                }
+            }
+            if(!hasCycle){
+                return null;
+            }
+            slow = head;
+            while(slow!=fast){
+                slow=slow.next;
+                // 注意，这里也是写错了，两个指针要同速走！
+                //fast = fast.next.next;
+                fast = fast.next;
+            }
+            return slow;
         }
     }
 }
