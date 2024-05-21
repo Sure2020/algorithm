@@ -143,4 +143,31 @@ public class LC142_linked_list_cycle_ii {
             return slow;
         }
     }
+
+    //先理清思路：快指针每次走两步，和慢指针相遇后，再同速走k-m步
+    public class Solution20240521 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            ListNode slow=head, fast=head;
+            while(fast!=null && fast.next !=null){
+                fast=fast.next.next;
+                slow=slow.next;
+                if(fast==slow){
+                    break;
+                }
+            }
+            if(fast==null || fast.next==null){
+                return null;
+            }
+            slow=head;
+            while(slow!=fast){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return slow;
+
+        }
+    }
 }
