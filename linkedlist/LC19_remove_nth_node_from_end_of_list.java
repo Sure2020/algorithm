@@ -104,4 +104,27 @@ public class LC19_remove_nth_node_from_end_of_list {
         }
 
     }
+
+    class Solution20240521 {
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            //注意，搞了个dummy节点，就能处理倒数第n个节点是第一个节点的情况了
+            ListNode dummy = new ListNode(-1);
+            dummy.next = head;
+            ListNode slow=dummy,fast=dummy;
+            for(int i=1;i<=n;i++){
+                fast=fast.next;
+                //System.out.println(fast.val);
+            }
+            //控制fast指向最后一个节点，而不是null节点
+            while(fast.next!=null){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            slow.next = slow.next.next;
+            return dummy.next;
+        }
+    }
 }
