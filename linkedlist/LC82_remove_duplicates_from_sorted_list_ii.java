@@ -114,4 +114,28 @@ public class LC82_remove_duplicates_from_sorted_list_ii {
             return dummy.next;
         }
     }
+
+    class Solution20240521 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode dummy = new ListNode(-101);
+            dummy.next = head;
+            ListNode left = dummy, right=head;
+            while(right!=null){
+                //跳过重复节点
+                while(right.next!=null && right.val == right.next.val){
+                    right = right.next;
+                }
+                if(left.next==right){
+                    left=left.next;
+                }else{
+                    left.next = right.next;
+                }
+                right=right.next;
+            }
+            return dummy.next;
+        }
+    }
 }
