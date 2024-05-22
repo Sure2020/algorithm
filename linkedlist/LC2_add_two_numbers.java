@@ -129,4 +129,58 @@ public class LC2_add_two_numbers {
             return dummy.next;
         }
     }
+
+    //牛，早上，晚上的两趟地铁，终究是独立写出来了，没看任何提示，虽然代码繁琐但毕竟是自己独立写的，以后就这么写！
+    class Solution20240522 {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode(-1);
+            ListNode p1=l1,p2=l2,p3=dummy;
+
+            int moreThanTen = 0;
+            while(p1!=null && p2!=null){
+                int v1=p1.val,v2=p2.val;
+                int sum = v1+v2;
+                // 这里要将v1 v2 moreThanTen加起来，再取模，取余，考虑[3,7]，[9,2]这个测试用例
+                // int v3=sum%10 + moreThanTen;
+                int v3=(sum + moreThanTen)%10;
+                //这里错写成了v3/10
+                // moreThanTen = sum/10;
+                moreThanTen = (sum + moreThanTen)/10;
+                ListNode tempNode = new ListNode(v3);
+                p3.next=tempNode;
+                p3=p3.next;
+
+                //忘了移动这两个指针
+                p1=p1.next;
+                p2=p2.next;
+            }
+            //处理p1较长的情况
+            while(p1!=null){
+                int sum = p1.val + moreThanTen;
+                int v3 = sum%10;
+                moreThanTen = sum/10;
+                ListNode tempNode = new ListNode(v3);
+                p3.next = tempNode;
+                p3=p3.next;
+                p1=p1.next;
+            }
+            //处理p2较长的情况
+            while(p2!=null){
+                int sum = p2.val + moreThanTen;
+                int v3 = sum%10;
+                moreThanTen = sum/10;
+                ListNode tempNode = new ListNode(v3);
+                p3.next = tempNode;
+                p3=p3.next;
+                p2=p2.next;
+            }
+
+            //处理仍然有进位的情况
+            if(moreThanTen!=0){
+                ListNode tempNode = new ListNode(moreThanTen);
+                p3.next = tempNode;
+            }
+            return dummy.next;
+        }
+    }
 }
