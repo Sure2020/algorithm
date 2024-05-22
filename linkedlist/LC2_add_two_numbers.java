@@ -183,4 +183,28 @@ public class LC2_add_two_numbers {
             return dummy.next;
         }
     }
+    class Solution202405222236 {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode(-1);
+            ListNode p1=l1,p2=l2,p3=dummy;
+            int moreThanTen = 0;
+            //moreThanTen>0这个条件很关键，可以省去很多额外的处理
+            while(p1!=null || p2!=null || moreThanTen>0){
+                int sum=moreThanTen;
+                if(p1!=null){
+                    sum+=p1.val;
+                    p1=p1.next;
+                }
+                if(p2!=null){
+                    sum+=p2.val;
+                    p2=p2.next;
+                }
+                int val = sum%10;
+                moreThanTen=sum/10;
+                p3.next = new ListNode(val);
+                p3=p3.next;
+            }
+            return dummy.next;
+        }
+    }
 }
