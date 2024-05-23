@@ -292,4 +292,37 @@ public class LC92_reverse_linked_list_ii {
             return last;
         }
     }
+
+    //思路：先实现reverseN，也就是翻转前N个，再将head前进到left的位置，调用reverseN
+    //不是最简洁的做法，但是早班地铁上半小时左右自己独立调出来的，在到站的前一秒AC，别提多有成就感了
+    class Solution20240523 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            //return reverseN(head, left);//证明reverseN函数写的没问题
+            if(head==null || head.next==null){
+                return head;
+            }
+            //先跳过前Left个节点
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode p = dummy;
+            for(int i=1;i<left;i++){
+                p = p.next;
+            }
+            p.next = reverseN(p.next, right-left+1);
+            return dummy.next;
+        }
+        //reverseN则是需要一个节点保存后继节点
+        ListNode successor = new ListNode();
+        public ListNode reverseN(ListNode head,int n){
+            //base case
+            if(n==1){
+                successor = head.next;
+                return head;
+            }
+            ListNode last = reverseN(head.next, n-1);
+            head.next.next=head;
+            head.next = successor;
+            return last;
+        }
+    }
 }
