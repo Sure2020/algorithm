@@ -28,3 +28,8 @@
 2024.05.18,LC23. 合并 K 个升序链表
 //注意new 后面的尖括号别落下
 PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a,b)->(a.val-b.val));
+
+
+2024.05.24, LC92,反转链表II，
+//前进到第left个节点的方式，值得记忆！
+head.next = reverseBetween(head.next, left-1,right-1);
