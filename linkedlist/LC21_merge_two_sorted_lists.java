@@ -159,4 +159,32 @@ public class LC21_merge_two_sorted_lists {
             return dummy.next;
         }
     }
+
+    //思路，双指针，分别指向两个链表，逐个比对值
+    class Solution20240524 {
+        public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+            ListNode dummy = new ListNode();
+            ListNode p1=list1,p2=list2,p3=dummy;
+
+            int v1=-101,v2=-101;
+            while(p1!=null && p2!=null){
+                if(p1.val<p2.val){
+                    p3.next=p1;
+                    p1=p1.next;
+                }else{
+                    p3.next=p2;
+                    p2=p2.next;
+
+                }
+                p3=p3.next;
+            }
+            if(p1!=null){
+                p3.next=p1;
+            }
+            if(p2!=null){
+                p3.next=p2;
+            }
+            return dummy.next;
+        }
+    }
 }
