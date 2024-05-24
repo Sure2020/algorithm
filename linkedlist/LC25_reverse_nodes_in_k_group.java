@@ -151,4 +151,45 @@ public class LC25_reverse_nodes_in_k_group {
             return previous;
         }
     }
+
+
+    //先理清思路：写出翻转两个节点之间的链表的函数
+    //还算厉害，地铁早班20分钟左右独立写出，调了两三次就AC，逐渐掌握了一个调试技巧就是有辅助函数的情况下，可以先只调用辅助函数来调试，先保证辅助函数没问题
+    class Solution20240524 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if(head==null || head.next==null){
+                return head;
+            }
+
+            ListNode p = head;
+            for(int i=1;i<=k;i++){
+                //base case
+                if(p==null){
+                    return head;
+                }
+                p=p.next;
+            }
+
+            ListNode newHead = reverseBetween(head, p);
+            head.next=reverseKGroup(p,k);
+            return newHead;
+            //return reverseBetween(head, head.next.next);
+
+        }
+        //区间[a,b)
+        //这里要用迭代，更方便控制节点区间
+        public ListNode reverseBetween(ListNode a, ListNode b){
+            // ListNode dummy = new ListNode();
+            ListNode previous=null,current=a,next=null;
+            // 哈哈我踏马真是做一次就在这里踩坑一次，如果翻转整个链表，结束条件才是!=null，现在是翻转区间，就要!=b
+            while(current!=b){
+                //这里的四步一画图就了然
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
 }
