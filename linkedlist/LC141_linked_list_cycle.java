@@ -77,4 +77,24 @@ public class LC141_linked_list_cycle {
             return false;
         }
     }
+
+    //双指针，一步两步，相等
+    public class Solution20240524 {
+        public boolean hasCycle(ListNode head) {
+            if(head==null){
+                return false;
+            }
+            ListNode slow=head,fast=head;
+
+            // 这里错把且写成了或
+            while(fast!=null && fast.next!=null){
+                fast=fast.next.next;
+                slow=slow.next;
+                if(fast==slow){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
