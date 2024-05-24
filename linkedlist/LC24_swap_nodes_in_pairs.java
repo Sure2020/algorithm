@@ -89,4 +89,36 @@ public class LC24_swap_nodes_in_pairs {
             return previous;
         }
     }
+
+    //轻松搞定
+    class Solution20240524 {
+        public ListNode swapPairs(ListNode head) {
+            return reverseKgroup(head, 2);
+        }
+        public ListNode reverseKgroup(ListNode head, int k){
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode p = head;
+            for(int i=1;i<=k;i++){
+                if(p==null){
+                    return head;
+                }
+                p=p.next;
+            }
+            ListNode newHead = reverseBetween(head,p);
+            head.next=reverseKgroup(p,k);
+            return newHead;
+        }
+        public ListNode reverseBetween(ListNode a, ListNode b){
+            ListNode previous=null,current=a,next=null;
+            while(current!=b){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
 }
