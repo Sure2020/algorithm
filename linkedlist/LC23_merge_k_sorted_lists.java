@@ -248,4 +248,32 @@ public class LC23_merge_k_sorted_lists {
             return dummy.next;
         }
     }
+
+    //先将头节点放入小顶堆，再取出顶元素，再逐个放入后面的节点，边放边取
+    //很多小细节需要注意，不用特意记忆，靠测试用例来推动改正吧
+    class Solution20240525 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if(lists.length==0){
+                return null;
+            }
+            PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length,(a,b)->a.val-b.val);
+            for(int i=0;i<lists.length;i++){
+                ListNode tempNode = lists[i];
+                if(tempNode!=null){
+                    queue.add(tempNode);
+                }
+            }
+            ListNode dummy = new ListNode();
+            ListNode p = dummy;
+            while(!queue.isEmpty()){
+                ListNode tempNode = queue.poll();
+                p.next = tempNode;
+                p=p.next;
+                if(tempNode.next!=null){
+                    queue.add(tempNode.next);
+                }
+            }
+            return dummy.next;
+        }
+    }
 }
