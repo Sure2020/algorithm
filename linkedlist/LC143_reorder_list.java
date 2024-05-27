@@ -172,4 +172,41 @@ public class LC143_reorder_list {
             left.next=null;
         }
     }
+
+    //思路：用一个栈存储节点，并依次取出拼接
+    //早班折腾，晚班快到站时，无意间把left.next放到了while外面，竟然可以了。。。就这样解吧，毕竟纯独立搞定的
+    class Solution20240527 {
+        public void reorderList(ListNode head) {
+            if(head==null || head.next==null){
+                return;
+            }
+            ListNode p = head;
+            Stack<ListNode> stack = new Stack<>();
+            while(p!=null){
+                stack.push(p);
+                //忘了移动指针，导致超出内存限制。。。。
+                p=p.next;
+            }
+            ListNode left = head,right=null;
+            while(left!=null){
+                right=stack.pop();
+                // System.out.println(right.val);
+                // System.out.println(left.val);
+                // System.out.println("#####");
+                right.next=left.next;
+                //left.next.next=null;
+                left.next=right;
+                // left=left.next;
+                left=right.next;
+
+                if(left==null ||left==right || left.next==right){
+                    break;
+                }
+
+            }
+            //这是关键的一步，最后断开和后面的连接，否则会形成环
+            left.next=null;
+            return;
+        }
+    }
 }
