@@ -175,4 +175,32 @@ public class LC160_intersection_of_two_linked_lists {
             return p1;
         }
     }
+    //思路：将两条链表拼成一条，就可以用双指针遍历了
+    public class Solution20240527 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode p1 = headA,p2=headB;
+            while(p1!=null || p2!=null){
+                if(p1==p2){
+                    return p1;
+                }
+                //System.out.println(p1.val);
+                p1=p1.next;
+                p2=p2.next;
+                // 卡在了这一步，要及时判断是否都走到了终点，并推出while，否则会死循环
+                if(p1==null && p2==null){
+                    return null;
+                }
+                if(p1==null){
+                    p1=headB;
+                }
+
+                //System.out.println(p2.val);
+                //p2=p2.next;
+                if(p2==null){
+                    p2=headA;
+                }
+            }
+            return null;
+        }
+    }
 }
