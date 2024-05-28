@@ -170,4 +170,32 @@ public class LC142_linked_list_cycle_ii {
 
         }
     }
+
+    //快慢指针，快指针每次走两步，当和慢指针相遇，则让慢指针从head开始，与另一个指针每次一步前进，再次相遇就是所求点
+    //挺牛的，快速敲完了，而且一遍过
+    public class Solution20240528 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            ListNode slow=head,fast=head;
+            while(fast!=null && fast.next!=null){
+                slow=slow.next;
+                fast=fast.next.next;
+                if(slow==fast){
+                    break;
+                }
+            }
+            if(fast==null || fast.next==null){
+                return null;
+            }
+            //slow 从Head开始
+            slow = head;
+            while(slow!=fast){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return slow;
+        }
+    }
 }
