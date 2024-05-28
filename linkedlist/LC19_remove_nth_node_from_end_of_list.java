@@ -127,4 +127,58 @@ public class LC19_remove_nth_node_from_end_of_list {
             return dummy.next;
         }
     }
+
+    //第一时间能想到的还是递归；tips:只要需要删除节点，就搞dummy节点辅助
+    class Solution20240528 {
+        private int count = 0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            //不能当head.next==null时return head，因为head这一个节点要被删掉，所以要return null
+            if(head==null){
+                return null;
+            }
+            // ListNode dummy = new ListNode();
+            // dummy.next = head;
+            // remove(dummy, n);
+            // return dummy.next;
+            //return remove(head, n);
+            head.next=removeNthFromEnd(head.next,n);
+            count ++;
+            if(count==n){
+                return head.next;
+            }
+            return head;
+        }
+
+        public ListNode remove(ListNode head, int n){
+            //base case
+            if(head==null){
+                return null;
+            }
+
+            head.next=remove(head.next, n);
+            count++;
+            //base case
+            if(count==n){
+                return head.next;
+            }
+            return head;
+        }
+    }
+
+    //思路的演变过程见上一次提交
+    class Solution202405282119 {
+        private int count = 0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            //base case
+            if(head==null){
+                return null;
+            }
+            head.next = removeNthFromEnd(head.next, n);
+            count ++;
+            if(count ==n){
+                return head.next;
+            }
+            return head;
+        }
+    }
 }

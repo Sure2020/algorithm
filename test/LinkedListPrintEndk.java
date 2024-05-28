@@ -9,6 +9,7 @@ public class LinkedListPrintEndk {
         }
 
         findPenultimateNode(head.next);
+        //倒数第几个，那肯定是要将计数的逻辑写在递归函数后面，参考二叉树的后续遍历！
         count++;
 
         if (count == 2) {
