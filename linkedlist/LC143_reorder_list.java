@@ -209,4 +209,28 @@ public class LC143_reorder_list {
             return;
         }
     }
+
+    //双指针，利用栈暂存
+    class Solution20240528 {
+        public void reorderList(ListNode head) {
+            if(head==null || head.next==null || head.next.next==null){
+                return;
+            }
+            ListNode p = head;
+            Stack<ListNode> stack = new Stack<>();
+
+            while(p!=null){
+                stack.push(p);
+                p=p.next;
+            }
+            ListNode left=head,right=null;
+            while(left.next!=right || left.next.next!=right){
+                right = stack.pop();
+                right.next=left.next;
+                left.next=right;
+                left=right.next;
+            }
+            left.next=null;
+        }
+    }
 }
