@@ -138,4 +138,31 @@ public class LC82_remove_duplicates_from_sorted_list_ii {
             return dummy.next;
         }
     }
+
+    // 两个要点，slow向前移动的前提是slow.next=fast;用while跳过重复的节点
+    //还是没能写出来，记住一点，移动完，slow不能和fast指向同一个节点。fast要先去前面探路，所以移动时要等slow移动完，再移动，这样能保持领先
+    class Solution20240528 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null || head.next == null){
+                return head;
+            }
+            ListNode dummy = new ListNode(-101);
+            dummy.next = head;
+            ListNode slow=dummy,fast=head;
+            while(fast!=null){
+                while(fast.next!=null && fast.val==fast.next.val){
+                    //fast.next!=null的条件还是要写在这个while里，因为下面fast在移动，要控制不能为空
+                    fast=fast.next;
+                }
+                //fast=fast.next;
+                if(slow.next==fast){
+                    slow=slow.next;
+                }else{
+                    slow.next = fast.next;
+                }
+                fast=fast.next;
+            }
+            return dummy.next;
+        }
+    }
 }

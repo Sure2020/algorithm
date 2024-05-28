@@ -39,3 +39,4 @@ head.next = reverseBetween(head.next, left-1,right-1);
 while(current!=b){
 
 2024.05.28, LC19，打印倒数第k个链表节点，是个很基础的东西！记住count++要放在递归之后，参考二叉树的后续遍历
+2024.05.28,LC82,删除重复节点，还是没能写出来，记住一点，移动完，slow不能和fast指向同一个节点。fast要先去前面探路，所以移动时要等slow移动完，再移动，这样能保持领先
