@@ -129,4 +129,27 @@ class LC101_symmetric_tree {
         }
 
     }
+
+    //思路。。。判断左右子树是否是。
+    //但短时间没想出来，直接看答案
+    //labuladong说二叉树的递归分为遍历和分解两种，下面是分解，咱曾经也用过遍历的方式，就是BFS遍历出每层节点，再判断是否对称
+    class Solution20240529 {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return true;
+            }
+            return check(root,root);
+        }
+
+        public boolean check(TreeNode left, TreeNode right){
+            if(left==null || right==null){
+                return left==right;
+            }
+            if(left.val!=right.val){
+                return false;
+            }
+            //检查子树
+            return check(left.left,right.right) && check(left.right, right.left);
+        }
+    }
 }
