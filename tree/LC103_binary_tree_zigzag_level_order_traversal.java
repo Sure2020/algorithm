@@ -183,4 +183,42 @@ public class LC103_binary_tree_zigzag_level_order_traversal {
             return result;
         }
     }
+
+    //层序遍历基础上，带上当前深度来控制方向
+    //用一个flag标记方向，能感觉到性能不行，但好歹是独立做出来的，而且相对顺利！
+    //唉！恍然大悟！记住LinkedList有方法可以头插或者尾插！自然就可以控制方向了
+    class Solution20240529LinkedList {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            boolean leftToRight=true;
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                //List<Integer> tempList = new ArrayList<>();
+                LinkedList<Integer> tempList = new LinkedList<>();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    if(leftToRight){
+                        tempList.addLast(tempNode.val);
+                    }else{
+                        tempList.addFirst(tempNode.val);
+                    }
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(tempList);
+                leftToRight = !leftToRight;
+            }
+
+            return result;
+        }
+    }
 }
