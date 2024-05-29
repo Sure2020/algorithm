@@ -36,4 +36,17 @@ public class LC100_same_tree {
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 
     }
+
+    //从LC101过来，这个可以秒了吧
+    class Solution20240529 {
+        public boolean isSameTree(TreeNode p, TreeNode q) {
+            if(p==null || q==null){
+                return p==q;
+            }
+            if(p.val!=q.val){
+                return false;
+            }
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        }
+    }
 }
