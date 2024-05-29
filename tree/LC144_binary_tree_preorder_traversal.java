@@ -73,4 +73,18 @@ public class LC144_binary_tree_preorder_traversal {
             return resultList;
         }
     }
+
+    //哈哈
+    class Solution20240529 {
+        List<Integer> result = new ArrayList<>();
+        public List<Integer> preorderTraversal(TreeNode root) {
+            if(root==null){
+                return result;
+            }
+            result.add(root.val);
+            preorderTraversal(root.left);
+            preorderTraversal(root.right);
+            return result;
+        }
+    }
 }
