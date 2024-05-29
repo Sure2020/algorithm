@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @program: PACKAGE_NAME
@@ -127,6 +128,58 @@ public class LC103_binary_tree_zigzag_level_order_traversal {
                 isLeftToRight = !isLeftToRight;
                 result.add(tempList);
             }
+            return result;
+        }
+    }
+
+    //层序遍历基础上，带上当前深度来控制方向
+    //用一个flag标记方向，能感觉到性能不行，但好歹是独立做出来的，而且相对顺利！
+    class Solution20240529 {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            boolean leftToRight=true;
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                List<Integer> tempList = new ArrayList<>();
+                if(leftToRight){
+                    for(int i=1;i<=size;i++){
+                        TreeNode tempNode = queue.poll();
+                        tempList.add(tempNode.val);
+                        if(tempNode.left!=null){
+                            queue.offer(tempNode.left);
+                        }
+                        if(tempNode.right!=null){
+                            queue.offer(tempNode.right);
+                        }
+                    }
+                }else{
+                    Stack<TreeNode> stack = new Stack<>();
+
+                    for(int i=1;i<=size;i++){
+                        TreeNode tempNode = queue.poll();
+                        stack.push(tempNode);
+                        //tempList.add(tempNode.val);
+                        if(tempNode.left!=null){
+                            queue.offer(tempNode.left);
+                        }
+                        if(tempNode.right!=null){
+                            queue.offer(tempNode.right);
+                        }
+                    }
+                    for(int i=1;i<=size;i++){
+                        TreeNode tempNode = stack.pop();
+                        tempList.add(tempNode.val);
+                    }
+                }
+                result.add(tempList);
+                leftToRight = !leftToRight;
+            }
+
             return result;
         }
     }
