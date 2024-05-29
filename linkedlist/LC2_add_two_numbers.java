@@ -207,4 +207,42 @@ public class LC2_add_two_numbers {
             return dummy.next;
         }
     }
+
+    //双指针，注意进位，用一个变量保存进位
+    class Solution20240529 {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode p1 = l1,p2=l2;
+            ListNode dummy = new ListNode();
+            ListNode p3 = dummy;
+            int moreThanTen = 0;
+            int sum = 0;
+            while(p1!=null || p2!=null || moreThanTen!=0){
+                // System.out.println("start############");
+                // System.out.println("1: " + moreThanTen);
+                sum += moreThanTen;
+                if(p1!=null){
+                    // System.out.println("2: " + p1.val);
+                    sum += p1.val;
+                    //指针忘了前进
+                    p1 = p1.next;
+                }
+                if(p2!=null){
+                    // System.out.println("3: " + p2.val);
+                    sum += p2.val;
+                    //指针忘了前进
+                    p2 = p2.next;
+                }
+                ListNode tempNode = new ListNode(sum%10);
+                p3.next = tempNode;
+                p3=p3.next;
+                // System.out.println("4: " + sum);
+                moreThanTen = sum/10;
+                //搞了半天是因为sum没置为0
+                sum=0;
+                // System.out.println("5: " + moreThanTen);
+                // System.out.println("end############");
+            }
+            return dummy.next;
+        }
+    }
 }
