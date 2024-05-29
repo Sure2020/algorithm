@@ -99,4 +99,34 @@ public class LC102_binary_tree_level_order_traversal {
 
         }
     }
+
+    //每层放到一个队列中，再依次取
+    //嗯，还行，通过做其他几个简单的题，然后窥视到了层序遍历的一些细节，然后在这里“独立”写出来了，哈哈
+    class Solution20240529 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            if(root==null){
+                return new ArrayList<>();
+            }
+            List<List<Integer>> result = new ArrayList<>();
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                List<Integer> tempList = new ArrayList<>();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    tempList.add(tempNode.val);
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(tempList);
+
+            }
+            return result;
+        }
+    }
 }
