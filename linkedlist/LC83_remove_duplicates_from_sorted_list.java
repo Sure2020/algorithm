@@ -91,4 +91,24 @@ public class LC83_remove_duplicates_from_sorted_list {
             return head;
         }
     }
+    //受LC82的影响，换了思路，但也是自己独立调出来了
+    class Solution20240529 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null){
+                return null;
+            }
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode slow=dummy,fast=head;
+            while(fast!=null){
+                while(fast.next!=null && fast.val==fast.next.val){
+                    fast=fast.next;
+                    slow.next=fast;
+                }
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return dummy.next;
+        }
+    }
 }
