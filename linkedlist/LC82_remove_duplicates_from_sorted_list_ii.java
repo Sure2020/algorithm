@@ -165,4 +165,27 @@ public class LC82_remove_duplicates_from_sorted_list_ii {
             return dummy.next;
         }
     }
+    //fast要一直领先于slow
+    class Solution20240529 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode slow=dummy, fast=head;
+            while(fast!=null){
+                while(fast.next!=null && fast.val==fast.next.val){
+                    fast=fast.next;
+                }
+                if(slow.next==fast){
+                    slow=slow.next;
+                }else{
+                    slow.next=fast.next;
+                }
+                fast=fast.next;
+            }
+            return dummy.next;
+        }
+    }
 }
