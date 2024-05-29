@@ -151,4 +151,19 @@ public class LC104_maximum_depth_of_binary_tree {
             return maxDepth;
         }
     }
+
+    //先哈哈
+    //果然没打脸，自己秒杀了，毕竟简单题。诀窍是弄清楚递归函数的定义
+    class Solution20240529 {
+        // int result = 0;
+        public int maxDepth(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            int left = maxDepth(root.left);
+            int right = maxDepth(root.right);
+            int result = Math.max(left,right) + 1;
+            return result;
+        }
+    }
 }
