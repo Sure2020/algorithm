@@ -109,4 +109,22 @@ public class LCR140_lian_biao_zhong_dao_shu_di_kge_jie_dian_lcof {
         }
     }
 
+    //递归
+    //哈哈，地铁上没写出来，路上想了想，到公司立马写出来。注意诀窍是弄清楚递归函数的定义！
+    class Solution20240529 {
+        private int count=0;
+        public ListNode trainingPlan(ListNode head, int cnt) {
+            //base case
+            if(head==null){
+                return null;
+            }
+            ListNode result =  trainingPlan(head.next, cnt);
+            count++;
+            if(count == cnt){
+                return head;
+            }
+            return result;
+        }
+    }
+
 }
