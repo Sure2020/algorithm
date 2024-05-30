@@ -138,4 +138,41 @@ public class LC110_balanced_binary_tree {
             return depth;
         }
     }
+
+    //递归算左右子树的深度，并比较高度差
+    //确实感觉到了可以精简，但没深入想：可以在判断树高度时，顺便判断是否是平衡二叉树
+    class Solution20240530Faster {
+        public boolean isBalanced(TreeNode root) {
+            // if(root==null){
+            //     return true;
+            // }
+            // int left = depth(root.left);
+            // int right = depth(root.right);
+            // if(Math.abs(left-right)>1){
+            //     return false;
+            // }else{
+            //     //这里要判断子树也是平衡二叉树
+            //     return isBalanced(root.left) && isBalanced(root.right);
+            //     //return true;
+            // }
+
+            depth(root);
+            return result;
+        }
+        private int depth = 0;
+        private boolean result = true;
+        public int depth(TreeNode root){
+            if(root == null){
+                return 0;
+            }
+            int left = depth(root.left);
+            int right = depth(root.right);
+            if(Math.abs(left-right)>1){
+                result=false;
+                return depth;
+            }
+            depth = Math.max(left, right) + 1;
+            return depth;
+        }
+    }
 }
