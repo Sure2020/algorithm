@@ -166,4 +166,18 @@ public class LC104_maximum_depth_of_binary_tree {
             return result;
         }
     }
+
+    //分解的思路
+    class Solution20240530 {
+        private int result = 0;
+        public int maxDepth(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            int left = maxDepth(root.left);
+            int right = maxDepth(root.right);
+            result = Math.max(left,right)+1;
+            return result;
+        }
+    }
 }
