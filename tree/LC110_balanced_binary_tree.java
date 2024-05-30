@@ -110,4 +110,32 @@ public class LC110_balanced_binary_tree {
             return Math.max(leftDepth, rightDepth)+1;
         }
     }
+
+    //递归算左右子树的深度，并比较高度差
+    class Solution20240530 {
+        public boolean isBalanced(TreeNode root) {
+            if(root==null){
+                return true;
+            }
+            int left = depth(root.left);
+            int right = depth(root.right);
+            if(Math.abs(left-right)>1){
+                return false;
+            }else{
+                //这里要判断子树也是平衡二叉树
+                return isBalanced(root.left) && isBalanced(root.right);
+                //return true;
+            }
+        }
+        private int depth = 0;
+        public int depth(TreeNode root){
+            if(root == null){
+                return 0;
+            }
+            int left = depth(root.left);
+            int right = depth(root.right);
+            depth = Math.max(left, right) + 1;
+            return depth;
+        }
+    }
 }
