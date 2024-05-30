@@ -16,7 +16,9 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 /**
@@ -201,6 +203,68 @@ public class LC662_maximum_width_of_binary_tree {
                 }
             }
             widthPractise1 = Math.max(widthPractise1, end-start+1);
+        }
+    }
+
+    //关键是二叉树的节点编号，完全二叉树的情况下假设根节点编号为x，则左叶子为2x，右叶子为2x+1;
+    //次关键点是，自定义一个结构体存储节点和编号。
+    class Solution20240530 {
+        // public class Pair{
+        //     private TreeNode node;
+        //     private int number;
+        //     public Pair(TreeNode node, int number){
+        //         this.node = node;
+        //         this.number = number;
+        //     }
+        // }
+        public int widthOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            int maxWidth = 0;
+            // List<Pair> pairList = new ArrayList<>();
+            Map<TreeNode, Integer> map = new HashMap<>();
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            map.put(root, 1);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                long start = 0,end=0;
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    int number = map.get(tempNode);
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                        map.put(tempNode.left, 2*number);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                        map.put(tempNode.right, 2*number+1);
+                    }
+
+                    // System.out.println("size: "+size);
+                    // System.out.println("i: "+i);
+                    if(i==1){
+                        start = map.get(tempNode);
+
+                    }
+                    if(i==size){
+                        end = map.get(tempNode);
+
+                        // System.out.println("start: "+start);
+                        // System.out.println("end: "+end);
+                        int diff = (int)(end-start+1);
+                        // System.out.println("diff: "+diff);
+                        maxWidth = Math.max(maxWidth, diff);
+                        // System.out.println("max: "+maxWidth);
+                        // System.out.println("####################");
+                    }
+                    //end-start的运算不能放在这里，会造成0-超大start然后溢出的情况
+
+
+                }
+            }
+            return maxWidth;
         }
     }
 }
