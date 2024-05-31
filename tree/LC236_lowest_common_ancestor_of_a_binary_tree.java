@@ -82,4 +82,26 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
             return left!=null ? left:right;
         }
     }
+
+    //看了上次的笔记，那么这次应该是第四次遇到了，开始有些怕，但记住思路后就心里有底了：
+//就是去左右子树中找p或q,找到了p或q，说明当前节点有可能是所求，如果左右子树都找到了，说明当前节点就是所求
+//诀窍就是搞清楚递归函数的定义，不要去想递归起来以后的细节！否则就是庸人自扰！
+    class Solution20240531 {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            //情况2，如果某个root是p或q,则这个就是所求，直接返回
+            if(root==p||root==q){
+                return root;
+            }
+            TreeNode left = lowestCommonAncestor(root.left, p,q);
+            TreeNode right = lowestCommonAncestor(root.right,p,q);
+            //情况1
+            if(left!=null && right!=null){
+                return root;
+            }
+            return left!=null ? left:right;
+        }
+    }
 }
