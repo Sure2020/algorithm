@@ -99,4 +99,29 @@ public class LC543_diameter_of_binary_tree {
             return Math.max(leftDepth, rightDepth)+1;
         }
     }
+
+    //分解的思路
+    class Solution20240604 {
+        int result = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root);
+            return result;
+        }
+        //函数定义：返回通过根的左右子树的边之和
+        public int dfs(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int left = dfs(root.left);
+            int right = dfs(root.right);
+            //System.out.println(left+"###"+right);
+            //这里确实不应该+1，算的是边，不是节点
+            result = Math.max(result,left+right);
+            //return left+right+1;
+            return Math.max(left,right)+1;
+        }
+    }
 }
