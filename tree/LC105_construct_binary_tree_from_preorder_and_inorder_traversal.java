@@ -66,4 +66,31 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
             return root;
         }
     }
+
+    //哈哈，我踏马是个天才！简单看了下之前的思路，独立敲完，调试了3次，直接AC!
+    class Solution20250603 {
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            return build(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+        }
+        public TreeNode build(int[] preorder, int preLow,int preHigh, int[] inorder, int inLow, int inHigh){
+            //落下了base case
+            if(preLow>preHigh||inLow>inHigh){
+                return null;
+            }
+            //前序遍历的第一个节点就是根节点
+            TreeNode root = new TreeNode(preorder[preLow]);
+            int rootIndex = -1;
+            for(int i=inLow;i<=inHigh;i++){
+                if(inorder[i]==preorder[preLow]){
+                    rootIndex=i;
+                    break;
+                }
+            }
+            int leftLength=rootIndex-inLow;
+            int rightLength=inHigh-rootIndex;
+            root.left = build(preorder,preLow+1,preLow+leftLength,inorder,inLow,inLow+leftLength-1);
+            root.right = build(preorder,preHigh-rightLength+1,preHigh,inorder,inHigh-rightLength+1,inHigh);
+            return root;
+        }
+    }
 }
