@@ -104,4 +104,25 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
             return left!=null ? left:right;
         }
     }
+
+    //分解的思路，去左右子树中找p或q
+    class Solution20240603 {
+        //函数定义：返回最近公共祖先
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            //case 2
+            if(root==p || root==q){
+                return root;
+            }
+            TreeNode left  =  lowestCommonAncestor (root.left, p,q);
+            TreeNode right = lowestCommonAncestor (root.right, p,q);
+            //case 1
+            if(left!=null && right!=null){
+                return root;
+            }
+            return left!=null ? left: right;
+        }
+    }
 }
