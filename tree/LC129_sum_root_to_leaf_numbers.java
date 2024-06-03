@@ -162,4 +162,39 @@ public class LC129_sum_root_to_leaf_numbers {
             dfs(root.right, currentSum * 10);
         }
     }
+
+    //跟层数有关
+    //base case是到达叶子节点
+    //稀里糊涂，调试好久，算是独立解出
+    class Solution202040603 {
+        int result = 0;
+        int current = 0;
+        public int sumNumbers(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root,0);
+            return result;
+        }
+        //函数定义？不用了，这个是递归思路，不是分解思路，不用函数定义
+        public void dfs(TreeNode root, int current){
+            //System.out.println("###" + current);
+            //base case
+            if(root==null){
+                return;
+            }
+            current = current * 10 + root.val;
+            if(root.left==null && root.right==null){
+                result += current;
+                //System.out.println("###" + current+"###"+result);
+                return;
+            }
+            //System.out.println("###" + current);
+
+            //System.out.println(root.val + "###" + current+"###"+result);
+            //System.out.println("###" + current);
+            dfs(root.left,current);
+            dfs(root.right,current);
+        }
+    }
 }
