@@ -146,4 +146,33 @@ public class LC199_binary_tree_right_side_view {
             return result;
         }
     }
+
+    //层序遍历的基础上，只留每层最后那个节点
+    class Solution20240604 {
+        List<Integer> result = new ArrayList<>();
+
+        public List<Integer> rightSideView(TreeNode root) {
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    if(i==size){
+                        result.add(tempNode.val);
+                    }
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+            }
+            return result;
+        }
+    }
 }
