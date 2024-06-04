@@ -116,4 +116,34 @@ public class LC124_binary_tree_maximum_path_sum {
             //return outMax;
         }
     }
+
+    //分清内部最大值和返回给外层递归调用的最大值
+//很明显是分解的思路
+    class Solution20240604 {
+        //f**k me! 竟然因为result的初始值写成了0，导致没过，还调试了几次！真是自己坑自己，还调试了好久！
+        int result = Integer.MIN_VALUE;
+        public int maxPathSum(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            // if(root.left==null && root.right==null){
+            //     return root.val;
+            // }
+            maxPath(root);
+            return result;
+        }
+        //函数定义，返回树从根节点到叶子节点的最长边吧
+        public int maxPath(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int left = maxPath(root.left);
+            int right = maxPath(root.right);
+            int currentSum = left+right+root.val;
+            //挑战一下最大值
+            result = Math.max(result, currentSum);
+            int innerMax = Math.max(left+root.val, right+root.val);
+            return innerMax >0?innerMax:0;
+        }
+    }
 }
