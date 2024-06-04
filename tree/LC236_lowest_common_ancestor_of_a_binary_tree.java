@@ -125,4 +125,26 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
             return left!=null ? left: right;
         }
     }
+
+    //思路，去左右子树中找p或q，情况1，当前root就是p或q，直接返回root；情况2，左右子树中找到p或q的节点，则root就是所求
+    class Solution20240604 {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            //case 1
+            //关于为啥root等于p或q其中一个节点，那root就是所求。可能会问，如果另一个节点在另一颗子树上呢？
+            //答：如果在另一颗子树上，那这个子树的root节点早就被认为是所求而返回了，根本到不了当下这个逻辑
+            //既然到了当下这个逻辑，说明p和q两个节点都在本子树上
+            if(root==p || root==q){
+                return root;
+            }
+            TreeNode left = lowestCommonAncestor(root.left,p,q);
+            TreeNode right = lowestCommonAncestor(root.right,p,q);
+            if(left!=null && right!=null){
+                return root;
+            }
+            return left!=null?left:right;
+        }
+    }
 }
