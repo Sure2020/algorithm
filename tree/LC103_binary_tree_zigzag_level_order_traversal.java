@@ -221,4 +221,38 @@ public class LC103_binary_tree_zigzag_level_order_traversal {
             return result;
         }
     }
+
+    //我踏马记得你，LinkedList可以头插或尾插！
+    class Solution20240604 {
+        List<List<Integer>> result = new ArrayList<>();
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            boolean isLeftToRight = true;
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                LinkedList<Integer> tempList = new LinkedList<>();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    if(isLeftToRight){
+                        tempList.addLast(tempNode.val);
+                    }else{
+                        tempList.addFirst(tempNode.val);
+                    }
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                isLeftToRight = !isLeftToRight;
+                result.add(tempList);
+            }
+            return result;
+        }
+    }
 }
