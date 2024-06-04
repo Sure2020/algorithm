@@ -16,6 +16,9 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
@@ -90,6 +93,42 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
             int rightLength=inHigh-rootIndex;
             root.left = build(preorder,preLow+1,preLow+leftLength,inorder,inLow,inLow+leftLength-1);
             root.right = build(preorder,preHigh-rightLength+1,preHigh,inorder,inHigh-rightLength+1,inHigh);
+            return root;
+        }
+    }
+
+    //分解的思路
+    //注意！根节点的值要写成preorder[preStart]，而不是preorder[0]!因为子树的根节点在变，不固定！
+    //还不错，自己优化了一下，性能提升50%！狗头
+    class Solution20240604 {
+        Map<Integer,Integer> map = new HashMap<>();
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            for(int i=0;i<inorder.length;i++){
+                map.put(inorder[i],i);
+            }
+            return build(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+
+        }
+        //函数定义，回推树
+        public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStrat, int inEnd){
+            //base case
+            if(preStart>preEnd || inStrat  > inEnd){
+                return null;
+            }
+            int rootIndex = map.get(preorder[preStart]);
+            // for(int i=0;i<inorder.length;i++){
+            //     //这里！错把根节点的值写成了preorder[0]！要知道左右子树是在滑动的，各子树根节点不固定！
+            //     if(preorder[preStart] == inorder[i]){
+            //         rootIndex=i;
+            //         break;
+            //     }
+            // }
+            int leftLength = rootIndex-inStrat;
+            int rightLength = inEnd-rootIndex;
+            //这里根节点的值错写成了preorder[0]
+            TreeNode root = new TreeNode(preorder[preStart]);
+            root.left = build(preorder,preStart+1,preStart+leftLength,inorder,inStrat, rootIndex-1);
+            root.right = build(preorder,preEnd-rightLength+1, preEnd,inorder,rootIndex+1,inEnd);
             return root;
         }
     }
