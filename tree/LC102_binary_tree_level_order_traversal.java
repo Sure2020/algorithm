@@ -129,4 +129,31 @@ public class LC102_binary_tree_level_order_traversal {
             return result;
         }
     }
+    //每层先放到queue中，再逐个取出
+    class Solution20240604 {
+        List<List<Integer>> result = new ArrayList<>();
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                List<Integer> tempList= new ArrayList<>();
+                int size = queue.size();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    tempList.add(tempNode.val);
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(tempList);
+            }
+            return result;
+        }
+    }
 }
