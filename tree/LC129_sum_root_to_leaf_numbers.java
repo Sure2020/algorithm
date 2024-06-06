@@ -197,4 +197,32 @@ public class LC129_sum_root_to_leaf_numbers {
             dfs(root.right,current);
         }
     }
+
+    //递归的思路
+    //多次做，还是不够流畅，但总结了诀窍是，代入一个case辅助思考即可
+    class Solution20240606 {
+        int result = 0;
+
+        public int sumNumbers(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            sum(root,0);
+            return result;
+        }
+        public void sum (TreeNode root, int current){
+            if(root==null){
+                return;
+            }
+            current = current * 10 + root.val;
+            //base case
+            if(root.left==null && root.right==null){
+                result += current;
+                return;
+            }
+
+            sum(root.left, current);
+            sum(root.right, current);
+        }
+    }
 }
