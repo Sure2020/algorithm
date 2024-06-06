@@ -182,4 +182,33 @@ class LC101_symmetric_tree {
             return check(root1.left, root2.right) && check(root2.left, root1.right);
         }
     }
+
+    //接下来用迭代试试，思路就是取出每一层的节点，再判断是否对称，Null的节点补零怎么样
+    //事后：不怎么样，看提交记录可以发现自己踩过这个坑，放到list中再判断每层是否对称行不通
+    //看了题解各路大神的方法，“默写”如下：
+    class Solution20240606Iteration {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return false;
+            }
+            Queue<TreeNode> queue  = new LinkedList<>();
+            queue.offer(root.left);
+            queue.offer(root.right);
+            while(!queue.isEmpty()){
+                TreeNode node1=queue.poll();
+                TreeNode node2=queue.poll();
+                if(node1==null && node2==null){
+                    continue;
+                }
+                if(node1==null || node2==null || (node1.val!=node2.val)){
+                    return false;
+                }
+                queue.offer(node1.left);
+                queue.offer(node2.right);
+                queue.offer(node2.left);
+                queue.offer(node1.right);
+            }
+            return true;
+        }
+    }
 }
