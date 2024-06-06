@@ -175,4 +175,27 @@ public class LC110_balanced_binary_tree {
             return depth;
         }
     }
+
+    //偷瞄了一眼以前的代码，知道了有个地方可以优化。思路就是在求树的高度时，可以顺便判断高度差
+    class Solution20240606 {
+        int depth = 0;
+        boolean result = true;
+        public boolean isBalanced(TreeNode root) {
+            depth(root);
+            return result;
+        }
+
+        public int depth(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int left = depth(root.left);
+            int right = depth(root.right);
+            if(Math.abs(left-right)>1){
+                result = false;
+            }
+            depth = Math.max(left, right) + 1;
+            return depth;
+        }
+    }
 }
