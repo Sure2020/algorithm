@@ -152,4 +152,34 @@ class LC101_symmetric_tree {
             return check(left.left,right.right) && check(left.right, right.left);
         }
     }
+
+    //偷瞄了一眼之前的代码。总之就是分解的思路
+    class Solution20240606 {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return false;
+            }
+            return check(root,root);
+        }
+        //函数定义:判断两个子树是否对称
+        public boolean check (TreeNode root1, TreeNode root2){
+            // if(root1==null && root2==null){
+            //     return true;
+            // }
+            // if(root1==null && root2!=null){
+            //     return false;
+            // }
+            // if(root2==null && root1!=null){
+            //     return false;
+            // }
+            // 上面这一堆判断，可以归为一个：有点意思
+            if(root1==null || root2==null){
+                return root1==root2;
+            }
+            if(root1.val!=root2.val){
+                return false;
+            }
+            return check(root1.left, root2.right) && check(root2.left, root1.right);
+        }
+    }
 }
