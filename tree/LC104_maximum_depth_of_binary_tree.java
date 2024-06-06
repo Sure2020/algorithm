@@ -180,4 +180,26 @@ public class LC104_maximum_depth_of_binary_tree {
             return result;
         }
     }
+
+    //递归的思路试试：
+    //事后：相当于秒杀了~~~
+    class Solution20240606 {
+        int result=0;
+        public int maxDepth(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            max(root, 0);
+            return result;
+        }
+        public void max(TreeNode root, int currentDepth){
+            if(root==null){
+                return ;
+            }
+            currentDepth++;
+            result = Math.max(result, currentDepth);
+            max(root.left, currentDepth);
+            max(root.right, currentDepth);
+        }
+    }
 }
