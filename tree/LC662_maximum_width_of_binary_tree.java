@@ -267,4 +267,61 @@ public class LC662_maximum_width_of_binary_tree {
             return maxWidth;
         }
     }
+
+    class Solution20240607 {
+        class Pair {
+            private TreeNode node;
+            private long number;
+            Pair(TreeNode node, long number){
+                this.node = node;
+                this.number = number;
+            }
+            public TreeNode getNode(){
+                return this.node;
+            }
+            public long getNumber(){
+                return this.number;
+            }
+        }
+        public int widthOfBinaryTree(TreeNode root) {
+            long result = 0;
+            if(root==null){
+                return 0;
+            }
+            Queue <Pair> queue = new LinkedList<>();
+            queue.offer(new Pair(root,1));
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                //注意2，要用long，int的话容易溢出
+                long start =0,end=0;
+                for(int i=1;i<=size;i++){
+                    Pair pair = queue.poll();
+                    TreeNode node = pair.getNode();
+                    long number = pair.getNumber();
+                    if(i==1){
+                        //System.out.println("i==i: ### " + i + " $$$ " + number);
+                        start = number;
+                    }
+                    //注意1，这里还不能用else if，自作聪明了，考虑只有一个根节点的情况
+                    if(i==size){
+                        //System.out.println("i==size: ### " + i + " $$$ " + number);
+                        end = number;
+                    }
+                    //result = Math.max(result, end-start + 1);
+                    if(node.left!=null){
+                        queue.offer(new Pair(node.left, 2* number));
+                    }
+                    if(node.right!=null){
+                        queue.offer(new Pair(node.right, 2*number+1));
+                    }
+                    //System.out.println("################");
+                }
+                //注意3，被自己蠢到了！把这个放在了for循环里面，导致溢出，放在外面，就可以用int类型，因为溢出也没关系，最后算的是两个值的差值
+                result = Math.max(result, end-start + 1);
+            }
+            return (int)result;
+        }
+    }
+//由于老能偷瞄到上次的思路，导致练习不够纯粹，以后思路就写在代码下方了。
+//这次就是偷瞄到了上次的思路：关键是记录每个节点的编号。
 }
