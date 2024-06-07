@@ -146,4 +146,28 @@ public class LC124_binary_tree_maximum_path_sum {
             return innerMax >0?innerMax:0;
         }
     }
+    //肯定是分解的思路了
+    //可以和LC543一起看，一模一样的思路
+    class Solution20240607 {
+        int result = Integer.MIN_VALUE;
+        public int maxPathSum(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root);
+            return result;
+        }
+        public int dfs(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int left = dfs(root.left);
+            int right = dfs(root.right);
+            //challenge max
+            int innerMax = left + right + root.val;
+            result = Math.max(result, innerMax);
+            int outerMax = Math.max(left, right) + root.val;
+            return outerMax>0?outerMax:0;
+        }
+    }
 }

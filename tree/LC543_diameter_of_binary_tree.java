@@ -124,4 +124,28 @@ public class LC543_diameter_of_binary_tree {
             return Math.max(left,right)+1;
         }
     }
+
+    //分解的思路
+    //可以和LC124一起看，一模一样的思路
+    class Solution20240607 {
+        int result = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root);
+            //求的是节点的数目，减1，则是边的数目
+            return result-1;
+        }
+        public int dfs(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int left = dfs(root.left);
+            int right = dfs(root.right);
+            //chanlenge
+            result = Math.max(result, left+right+1);
+            return Math.max(left,right)+1;
+        }
+    }
 }
