@@ -98,4 +98,26 @@ public class LC704_binary_search {
             return -1;
         }
     }
+
+    //left,mid,right,长时间不写，乍一看还有点懵。。。
+    class Solution20240611 {
+        public int search(int[] nums, int target) {
+            //right的取值忘了减1，在写的时候尽量想清楚，否则代码成型后再debug，就很难发现了
+            int left=0,right=nums.length-1;
+            int mid = 0;
+            while(left<=right){
+                // mid = (left+right)/2;
+                // mid = left/2+right/2;
+                mid = (right-left)/2+left;
+                if(nums[mid]==target){
+                    return mid;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }else{
+                    left=mid+1;
+                }
+            }
+            return -1;
+        }
+    }
 }
