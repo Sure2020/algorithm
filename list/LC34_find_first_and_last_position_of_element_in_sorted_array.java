@@ -23,6 +23,12 @@
  * @create: 2024-01-19
  **/
 public class LC34_find_first_and_last_position_of_element_in_sorted_array {
+    public static void main(String[] args) {
+        System.out.println("testing");
+        Solution20240611Wrong solution20240611 = new Solution20240611Wrong();
+        int[] nums1 = new int[]{1, 2};
+        solution20240611.searchRange(nums1, 8);
+    }
     public int[] searchRange(int[] nums, int target) {
         return new int[]{left_bound(nums,target),right_bound(nums,target)};
     }
@@ -118,4 +124,129 @@ public class LC34_find_first_and_last_position_of_element_in_sorted_array {
 
 
     }
+    //找左右边界
+    static class Solution20240611Wrong {
+        public int[] searchRange(int[] nums, int target) {
+            int left=0,right=nums.length-1;
+            int mid=-1;
+            int[] result=new int[]{-1,-1};
+            while(left<=right){
+                mid = (right-left)/2+left;
+                if(nums[mid]==target){
+                    break;
+                }else if(nums[mid] >target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            if(mid==-1){
+                return result;
+            }
+            int leftBound = left_bound(nums, target, mid);
+            int rightBound = right_bound(nums, target, mid);
+            result[0] = (leftBound);
+            result[1] = (rightBound);
+            return result;
+        }
+        public int left_bound(int[] nums, int target, int realMid){
+            int left=0,right=realMid;
+            int mid=0;
+            while(left<=right){
+                System.out.println(left + "###" + right);
+                mid = (right-left)/2+left;
+                if(nums[mid] ==target){
+                    right = mid-1;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            return left;
+        }
+        public int right_bound(int[] nums, int target, int realMid){
+            int left=0,right=realMid;
+            int mid = 0;
+            while(left<=right){
+                System.out.println(left + "###" + right);
+                if(nums[mid] == target){
+                    left = mid+1;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            return right;
+        }
+    }
+
+    //找左右边界
+//时隔多日再做，一开始很抵触，一想到有很多细节要处理就心烦，经过了一整天的心理建设以后，算是独立写出来了吧，所以还是要戒骄戒躁，心态很重要
+//反正我就回忆起一点，找左边界，就返回left，找右边界，就返回right，无他，经验尔
+//独立做完后，感觉也没labuladong说的那么玄乎，什么要处理细节，什么要决定用开还是闭区间。别考虑太多直接干，遇到问题再调试解决吧，你不能指望把这些细节都记下来，那样成本太高了
+    class Solution202406111742 {
+        public int[] searchRange(int[] nums, int target) {
+            int left=0,right=nums.length-1;
+            int mid=-1;
+            boolean founded = false;
+            int[] result=new int[]{-1,-1};
+            while(left<=right){
+                mid = (right-left)/2+left;
+                if(nums[mid]==target){
+                    founded = true;
+                    break;
+                }else if(nums[mid] >target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            if(!founded){
+                return result;
+            }
+            int leftBound = left_bound(nums, target, mid);
+            int rightBound = right_bound(nums, target, mid);
+            result[0] = (leftBound);
+            result[1] = (rightBound);
+            return result;
+        }
+        public int left_bound(int[] nums, int target, int realMid){
+            int left=0,right=realMid;
+            int mid=0;
+            while(left<=right){
+                //System.out.println(left + "###" + right);
+                mid = (right-left)/2+left;
+                if(nums[mid] ==target){
+                    right = mid-1;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            return left;
+        }
+        public int right_bound(int[] nums, int target, int realMid){
+            //System.out.println(realMid);
+            // int left=0,right=realMid;
+            int left=realMid, right=nums.length-1;
+            int mid = 0;
+            while(left<=right){
+                //System.out.println(left + "###" + right);
+                //执行超时，原来是忘了计算mid的值。。。。
+                mid = (right-left)/2+left;
+                if(nums[mid] == target){
+                    left = mid+1;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            return right;
+        }
+    }
+
 }
