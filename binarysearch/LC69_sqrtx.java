@@ -73,4 +73,31 @@ public class LC69_sqrtx {
             return  (int)max;
         }
     }
+
+    //第一反应是循环遍历，找k*k=x的k值，其实这样和二分查找没半毛钱关系
+//思路，找k*k<=x的最大k
+    class Solution20240611 {
+        public int mySqrt(int x) {
+            long left=1,right=x;
+            long mid=0;
+            while(left<=right){
+                mid=(right-left)/2 + left;
+                //System.out.println("###  " + mid);
+                if(mid * mid<x){
+
+                    left=mid+1;
+                }else if(mid*mid==x){
+                    return (int)mid;
+                }else if(mid*mid>x) {
+                    //竟然把这个条件给忘了，然后一直超时
+                    right=mid-1;
+                }
+            }
+            if(mid*mid>x){
+                return (int) (mid-1);
+            }else{
+                return (int) mid;
+            }
+        }
+    }
 }
