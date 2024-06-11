@@ -100,4 +100,25 @@ public class LC69_sqrtx {
             }
         }
     }
+
+    //小技巧是用一个变量记录当前满足mid*mid<=x的最大值
+//注意事项是，要用long变量，否则会溢出
+    class Solution202406111056 {
+        public int mySqrt(int x) {
+            long left=0,right=x;
+            long max=-1,mid=-1;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                if(mid*mid<x){
+                    max=mid;
+                    left=mid+1;
+                }else if(mid*mid==x){
+                    return (int)mid;
+                }else if(mid*mid>x){
+                    right=mid-1;
+                }
+            }
+            return (int)max;
+        }
+    }
 }
