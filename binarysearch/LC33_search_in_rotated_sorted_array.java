@@ -98,4 +98,40 @@ public class LC33_search_in_rotated_sorted_array {
             return -1;
         }
     }
+
+    class Solution20240612 {
+        public int search(int[] nums, int target) {
+            int left=0,right=nums.length-1,mid=-1;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                if(nums[mid]==target){
+                    return mid;
+                }
+                // 太遗憾了。下面的文字明明分析清楚了，但这里写反了，还调试了好久
+                // if(nums[left]>=nums[mid]){
+                if(nums[mid]>=nums[left]){
+                    if(nums[left]<=target && target<nums[mid]){
+                        right = mid-1;
+                    }else{
+                        left = mid + 1;
+                    }
+                }else if (nums[mid]<nums[left]){
+                    if(nums[mid]<target && target<=nums[right]){
+                        left = mid + 1;
+                    }else {
+                        right = mid-1;
+                    }
+                }
+            }
+            return -1;
+        }
+    }
+//关键思路是通过比较mid和Left,确定mid在断崖的哪边
+//mid大于left，mid在断崖左边，left---mid递增
+//mid等于left，仍然可以认为left---mid递增
+    //left<target<mid，大胆地收缩右边界，否则，收缩左边界，交由下次循环，再次判断mid与left的关系去处理
+    //否则收缩左边界
+//mid小于left，mid在断崖右边，mid---right递增
+    //mid<target<right,收缩左边界
+    //否则收缩右边界
 }
