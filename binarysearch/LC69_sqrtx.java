@@ -121,4 +121,24 @@ public class LC69_sqrtx {
             return (int)max;
         }
     }
+
+    class Solution20240612 {
+        public int mySqrt(int x) {
+            long left = 1,right=x,mid=0;
+            long result = 0;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                if(mid*mid==x){
+                    return (int)mid;
+                }else if (mid*mid>x){
+                    right = mid-1;
+                }else if (mid*mid<x){
+                    result = mid;
+                    left = mid+1;
+                }
+            }
+            return (int)result;
+        }
+    }
+//二分查找，找到k*k<=x的最大k值
 }
