@@ -121,4 +121,50 @@ public class LC162_find_peak_element {
             return right;
         }
     }
+
+    //我自己想的思路是：二分查找，判断mid大于Left大于right，则...
+//mid大于Left，小于right，则mid---right之间肯定有峰值，收缩左区间
+//mid小于left，大于right，则left---mid之间。。。。
+//mid小于left，小于right，则收缩哪边都可以
+// class Solution {
+//     public int findPeakElement(int[] nums) {
+//         int left = 0,right=nums.length-1;mid=-1;
+//         while(left<=right){
+//             mid=left+(right-left)/2;
+//             if(nums[mid]>nums[left]){
+//                 if(nums[mid]>nums[right]){
+//                     return mid;
+//                 }
+//             }else if(nums[mid] == nums[left]){
+
+//             }else if(nums[mid] < nums[left]){
+
+    //             }
+//         }
+//     }
+// }
+//判断mid和left，right的大小关系太复杂，上面就是反例，关键思路是换个角度，判断mid和mid+1的大小关系
+//mid大于mid+1,峰值肯定在mid左边或者就是mid，收缩右边界
+//mid等于mid+1,不用考虑，因为题目说了没有重复元素
+//mid小于mid+1,峰值肯定在mid右边，收缩左边界
+    class Solution20240612 {
+        public int findPeakElement(int[] nums) {
+            // if(nums.length==1){
+            //     return 0;
+            // }
+            int left = 0,right=nums.length-1,mid=-1;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                if(mid+1>nums.length-1){
+                    break;
+                }
+                if(nums[mid]>nums[mid+1]){
+                    right = mid-1;
+                }else if(nums[mid]<nums[mid+1]){
+                    left = mid+1;
+                }
+            }
+            return left;
+        }
+    }
 }
