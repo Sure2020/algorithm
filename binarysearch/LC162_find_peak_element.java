@@ -167,4 +167,26 @@ public class LC162_find_peak_element {
             return left;
         }
     }
+
+    class Solution202406121725 {
+        public int findPeakElement(int[] nums) {
+            int left=0,right=nums.length-1,mid=-1;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                if(mid+1>nums.length-1){
+                    //用[2,3]和[3,2]推演了一下
+                    return mid;
+                }
+                if(nums[mid]>nums[mid+1]){
+                    //mid左边肯定有峰值，收缩右边界
+                    right = mid-1;
+                }else if (nums[mid]<nums[mid+1]){
+                    //mid右边肯定有峰值，收缩左边界
+                    left = mid+1;
+                }
+            }
+            return left;
+        }
+    }
+//keys:通过比较mid和mid+1，确定峰值在mid的哪边
 }
