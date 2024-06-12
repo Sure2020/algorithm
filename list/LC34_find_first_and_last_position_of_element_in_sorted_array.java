@@ -249,4 +249,59 @@ public class LC34_find_first_and_last_position_of_element_in_sorted_array {
         }
     }
 
+    class Solution20240612 {
+        public int[] searchRange(int[] nums, int target) {
+            int left=0,right = nums.length-1,mid=-1;
+            boolean targetFounded = false;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                if(nums[mid]==target){
+                    targetFounded=true;
+                    break;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid +1;
+                }
+            }
+            //至此，mid指向的是target在数组中心的位置，接下来以这个位置为界限，在左右两边找左右边界
+
+            int[] result = new int[]{-1,-1};
+            //需要特殊处理没找到的情况
+            if(!targetFounded){
+                return result;
+            }
+            result[0]=leftBound(nums,target,mid);
+            result[1]=rightBound(nums,target,mid);
+            return result;
+        }
+        public int leftBound(int[] nums, int target, int firstMid){
+            int left=0,right=firstMid,mid=-1;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                if(nums[mid]>=target){
+                    right = mid-1;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }
+            }
+            return left;
+        }
+        public int rightBound(int[] nums, int target, int firstMid){
+            //注意求右边界时，区间的起始点
+            int left = firstMid,right=nums.length-1,mid=-1;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                if(nums[mid]<=target){
+                    left=mid+1;
+                }else if(nums[mid]>target){
+                    right = mid-1;
+                }
+            }
+            return right;
+        }
+    }
+//寻找左右边界的结合体，我认为相当经典
+//调完直接提交，都没先运行一下，就是这么狂，哈哈哈哈哈哈
+
 }
