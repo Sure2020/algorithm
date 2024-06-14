@@ -16,7 +16,9 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -160,4 +162,31 @@ public class LC3_longest_substring_without_repeating_characters {
             return len;
         }
     }
+    class Solution20240614 {
+        public int lengthOfLongestSubstring(String s) {
+            int left=0,right=0;
+            Map<Character, Integer> map = new HashMap<>();
+            int result = 0;
+            int currentWindowSize = 0;
+            while(right<=s.length()-1){
+                char c = s.charAt(right);
+                if(!map.containsKey(c)){
+                    map.put(c,1);
+                    currentWindowSize ++;
+                    result = Math.max(result, currentWindowSize);
+                    right ++;
+                }else {
+                    char d = s.charAt(left);
+                    map.remove(d);
+                    left ++;
+                    currentWindowSize --;
+                }
+            }
+            return result;
+        }
+    }
+//滑动窗口，我只能记起来有个Left，right边界，还有扩张和收缩窗口的操作，并且扩张和收缩的内部逻辑正好相反
+//用Map记录字符出现的个数，一个map记录窗口中的，一个map记录。。。（那个是最小覆盖子串，我还记得取名为need，哈哈，现在刷个算法题，本质变成了拼记忆力。。。）
+//每读入一个字符，就判断Map中是否存在，已存在则收缩窗口，否则就扩大窗口
+//我的妈哈哈哈哈哈，一开始十分抵触，因为没思路，后来慢慢平复心态，慢慢理思路，硬着头皮写，想到哪儿写到哪儿，结果最后只调试了几次，竟然给写出来了，不愧是我！
 }
