@@ -304,4 +304,55 @@ public class LC76_minimum_window_substring {
             return len==Integer.MAX_VALUE?"":s.substring(start, start+len);
         }
     }
+
+    class Solution20240614 {
+        public String minWindow(String s, String t) {
+            Map<Character, Integer> need = new HashMap<>();
+            Map<Character, Integer> window = new HashMap<>();
+            int left=0,right=0,start = -1, currentMinLength=0,min=Integer.MAX_VALUE,valid=0;
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c, need.getOrDefault(c,0)+1);
+            }
+            //
+            while(right<s.length()){
+                char c = s.charAt(right);
+                //当前字符值得记录，就开始处理
+                if(need.containsKey(c) ){
+                    window.put(c,window.getOrDefault(c,0)+1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid++;
+                    }
+                }
+                right++;
+                while(valid==need.size()){
+
+                    currentMinLength = right-left;
+                    if(currentMinLength<min){
+                        min=currentMinLength;
+                        start = left;
+                    }
+                    //开始收缩
+                    char d = s.charAt(left);
+                    if(need.containsKey(d)){
+                        if(window.get(d).equals(need.get(d))){
+                            valid--;
+                        }
+                        window.put(d,window.get(d)-1);
+                    }
+                    left++;
+                }
+            }
+            //System.out.println("start: " + start);
+            return start==-1?"":s.substring(start, start+min);
+        }
+    }
+// 滑动窗口，进阶，记忆深刻的是用两个map，一个记录target字符串字符的个数，一个记录当前窗口中的字符个数，然后决定窗口的扩大还是收缩
+// 扩大窗口，要维护map，缩小窗口也要维护，步骤与扩大时相反
+
+// 1，先从0开始逐个扩大窗口，直到遇到所有t中包含的字符，再收缩窗口，直到窗口中的字符不全部包含t中的字符，此时产生一个当下最小的子串，用一个变量记一下此时的left；
+// 2，再收缩一下，导致不再包含t中的全部字符。
+// 然后再开始扩大，重复上面的1，2步
+
+//我还是比较高兴的，在很抵触，很混乱的环境下，竟然搞出来了，虽然借助了调试器，但还是有点厉害的，过一天再做一次
 }
