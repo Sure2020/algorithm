@@ -133,7 +133,6 @@ public class LC146_lru_cache {
             //一遍遍踩坑，靠北了我真是，这里不用else而直接用if的话，如果cache已满，且上面get完了，还会走下面这个，会remove头上的元素！
             else if(cap==cache.size()){
                 //最久未使用的元素怎么取到？
-                //todo
                 //看了labuladong知道了，链表头部元素，就是最久没使用的，也就是，链表采用的是尾插法
                 int oldestKey = cache.keySet().iterator().next();
                 cache.remove(oldestKey);
