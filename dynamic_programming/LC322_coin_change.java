@@ -162,4 +162,29 @@ public class LC322_coin_change {
             return count[amount]==amount+666?-1:count[amount];
         }
     }
+
+    class Solution20240617 {
+        public int coinChange(int[] coins, int amount) {
+            int[] dp = new int[amount+1];
+            Arrays.fill(dp,amount+678);
+            //忘了base case;
+            dp[0]=0;
+            //dp[1]=1;
+            //为啥从0开始，因为如果从1开始，需要amount为1，则dp的大小为2，这不现实
+            for(int i=0;i<=amount;i++){
+                for(int coin:coins){
+                    if(i-coin<0){
+                        continue;
+                    }
+                    //写成这样比较好理解
+                    if(dp[i-coin]+1<amount+678){
+                        dp[i]=dp[i-coin]+1;
+                    }
+                    //dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+                }
+            }
+            return (dp[amount]==amount+678)?-1:dp[amount];
+        }
+    }
+//用自底向上，因为性能好
 }
