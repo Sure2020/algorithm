@@ -355,4 +355,46 @@ public class LC76_minimum_window_substring {
 // 然后再开始扩大，重复上面的1，2步
 
 //我还是比较高兴的，在很抵触，很混乱的环境下，竟然搞出来了，虽然借助了调试器，但还是有点厉害的，过一天再做一次
+
+        class Solution20240617 {
+        public String minWindow(String s, String t) {
+            Map<Character, Integer> need = new HashMap<>();
+            Map<Character, Integer> window = new HashMap<>();
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c,need.getOrDefault(c,0) + 1);
+            }
+            int left=0,right=0,start=0,min=Integer.MAX_VALUE,currentMin = Integer.MAX_VALUE,valid=0;
+            while(right<s.length()){
+                char c = s.charAt(right);
+                //System.out.println("right:  " + c);
+                if(need.containsKey(c)){
+                    window.put(c,window.getOrDefault(c,0)+1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid++;
+                    }
+                    while(need.size()==valid){
+                        currentMin = right-left+1;
+                        if(currentMin<min){
+                            start = left;
+                            min = currentMin;
+                        }
+
+                        char d = s.charAt(left);
+                        //System.out.println("left:  " + d);
+                        if(need.containsKey(d)){
+                            if(window.get(d).equals(need.get(d))){
+                                valid --;
+                            }
+                            window.put(d,window.get(d)-1);
+
+                        }
+                        left ++;
+                    }
+                }
+                right ++;
+            }
+            return min==Integer.MAX_VALUE?"":s.substring(start, start + min);
+        }
+    }
 }
