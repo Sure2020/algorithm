@@ -177,10 +177,11 @@ public class LC322_coin_change {
                         continue;
                     }
                     //写成这样比较好理解
-                    if(dp[i-coin]+1<amount+678){
-                        dp[i]=dp[i-coin]+1;
-                    }
-                    //dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+                    //不能写成这样，要跟dp[i]比较，比如有coin[2,1]，amount为2，dp[2]最终值为错误的2，而不是正确的1
+                    // if(dp[i-coin]+1<amount+678){
+                    //     dp[i]=dp[i-coin]+1;
+                    // }
+                    dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
                 }
             }
             return (dp[amount]==amount+678)?-1:dp[amount];
