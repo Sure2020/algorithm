@@ -137,4 +137,20 @@ public class LC509_fibonacci_numbe {
             return res;
         }
     }
+
+    class Solution20240617 {
+        public int fib(int n) {
+            if(n==0 || n==1){
+                return n;
+            }
+            int dp0=0,dp1=1, dp2=0;
+            for(int i=2;i<=n;i++){
+                dp2 = dp0+dp1;
+                dp0=dp1;
+                dp1=dp2;
+            }
+            return dp2;
+        }
+    }
+//DP经典入门
 }
