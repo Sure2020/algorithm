@@ -115,4 +115,52 @@ public class LC415_add_strings {
             return sb.toString();
         }
     }
+
+    class Solution20240618 {
+        public String addStrings(String num1, String num2) {
+            StringBuilder sb = new StringBuilder();
+            int p1=num1.length()-1,p2=num2.length()-1,moreThanTen=0;
+            int n1=0,n2=0;
+            while(p1>=0 || p2>=0){
+                n1 = p1>=0?num1.charAt(p1)-'0':0;
+                n2 = p2>=0?num2.charAt(p2)-'0':0;
+                int sum = n1+n2+moreThanTen;
+                int n3 = sum%10;
+                moreThanTen = sum/10;
+                sb.append(n3);
+                //System.out.println(n3);
+
+                p1--;
+                p2--;
+            }
+            //System.out.println("test");
+            // while(p1>=0){
+            //     n1 = num1.charAt(p1)-'0';
+            //     int sum = n1+moreThanTen;
+            //     int n3 = sum%10;
+            //     moreThanTen = sum/10;
+            //     sb.append(n3);
+
+            //     p1--;
+            // }
+            // while(p2>=0){
+            //     n2 = num2.charAt(p2)-'0';
+            //     int sum = n2+moreThanTen;
+            //     int n3 = sum%10;
+            //     moreThanTen = sum/10;
+            //     sb.append(n3);
+
+            //     p2--;
+            // }
+            if(moreThanTen>0){
+                sb.append(moreThanTen);
+            }
+            sb.reverse();
+            return sb.toString();
+        }
+    }
+//确实第一时间想到了用数组，但看到入参是string，那结果先用stringbuilder吧。
+//当进位变量不为0，则要继续处理
+//技巧：获得char类型的数字对应的int值，char-'0'
+//最后翻转一下string?
 }
