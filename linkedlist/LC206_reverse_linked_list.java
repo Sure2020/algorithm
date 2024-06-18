@@ -170,4 +170,18 @@ public class LC206_reverse_linked_list {
             return last;
         }
     }
+
+    class Solution20240618 {
+        //函数定义，返回翻转后的链表，返回原链表的尾部节点
+        public ListNode reverseList(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode last = reverseList(head.next);
+            head.next.next = head;
+            head.next=null;
+            return last;
+        }
+    }
+//我就记得一招head.next.next=head，让我直呼巧妙
 }
