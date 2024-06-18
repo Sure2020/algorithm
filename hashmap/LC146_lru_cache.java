@@ -17,6 +17,7 @@
  */
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @program: PACKAGE_NAME
@@ -152,4 +153,52 @@ public class LC146_lru_cache {
  * int param_1 = obj.get(key);
  * obj.put(key,value);
  */
+
+class LRUCache20240618 {
+    int cap = 0;
+    Map<Integer,Integer> cache = new LinkedHashMap<>();
+    public LRUCache20240618(int capacity) {
+        cap = capacity;
+    }
+
+    public int get(int key) {
+        if(cache.containsKey(key)){
+            makeRecent(key);
+            return cache.get(key);
+        }else{
+            return -1;
+        }
+
+    }
+
+    public void put(int key, int value) {
+        if(cache.containsKey(key)){
+            makeRecent(key);
+            cache.put(key,value);
+            return;
+        }
+
+        if(cap == cache.size()){
+            int oldestKey = cache.keySet().iterator().next();
+            cache.remove(oldestKey);
+            //cache.put(key,value);
+        }
+        cache.put(key,value);
+    }
+    private void makeRecent(int key){
+        int value = cache.get(key);
+        cache.remove(key);
+        cache.put(key,value);
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+
+    //记忆很深刻，关键是需要借助LinkedHashMap的帮助
+    //还要记住LinkedHashMap插入时是尾插，所以最旧的节点在头部
 }
