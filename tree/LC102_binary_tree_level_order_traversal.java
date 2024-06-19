@@ -156,4 +156,38 @@ public class LC102_binary_tree_level_order_traversal {
             return result;
         }
     }
+
+    class Solution20240619 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                //System.out.println("size: " + size);
+                TreeNode tempNode = new TreeNode();
+                List<Integer> tempList = new ArrayList<>();;
+                for(int i=1;i<=size;i++){
+                    tempNode = queue.poll();
+                    //System.out.println("tempNode.val: " + tempNode.val);
+                    tempList.add(tempNode.val);
+
+                    //过度自信，思路没完全理清就直接上，结果下面两个Offer写在了for循环外面。
+                    //作用是将每个节点的左右子节点都放入queue，所以要放在for里面！
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(tempList);
+            }
+            return result;
+        }
+    }
+//haha，我喜欢做这个，因为印象深刻。。。
 }
