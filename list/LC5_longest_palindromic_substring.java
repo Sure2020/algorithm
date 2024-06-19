@@ -95,4 +95,30 @@ public class LC5_longest_palindromic_substring {
     }
 //没思路，直接看labuladong
 //只要记住一点，从中间向两边扩散，后面的思路就很自然了
+
+    class Solution20240619 {
+        public String longestPalindrome(String s) {
+            int left = 0,right=0;
+            String result = "";
+            for(int i=0;i<s.length();i++){
+                String temp1 = find(s,i,i);
+                String temp2 = find(s,i,i+1);
+                if(temp1.length()>result.length()){
+                    result = temp1;
+                }
+                if(temp2.length()>result.length()){
+                    result = temp2;
+                }
+            }
+            return result;
+        }
+        private String find(String s, int l, int r){
+            while(l>=0 && r<s.length() && s.charAt(l)==s.charAt(r) ){
+                l--;
+                r++;
+            }
+            return s.substring(l+1,r);
+        }
+    }
+//这个刚做不久，印象挺深，双指针，关键是从中间向两边查找
 }
