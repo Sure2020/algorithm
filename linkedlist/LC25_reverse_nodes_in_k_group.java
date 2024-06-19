@@ -192,4 +192,49 @@ public class LC25_reverse_nodes_in_k_group {
             return previous;
         }
     }
+
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     *     int val;
+     *     ListNode next;
+     *     ListNode() {}
+     *     ListNode(int val) { this.val = val; }
+     *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * }
+     */
+    class Solution20240619 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode p = head;
+            for(int i=1;i<=k;i++){
+                //不够k个一组，不翻转直接返回
+                if(p==null){
+                    return head;
+                }
+                p = p.next;
+            }
+            //System.out.println(p.val);
+            ListNode newHead = reverse(head, p);
+            head.next = reverseKGroup(p, k);
+            return newHead;
+            //return reverse(head, null);
+        }
+        //记住迭代方式的翻转链表，是节点两个两个地翻转，不要一次想翻转3个节点
+        public ListNode reverse(ListNode n1, ListNode n2){
+            ListNode previous=null,current=n1,next=n1;
+            while(current!=n2){
+                next = current.next;
+                current.next=previous;
+                previous = current;
+                current = next;
+            }
+            //最后return谁，记一下，或者用例子推演一下
+            return previous;
+        }
+    }
+//先前进k个节点，然后记录第k个节点后面那个节点successor，再翻转1-k个节点，再将successor节点与之拼接
+//稀里糊涂调了很久，都是小细节，再练练吧。
 }
