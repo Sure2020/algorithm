@@ -119,4 +119,18 @@ public class LC215_kth_largest_element_in_an_array {
     }
 //用基于快速排序的快速选择，虽然曾经理解过，但记忆成本太高，果断舍得。。。
 //这个就记住一点，用优先级队列
+
+    class Solution20240619 {
+        public int findKthLargest(int[] nums, int k) {
+            PriorityQueue<Integer> queue  = new PriorityQueue<>((a,b)->a-b);
+            for(int i=0;i<nums.length;i++){
+                queue.offer(nums[i]);
+                if(queue.size()>k){
+                    queue.remove();
+                }
+            }
+            return queue.peek();
+        }
+    }
+//利用小顶堆
 }
