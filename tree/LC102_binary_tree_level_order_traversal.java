@@ -189,5 +189,33 @@ public class LC102_binary_tree_level_order_traversal {
             return result;
         }
     }
+    class Solution20240620 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                TreeNode tempNode = null;
+                List<Integer> tempList = new ArrayList<>();
+                for(int i=0;i<size;i++){
+                    tempNode = queue.poll();
+                    tempList.add(tempNode.val);
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(tempList);
+            }
+            return result;
+        }
+    }
+//queue先进先出记录node
 //haha，我喜欢做这个，因为印象深刻。。。
 }
