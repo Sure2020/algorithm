@@ -97,4 +97,22 @@ public class LC141_linked_list_cycle {
             return false;
         }
     }
+
+    public class Solution20240621 {
+        public boolean hasCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return false;
+            }
+            ListNode slow=head,fast=head.next.next;
+            while(fast!=null&&fast.next!=null){
+                if(slow==fast){
+                    return true;
+                }
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return false;
+        }
+    }
+//快慢指针，慢走1，快走2
 }
