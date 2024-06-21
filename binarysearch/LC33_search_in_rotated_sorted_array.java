@@ -134,4 +134,38 @@ public class LC33_search_in_rotated_sorted_array {
 //mid小于left，mid在断崖右边，mid---right递增
     //mid<target<right,收缩左边界
     //否则收缩右边界
+
+    class Solution20240620 {
+        public int search(int[] nums, int target) {
+            int left=0,right=nums.length-1,mid=-1;
+            while(left<=right){
+                mid = left + (right-left)/2;
+                //System.out.println("mid:  " + mid);
+                if(nums[mid] == target){
+                    return mid;
+                }
+                //这里mid>left和mid==left是归为一类的，想象一下断崖的图即可
+                //哎太蠢了，这里将nums[left]写成了left，都怪在分析是偷懒也是这么写的
+                if(nums[mid]>=nums[left]){
+                    if(nums[left]<=target && target <= nums[mid]){
+                        right = mid-1;
+                    }else{
+                        left = mid+1;
+                    }
+                }else if(nums[mid]<nums[left]){
+                    //System.out.println("branch 2");
+                    if(nums[mid]<=target && target<= nums[right]){
+                        left = mid+1;
+                    }else{
+                        right = mid-1;
+                    }
+                }
+            }
+            return -1;
+        }
+    }
+//这种讲究技巧的题，是我所不齿的。。。
+//先根据mid和left比较，判断断崖在哪边，
+//mid>left,断崖在mid右边，left->mid递增，在此区间按二分查找。。。另一边丢给下一次循环
+//mid<left,断崖在mid左边，mid->right递增，在此区间按二分查找。。。另一边丢给下一次循环
 }
