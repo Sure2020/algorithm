@@ -255,4 +255,43 @@ public class LC103_binary_tree_zigzag_level_order_traversal {
             return result;
         }
     }
+
+    class Solution20240624 {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            boolean leftToRight = true;
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                TreeNode tempNode = null;
+                LinkedList<Integer> tempList = new LinkedList<>();
+                for(int i=1;i<=size;i++){
+                    tempNode = queue.poll();
+                    if(leftToRight){
+                        tempList.addLast(tempNode.val);
+
+                    }else{
+                        tempList.addFirst(tempNode.val);
+                    }
+
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                //忘了，位置还放错了
+                leftToRight = !leftToRight;
+                result.add(tempList);
+            }
+            return result;
+        }
+    }
+
+//我直到要用尾插法，但好像没想到用linkedlist支持尾插法，瞟到了之前的思路而已。。。
 }
