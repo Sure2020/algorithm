@@ -147,4 +147,26 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
             return left!=null?left:right;
         }
     }
+
+    class Solution20240624 {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            if(root==p){
+                return p;
+            }else if(root==q){
+                return q;
+            }
+            TreeNode left = lowestCommonAncestor(root.left, p,q);
+            TreeNode right = lowestCommonAncestor(root.right,p,q);
+            //ooooooooo忘了匹配情况2的情形
+            if(left!=null && right!=null){
+                return root;
+            }
+            return left!=null?left:right;
+        }
+    }
+//让我回忆一下，分两种情况：1.当前根节点是两节点其中之一，那它就是所求；2.当前节点在两节点上面，继续递归寻找；3.
+//如果找不到一个或两个节点，返回null
 }
