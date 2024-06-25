@@ -367,4 +367,79 @@ public class LC92_reverse_linked_list_ii {
             return last;
         }
     }
+
+    class Solution20240625 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            // return reverseN(head, 4);
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            ListNode previous=null,next=null,p1=dummy,p2=null;
+            for(int i=1;i<left;i++){
+                p1 = p1.next;
+            }
+            previous = p1;
+            //System.out.println("privious: "+previous.val);
+            p2 = p1;
+            for(int i=left;i<right;i++){
+                p2 = p2.next;
+            }
+            //System.out.println("previous: "+previous.val + "n: "+ (right-left+1));
+            //return reverseN(previous, right -left+1);
+            //return reverseN(previous.next, right -left+1);
+            previous.next = reverseN(previous.next, right -left+1);
+            return dummy.next;
+        }
+        public ListNode reverseN(ListNode head,int n){
+            if(head==null || head.next==null){
+                return head;
+            }
+            int count = 1;
+            ListNode previous=null,current = head,next=null;
+            while(count<=n){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+                count ++;
+            }
+            head.next = next;
+            return previous;
+        }
+    }
+//1.先前进到left位置；2.再翻转left-right，利用迭代法；3.尾部指向processor
+//利用翻转前N个节点的函数
+//哎，调试了太久，估计共有一个小时。
+
+    class Solution2024062501 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            if(left==1){
+                return reverseN(head, right);
+            }
+            head.next = reverseBetween(head.next, left-1,right-1);
+            return head;
+        }
+        public ListNode reverseN(ListNode head,int n){
+            if(head==null || head.next==null){
+                return head;
+            }
+            int count = 1;
+            ListNode previous=null,current = head,next=null;
+            while(count<=n){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+                count ++;
+            }
+            head.next = next;
+            return previous;
+        }
+    }
+//利用递归，将left递归到==1，再利用翻转前N个节点的函数
 }

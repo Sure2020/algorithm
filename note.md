@@ -33,6 +33,7 @@ PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a,b)->(a.val-
 2024.05.24, LC92,反转链表II，
 //前进到第left个节点的方式，值得记忆！
 head.next = reverseBetween(head.next, left-1,right-1);
+2024.06.25，LC92补充：值得记忆！值得记忆！一个月后竟然调试了一个小时！主要思路是利用递归，将left递归到==1，再利用翻转前N个节点的函数
 
 2024.05.24，LC25, K 个一组翻转链表
 // 哈哈我踏马真是做一次就在这里踩坑一次，如果翻转整个链表，结束条件才是!=null，现在是翻转区间，就要!=b
