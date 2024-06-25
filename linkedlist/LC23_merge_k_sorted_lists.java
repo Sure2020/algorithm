@@ -16,11 +16,7 @@
  * --------------------------------------------------------------------
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @program: PACKAGE_NAME
@@ -276,4 +272,36 @@ public class LC23_merge_k_sorted_lists {
             return dummy.next;
         }
     }
+
+    class Solution20240625 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if(lists==null || lists.length==0){
+                return null;
+            }
+            ListNode dummy = new ListNode();
+            ListNode p = dummy;
+            Queue<ListNode> queue = new PriorityQueue<>(lists.length, (a, b)->(a.val-b.val));
+
+
+            for(int i=0;i<lists.length;i++){
+                ListNode tempNode = lists[i];
+                if(tempNode==null){
+                    continue;
+                }
+                //System.out.println(tempNode.val);
+                queue.offer(tempNode);
+            }
+            while(!queue.isEmpty()){
+                //每次把各个链表的第一个节点都放进小顶堆，最后只取顶上的一个
+                ListNode tempNode = queue.poll();
+                p.next = tempNode;
+                p = p.next;
+                if(tempNode.next!=null){
+                    queue.offer(tempNode.next);
+                }
+            }
+            return dummy.next;
+        }
+    }
+//嗯，小顶堆
 }

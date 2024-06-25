@@ -28,6 +28,10 @@
 2024.05.18,LC23. 合并 K 个升序链表
 //注意new 后面的尖括号别落下
 PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a,b)->(a.val-b.val));
+2024.06.25,LC23，还有个坑，要先判断if(lists.length==0){
+                                     return null;
+                                 }
+否则new priorityQueue的时候老报不合法的语句，妈的，也不明确说长度参数不能为0！
 
 
 2024.05.24, LC92,反转链表II，
