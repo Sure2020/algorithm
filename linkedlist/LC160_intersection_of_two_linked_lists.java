@@ -203,4 +203,34 @@ public class LC160_intersection_of_two_linked_lists {
             return null;
         }
     }
+
+    public class Solution20240626 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode p1=headA,p2=headB;
+            // int count=1;
+            while(p1!=null && p2!=null){
+                if(p1==p2){
+                    //System.out.println("found it");
+                    return p1;
+                }
+
+                // System.out.println("p1: " + p1.val);
+                // System.out.println("p2: " + p2.val);
+                p1=p1.next;
+                p2=p2.next;
+                if(p1==null && p2==null){
+                    return null;
+                }
+                if(p1==null){
+                    p1=headB;
+                }
+                if(p2==null){
+                    p2=headA;
+                }
+            }
+            return null;
+        }
+    }
+//双指针，各走完A再走B
+//确实有几处细节，主要是判空、判等的位置，有讲究，不用硬记，面向测试用例编程即可~
 }
