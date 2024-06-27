@@ -233,4 +233,28 @@ public class LC143_reorder_list {
             left.next=null;
         }
     }
+
+    class Solution20240627 {
+        public void reorderList(ListNode head) {
+            Stack<ListNode> stack = new Stack<>();
+            ListNode p = head;
+            while(p!=null){
+                stack.push(p);
+                p=p.next;
+            }
+            ListNode p1 = head;
+            ListNode p2 = null;
+            while(p1!=p2 && p1.next!=p2){
+                p2 = stack.pop();
+                // 这一步是关键，竟然没想到
+                p2.next = p1.next;
+                // System.out.println("p2: " + p2.val);
+                // System.out.println("p1: " + p1.val);
+                p1.next = p2;
+                p1 = p2.next;
+            }
+            p1.next=null;
+        }
+    }
+//双指针，我想到了，用栈缓存，没想到
 }
