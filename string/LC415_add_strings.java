@@ -163,4 +163,44 @@ public class LC415_add_strings {
 //当进位变量不为0，则要继续处理
 //技巧：获得char类型的数字对应的int值，char-'0'
 //最后翻转一下string?
+
+    class Solution20240627 {
+        public String addStrings(String num1, String num2) {
+            int p1=num1.length()-1,p2=num2.length()-1;
+            int n1=0,n2=0;
+            int c1,c2;
+            int sum=0,moreThanTen=0;
+            StringBuilder sb = new StringBuilder();
+            while(p1>=0|| p2>=0 || moreThanTen !=0){
+
+                if(p1>=0){
+                    c1 = num1.charAt(p1);
+                    n1 = c1-'0';
+                    p1--;
+                }else{
+                    n1=0;
+                }
+                if(p2>=0){
+                    c2=num2.charAt(p2);
+                    n2=c2-'0';
+                    p2--;
+                }else{
+                    n2=0;
+                }
+                sum = n1+n2 + moreThanTen;
+                //System.out.println("n1: " + n1 + "  n2 " + n2);
+
+                moreThanTen = sum/10;
+                //System.out.println("sum: " + sum + "  moreThanTen: " + moreThanTen);
+                sb.append(sum%10);
+
+                //System.out.println(p1 + "   " + p2 + "   " + moreThanTen);
+
+            }
+            return sb.reverse().toString();
+        }
+    }
+//用一个变量记录进位的值
+//计算当前char对应的int，用char='0'
+//搞错了，指针要从后往前遍历
 }
