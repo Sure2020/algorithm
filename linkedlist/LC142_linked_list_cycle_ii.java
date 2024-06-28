@@ -198,4 +198,43 @@ public class LC142_linked_list_cycle_ii {
             return slow;
         }
     }
+
+    public class Solution20240628 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            ListNode slow = head.next,fast=head.next.next;
+            while(fast!=null && fast.next!=null){
+                if(slow==fast){
+                    break;
+                }
+                // System.out.println("slow: " + slow.val);
+                // System.out.println("fast: " + fast.val);
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            if(slow!=fast){
+                return null;
+            }
+            //System.out.println("####################");
+            slow=head;
+            while(slow!=fast){
+                slow=slow.next;
+                //注意，第二次相遇前，两指针每次都只走一步！
+                //fast=fast.next.next;
+                fast=fast.next;
+                // System.out.println("slow: " + slow.val);
+                // System.out.println("fast: " + fast.val);
+                // if(slow==fast){
+                //     break;
+                // }
+            }
+            return slow;
+        }
+    }
+//快慢指针，一个一次一步，一个一次两步。
+//当两者相遇，假如走了则慢针走了k步，，快针走了2k步，假设相遇点距离成环点x，
+//慢针再从头开始走k-x步，快针继续往前走k-x步，则第二次相遇的点即为所求
+//注意，第二次相遇前，两指针每次都只走一步！
 }
