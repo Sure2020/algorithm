@@ -181,4 +181,32 @@ public class LC19_remove_nth_node_from_end_of_list {
             return head;
         }
     }
+
+    class Solution20240701 {
+        int count = 0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return null;
+            }
+            // if(head==null || head.next==null){
+            //     return head;
+            // }
+            // if(n==1){
+            //     return head.next;
+            // }
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            head.next = removeNthFromEnd(head.next,n);
+            count ++;
+            if(count==n){
+                return head.next;
+            }
+            return dummy.next;
+        }
+    }
+//删除链表的题目，首先直接一个dummy节点写出来。。。
+//删除倒数第n个，那对于head.next,就是删除倒数第n-1个，对于某个head,就是删除自己
+
+//哈哈。。。。难道这就是无招胜有招？？一开始思路一团糟，后来慢慢想到利用递归，可以从后往前计数，关键是计数到第n个时，返回head.next，相当于跳过了当前节点。
+//关键还是对后续遍历的理解，count++放在递归调用的后面！
 }
