@@ -170,4 +170,39 @@ public class LC124_binary_tree_maximum_path_sum {
             return outerMax>0?outerMax:0;
         }
     }
+
+    class Solution20240701 {
+        int result = Integer.MIN_VALUE;
+        public int maxPathSum(TreeNode root) {
+            splict(root);
+            return result;
+        }
+        public int splict(TreeNode root) {
+            //System.out.println("##################");
+            if(root==null){
+                return -1;
+            }
+            int left = splict(root.left);
+            int right = splict(root.right);
+            //System.out.println(" root: "+ root.val + "  left: " + left + "  right:  " + right);
+            int currentMax = root.val;
+            if(left>0){
+                currentMax += left;
+            }
+            if(right>0){
+                currentMax += right;
+            }
+            //挑战一下最大值
+            result = currentMax>result?currentMax:result;
+            //System.out.println(" result: " + result + " currentMax: " + currentMax);
+            //System.out.println("##################");
+            //这里return的时候不能返回root+left+right，而要返回root+Max(left,right);
+            int returnValue = root.val;
+            if(left>0||right>0){
+                returnValue += Math.max(left,right);
+            }
+            return returnValue;
+        }
+    }
+//分解的递归。有一处我记得是返回0
 }
