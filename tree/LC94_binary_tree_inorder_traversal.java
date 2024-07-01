@@ -82,4 +82,17 @@ public class LC94_binary_tree_inorder_traversal {
             return result;
         }
     }
+
+    class Solution20240701 {
+        List<Integer> result = new ArrayList<>();
+        public List<Integer> inorderTraversal(TreeNode root) {
+            if(root==null){
+                return result;
+            }
+            inorderTraversal(root.left);
+            result.add(root.val);
+            inorderTraversal(root.right);
+            return result;
+        }
+    }
 }
