@@ -141,4 +141,28 @@ public class LC69_sqrtx {
         }
     }
 //二分查找，找到k*k<=x的最大k值
+
+    class Solution20240702 {
+        public int mySqrt(int x) {
+            int k=0;
+            int result = 0;
+            //从0-x范围内找
+            long left=1,right=x,mid=0;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                //System.out.println("mid: " + mid);
+                if(mid*mid==x){
+                    return (int)mid;
+                }else if(mid*mid>x){
+                    right = mid-1;
+                }else{
+                    left=mid+1;
+                    result = (int)mid;
+                }
+            }
+            return (int)result;
+
+        }
+    }
+//二分查找，找k*k<=x的最大k
 }
