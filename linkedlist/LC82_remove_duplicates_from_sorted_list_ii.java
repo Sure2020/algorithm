@@ -188,4 +188,36 @@ public class LC82_remove_duplicates_from_sorted_list_ii {
             return dummy.next;
         }
     }
+
+    class Solution20240702 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode dummy = new ListNode();
+            dummy.next =head;
+            ListNode slow=dummy,fast=dummy;
+            boolean hasSkiped = false;
+            while(fast!=null ){
+                //System.out.println("slow: " + slow.val + " fast: " + fast.val);
+                fast=fast.next;
+                hasSkiped=false;
+                while(fast!=null && fast.next!=null && fast.val==fast.next.val){
+                    fast=fast.next;
+                    hasSkiped = true;
+                }
+                // hasJump=false;
+                if(!hasSkiped){
+                    slow.next=fast;
+                    slow=slow.next;
+                }
+
+            }
+            return dummy.next;
+        }
+    }
+//双指针。反正只记得slow的next不能随便后移，只有当slow.next==fast，时，才移、
+//还有，利用while跳过重复节点
+
+//厉害厉害，以后就这么干。这个题目，做了好多次，直到有个什么什么技巧，但过段时间就是用不出来！还是用自己的思路舒服！
 }
