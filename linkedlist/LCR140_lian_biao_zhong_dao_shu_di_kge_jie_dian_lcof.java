@@ -127,4 +127,26 @@ public class LCR140_lian_biao_zhong_dao_shu_di_kge_jie_dian_lcof {
         }
     }
 
+    class Solution20240704 {
+        int count=0;
+        ListNode result = new ListNode();
+        public ListNode trainingPlan(ListNode head, int cnt) {
+            if(head==null){
+                return null;
+            }
+
+            trainingPlan(head.next,cnt);
+            count++;
+            if(count==cnt){
+                //result.val = head.val;
+                result = head;
+                // return head;
+            }
+            return result;
+            //return null;
+        }
+    }
+//递归
+//递归的结果用ListNode result来承接，比较好理解
+
 }
