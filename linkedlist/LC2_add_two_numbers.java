@@ -245,4 +245,38 @@ public class LC2_add_two_numbers {
             return dummy.next;
         }
     }
+    class Solution20240704 {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode();
+            ListNode p1=l1,p2=l2,p3=dummy;
+            int moreThanTen = 0,num1=0,num2=0,sum=0;
+            while(p1!=null || p2!=null || moreThanTen!=0){
+                if(p1!=null){
+                    num1=p1.val;
+                    p1=p1.next;
+                }
+                if(p2!=null){
+                    num2=p2.val;
+                    p2=p2.next;
+                }
+                sum = num1+num2+moreThanTen;
+                //System.out.println("sum: " + sum + " num1: " + num1 + " num2 " + num2 + " more: " + moreThanTen);
+                moreThanTen = sum/10;
+                //System.out.println("moreThanTen: " + moreThanTen);
+
+                ListNode tempNode = new ListNode(sum%10);
+                p3.next = tempNode;
+                p3=p3.next;
+
+                //注意，为了不在循环中每次声明num1和num2，在while外部声明了一次，但是用完忘了置为0，总之后面还是别‘炫技’了
+                num1=0;
+                num2=0;
+            }
+            // if(moreThanTen!=0){
+            //     System.out.println("final moreThanTen: " + moreThanTen);
+            // }
+            return dummy.next;
+        }
+    }
+//就是双指针，再用个变量保存进位，我记得while循环结束条件是两指针非空，或进位变量非0
 }
