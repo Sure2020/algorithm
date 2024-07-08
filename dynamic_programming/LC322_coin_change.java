@@ -188,4 +188,48 @@ public class LC322_coin_change {
         }
     }
 //用自底向上，因为性能好
+
+    class Solution20240708 {
+
+        //来个备忘录：
+        int[] dp = new int[10000];
+        public int coinChange(int[] coins, int amount) {
+            Arrays.fill(dp,-666);
+            return dp(coins, amount);
+        }
+        public int dp(int[] coins, int amount){
+            //System.out.println("amount: " + amount);
+            if(amount<0){
+                return -1;
+            }
+            if(amount==0){
+                return 0;
+            }
+            if(dp[amount]!=-666){
+                return dp[amount];
+            }
+
+            int result = Integer.MAX_VALUE;
+            for(int i=0;i<coins.length;i++){
+                int coin =coins[i];
+                //System.out.println("coin: " + coin);
+                int currentN = coinChange(coins, amount-coin);
+                //System.out.println("currentN: " + currentN + " amount-coin: " + (amount-coin));
+                if(currentN==-1){
+                    //没有，就跳过此次尝试
+                    continue;
+                }
+                //挑战最小值
+                result = (currentN + 1)<result?(currentN+1):result;
+                //result = Math.min(currentN+1, result);
+                dp[amount]=result;
+            }
+            return result==Integer.MAX_VALUE?-1:result;
+            //return result;
+        }
+    }
+//递归，分解的思路吧，求amount-n的最少硬币个数+1，
+//一次失败的尝试，时间跨度太大，最后放弃
+//两处失误，一个是没搞清楚base case，amount<0要返回-1,amount==0要返回0;另一个是，返回结果时要判断要不要返回-1
+//其实太遗憾了，仅仅差一步之遥，就是忘了一个base case，遗憾了
 }
