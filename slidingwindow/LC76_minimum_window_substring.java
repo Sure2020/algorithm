@@ -397,4 +397,51 @@ public class LC76_minimum_window_substring {
             return min==Integer.MAX_VALUE?"":s.substring(start, start + min);
         }
     }
+
+    class Solution20240708 {
+        public String minWindow(String s, String t) {
+            int left=0,right=0, start=0,valid=0, minLen=Integer.MAX_VALUE;
+            Map<Character, Integer> need = new HashMap<>();
+            Map<Character, Integer> window = new HashMap<>();
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c, need.getOrDefault(c,0)+1);
+            }
+            //开始操纵窗口
+            while(left<=right&& right<s.length()){
+                char c = s.charAt(right);
+                if(need.containsKey(c)){
+                    window.put(c, window.getOrDefault(c,0)+1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid ++;
+                        //System.out.println("valid: " + valid);
+                    }
+                }
+                right ++;
+                //这里错将while写成了if
+                //这里不能拿t.length()与valid比，要拿need.size()与valid比，想想用例s="aa",t="aa"!
+                while(need.size()==valid){
+                    //System.out.println("length == valid");
+                    //System.out.println(" right-left: " + (right-left) + "  minLen: " + minLen);
+                    if(right-left<=minLen){
+                        start = left;
+                        minLen = right-left;
+                    }
+                    //System.out.println("start: " + start);
+                    char d = s.charAt(left);
+                    if(need.containsKey(d)){
+
+                        if(window.get(d).equals(need.get(d))){
+                            valid--;
+                        }
+                        window.put(d,window.get(d)-1);
+                    }
+                    left ++;
+                }
+            }
+
+            return minLen==Integer.MAX_VALUE?"":s.substring(start, start + minLen);
+        }
+    }
+//滑动窗口，我还是有点自信的。这个题，搞个need和window Map。用一个start记录最短子串的起始位置
 }
