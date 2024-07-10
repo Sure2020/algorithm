@@ -138,7 +138,7 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
             return build(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
         }
         public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd){
-            System.out.println("preStart: " + preStart + " preEnd " + preEnd + " inStart: " + inStart + " inEnd: "+inEnd);
+            //System.out.println("preStart: " + preStart + " preEnd " + preEnd + " inStart: " + inStart + " inEnd: "+inEnd);
             if(preEnd<preStart || inEnd<inStart){
                 return null;
             }
@@ -162,7 +162,7 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
             int leftTreeLength = rootIndex-inStart;
             //这里rightLen错写成了inorder.length-rootIndex-1
             int rightTreeLength = inEnd-rootIndex;
-            System.out.println("rootIndex: " + rootIndex + " leftlen: " + leftTreeLength+" rightlen " + rightTreeLength);
+            //System.out.println("rootIndex: " + rootIndex + " leftlen: " + leftTreeLength+" rightlen " + rightTreeLength);
             if(leftTreeLength==0){
                 root.left=null;
             }else{
