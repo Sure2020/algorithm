@@ -202,4 +202,26 @@ public class LC104_maximum_depth_of_binary_tree {
             max(root.right, currentDepth);
         }
     }
+
+    class Solution20240710 {
+        int result = 0;
+
+        public int maxDepth(TreeNode root) {
+            max(root, 0);
+            return result;
+        }
+        public void max(TreeNode root, int currentMax){
+            //base case
+            if(root==null){
+                return ;
+            }
+            currentMax ++;
+            if(root.left==null && root.right==null){
+                result = Math.max(result, currentMax);
+                // currentMax=0;
+            }
+            max(root.left, currentMax);
+            max(root.right, currentMax);
+        }
+    }
 }
