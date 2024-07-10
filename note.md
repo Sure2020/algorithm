@@ -57,6 +57,13 @@ while(current!=b){
 2024.07.01,LC124,这里return的时候不能返回root+left+right，而要返回root+Max(left,right);
 
 2024.06.04,LC105,注意！根节点的值要写成preorder[preStart]，而不是preorder[0]!因为子树的根节点在变，不固定！
+********2024.07.10,LC105,//三点！1.计算leftLen和rightLen，就利用rootIndex和inStart\inEnd来，也就是全用中序遍历相关的变量别扯其他的！
+//2.计算左子树的边界：
+//左子树的前序界，就用preStart和leftLength算，别扯其他的！
+//左子树的中序边界，就用inStart和rootIndex算，别扯其他的！
+//3.计算右子树的边界：
+//右子树的前序边界，就用preEnd和rightLen算，别扯其他的！
+//右子树的中序边界，就用inEnd和rootIndex算，别扯其他的！
 
 2024.06.07,LC662，二叉树最大宽度，再练练吧，细节挺有意思的，虽然没啥技巧可言
 

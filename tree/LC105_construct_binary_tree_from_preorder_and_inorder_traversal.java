@@ -132,4 +132,62 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
             return root;
         }
     }
+
+    class Solution20240710 {
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            return build(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+        }
+        public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd){
+            System.out.println("preStart: " + preStart + " preEnd " + preEnd + " inStart: " + inStart + " inEnd: "+inEnd);
+            if(preEnd<preStart || inEnd<inStart){
+                return null;
+            }
+            int rootVal = preorder[preStart];
+            TreeNode root = new TreeNode(rootVal);
+
+            //base case
+            if(preStart==preEnd || inStart==inEnd){
+                return root;
+            }
+
+            //在中序遍历中找到root的位置
+            int rootIndex = -1;
+            for(int i=0;i<inorder.length;i++){
+                if(inorder[i]==rootVal){
+                    rootIndex = i;
+                    break;
+                }
+            }
+            //这里leftLen错写成了rootIndex，应该是rootIndex-inStart
+            int leftTreeLength = rootIndex-inStart;
+            //这里rightLen错写成了inorder.length-rootIndex-1
+            int rightTreeLength = inEnd-rootIndex;
+            System.out.println("rootIndex: " + rootIndex + " leftlen: " + leftTreeLength+" rightlen " + rightTreeLength);
+            if(leftTreeLength==0){
+                root.left=null;
+            }else{
+                root.left = build(preorder, preStart+1,preStart+leftTreeLength,inorder,inStart, inStart+leftTreeLength-1);
+            }
+            if(rightTreeLength==0){
+                root.right=null;
+            }else{
+                //算preorder边界时，别跟rootIndex扯上关系，因为它是inorder的产物！
+                //root.right = build(preorder,rootIndex+1,rootIndex+rightTreeLength,inorder,rootIndex+1,rootIndex+rightTreeLength);
+                root.right = build(preorder,preEnd-rightTreeLength+1,preEnd,inorder, rootIndex+1,inEnd);
+            }
+
+
+            return root;
+        }
+    }
+//有印象，还是分解的递归，然后每次递归的两边端点有讲究
+
+//哎，又栽在这里
+//三点！1.计算leftLen和rightLen，就利用rootIndex和inStart\inEnd来，也就是全用中序遍历相关的变量别扯其他的！
+//2.计算左子树的边界：
+//左子树的前序界，就用preStart和leftLength算，别扯其他的！
+//左子树的中序边界，就用inStart和rootIndex算，别扯其他的！
+//3.计算右子树的边界：
+//右子树的前序边界，就用preEnd和rightLen算，别扯其他的！
+//右子树的中序边界，就用inEnd和rootIndex算，别扯其他的！
 }
