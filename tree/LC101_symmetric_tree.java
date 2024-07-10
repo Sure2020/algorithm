@@ -211,4 +211,23 @@ class LC101_symmetric_tree {
             return true;
         }
     }
+
+    //我靠，竟然给秒了
+    class Solution20240710 {
+        public boolean isSymmetric(TreeNode root) {
+            return judge(root,root);
+        }
+        public boolean judge(TreeNode node1, TreeNode node2){
+            if(node1==null && node2==null){
+                return true;
+            }
+            if(node1==null || node2==null){
+                return false;
+            }
+            if(node1.val!=node2.val){
+                return false;
+            }
+            return judge(node1.left, node2.right) && judge(node1.right, node2.left);
+        }
+    }
 }
