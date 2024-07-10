@@ -225,4 +225,53 @@ public class LC129_sum_root_to_leaf_numbers {
             sum(root.right, current);
         }
     }
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode() {}
+     *     TreeNode(int val) { this.val = val; }
+     *     TreeNode(int val, TreeNode left, TreeNode right) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
+     * }
+     */
+    class Solution20240710 {
+        int result = 0;
+        public int sumNumbers(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            sum(root,0);
+            return result;
+        }
+        public void sum(TreeNode root, int currentSum){
+            //System.out.println("curremtSum: " + currentSum);
+            //base case
+
+            if(root==null){
+                return;
+            }
+            int val = root.val;
+            //System.out.println("val:: " + val);
+            currentSum = currentSum*10 + val;
+            if( root.left==null && root.right==null){
+                result += currentSum;
+                //System.out.println("result: " + result);
+                return;
+            }
+
+            sum(root.left, currentSum);
+
+            //System.out.println("left and right");
+            sum(root.right,currentSum);
+        }
+    }
+//递归的思路。
+//也是调试了1个小时，总结起来就是，静下心来调试
 }
