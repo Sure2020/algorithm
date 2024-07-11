@@ -148,4 +148,29 @@ public class LC543_diameter_of_binary_tree {
             return Math.max(left,right)+1;
         }
     }
+
+    class Solution20240711 {
+        int result = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root);
+            return result-1;
+        }
+        public int dfs(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            //System.out.println("          root: " + root.val);
+            //太蠢了，又是由于复制粘贴的原因，这里递归调用的方法写成了主函数diameterOfBinaryTree
+            int left = dfs(root.left);
+            //System.out.println("left: " + left);
+            int right = dfs(root.right);
+            //System.out.println("right: " + right);
+            result = Math.max(left+right+1, result);
+            return Math.max(left, right)+1;
+        }
+    }
+//分解的思路，有个内部最大值和外部最大值
 }
