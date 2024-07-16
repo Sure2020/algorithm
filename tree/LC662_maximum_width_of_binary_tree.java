@@ -324,4 +324,77 @@ public class LC662_maximum_width_of_binary_tree {
     }
 //由于老能偷瞄到上次的思路，导致练习不够纯粹，以后思路就写在代码下方了。
 //这次就是偷瞄到了上次的思路：关键是记录每个节点的编号。
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode() {}
+     *     TreeNode(int val) { this.val = val; }
+     *     TreeNode(int val, TreeNode left, TreeNode right) {
+     *         this.val = val;
+     *         this.left = left;
+     *         this.right = right;
+     *     }
+     * }
+     */
+    class Solution20240716 {
+        class Pair{
+            int code;
+            TreeNode node;
+            Pair(){
+
+            }
+            Pair(int code, TreeNode node){
+                this.code = code;
+                this.node = node;
+            }
+            int getCode(){
+                return this.code;
+            }
+            TreeNode getNode(){
+                return this.node;
+            }
+        }
+
+        public int widthOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            int result = Integer.MIN_VALUE;
+            Queue<Pair> queue = new LinkedList<>();
+            queue.offer(new Pair(1,root));
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                int start=0,end=0;
+                for(int i=1;i<=size;i++){
+                    Pair tempPair = queue.poll();
+                    int code = tempPair.getCode();
+                    TreeNode node = tempPair.getNode();
+                    if(i==1){
+                        start = code;
+                        //System.out.println("start: " + start);
+                    }
+                    if(i==size){
+                        end = code;
+                        //System.out.println("end: " + end);
+                    }
+                    if(node.left!=null){
+                        queue.offer(new Pair(code*2, node.left));
+                    }
+                    if(node.right!=null){
+                        queue.offer(new Pair(code*2+1, node.right));
+                    }
+                }
+                result = Math.max(result, end-start+1);
+            }
+            return result;
+        }
+    }
+//仍然掉坑里了，想当然的思路不对，应该利用节点编号。
+//节点编号的规律：假设根节点编号为x,则左节点编号2x,右节点编号2x+1
+//用pair存节点与其编号，放到queue中，然后利用层序遍历，每遍历一层就挑战一下最大值
+//事后：还行，简单调试了两次，直接误提交，但是过了，有点狂了
 }
