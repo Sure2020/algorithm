@@ -111,4 +111,28 @@ public class LC83_remove_duplicates_from_sorted_list {
             return dummy.next;
         }
     }
+
+    class Solution20240716 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null){
+                return null;
+            }
+            // ListNode dummy = new ListNode();
+            // dummy.next = head;
+            ListNode slow=head,fast=head;
+            while(fast!=null){
+                if(slow.val==fast.val){
+                    //System.out.println("== " + slow.val + "   "+fast.val);
+                    fast=fast.next;
+                }else{
+                    slow.next = fast;
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+            }
+            slow.next=fast;
+            return head;
+        }
+    }
+//这个反正比较简单了，按正常第一感觉来就行，不用注意什么技巧。就是双指针
 }
