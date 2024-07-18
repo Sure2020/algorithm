@@ -121,4 +121,61 @@ public class LC24_swap_nodes_in_pairs {
             return previous;
         }
     }
+
+    class Solution20240718 {
+        public ListNode swapPairs(ListNode head) {
+            if(head==null){
+                return null;
+            }
+            return swapK(head, 2);
+            // ListNode p = head;
+            // for(int i=1;i<=2;i++){
+            //     p = p.next;
+            //     if(p==null){
+            //         return head;
+            //     }
+            // }
+            // System.out.println("p: " + p.val);
+            // return swap(head, p);
+
+        }
+        public ListNode swapK(ListNode head, int k){
+            if(head==null){
+                return null;
+            }
+            ListNode p = head;
+            //System.out.println("p.val: " + p.val);
+            for(int i=1;i<k;i++){
+                p = p.next;
+                //不足k个一组，则不用翻转直接返回
+                if(p==null){
+                    return head;
+                }
+            }
+            //System.out.println("p: " + p.val);
+            //System.out.println("p.next: " + p.next.val);
+            // 注意，在swap之前，p.next和swap之后的p.next，指向不同，所以要在swap之前，先暂存p的指向！
+            ListNode pNext = p.next;
+            //System.out.println("pNext: " + pNext.val);
+            ListNode newHead = swap(head, p);
+            // System.out.println("p.next: " + p.next.val);
+            head.next = swapK(pNext, k);
+            return newHead;
+            //return swapK(pNext,k);
+        }
+        public ListNode swap(ListNode node1, ListNode node2){
+            ListNode previous = null,current = node1, next=null;
+            while(previous!=node2){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
+//先写k个一组交换，再把k置为2
+//需要利用迭代的方式交换两个节点间的节点
+//走k步，再交换（head, head-->k）
+//注意，在swap之前，p.next和swap之后的p.next，指向不同，所以要在swap之前，先暂存p的指向！
 }
