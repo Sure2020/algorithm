@@ -210,4 +210,30 @@ public class LC3_longest_substring_without_repeating_characters {
         }
     }
 //印象比较深，滑动窗口，用一个set记录已经有的字符，收缩窗口时判断set是否已存在当前字符，记录当前最长字串的长度
+
+    class Solution20240722 {
+        public int lengthOfLongestSubstring(String s) {
+            Set<Character> set = new HashSet<>();
+            int result = 0;
+            int left=0,right=0;
+            while(right<s.length()){
+                char c = s.charAt(right);
+                if(!set.contains(c)){
+                    //System.out.println("new c: " + c);
+                    set.add(c);
+                    result = Math.max(result, set.size());
+                    right ++;
+                }else{
+                    char d = s.charAt(left);
+                    //System.out.println("old d: " + d);
+                    set.remove(d);
+                    left++;
+                }
+            }
+            return result;
+        }
+    }
+//滑动窗口，用一个set记录已经历过的char，用一个变量记录最大值
+//事后：还不错，再次重新起刷，第一题，没耐心的情况下，还是只调试了几次就搞定了。
+//主要是在收缩窗口时错取了right的值，应该取left所在索引的值
 }
