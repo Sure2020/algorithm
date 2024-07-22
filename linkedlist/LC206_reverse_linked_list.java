@@ -184,4 +184,17 @@ public class LC206_reverse_linked_list {
         }
     }
 //我就记得一招head.next.next=head，让我直呼巧妙
+    class Solution20240722 {
+        //函数定义：返回翻转后的链表
+        public ListNode reverseList(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode result = reverseList(head.next);
+            head.next.next = head;
+            head.next = null;
+            return result;
+        }
+    }
+    //head.next.next = head?
 }
