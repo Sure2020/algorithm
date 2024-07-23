@@ -201,4 +201,47 @@ class LRUCache20240618 {
 
     //记忆很深刻，关键是需要借助LinkedHashMap的帮助
     //还要记住LinkedHashMap插入时是尾插，所以最旧的节点在头部
+
+class LRUCache20240723 {
+    int capacity;
+    LinkedHashMap<Integer, Integer> cache;
+    public LRUCache20240723(int capacity) {
+        this.capacity = capacity;
+        cache = new LinkedHashMap();
+    }
+
+    public int get(int key) {
+        if(cache.containsKey(key)){
+            makeRecent(key);
+            return cache.get(key);
+        }
+        return -1;
+    }
+
+    public void put(int key, int value) {
+        if(cache.containsKey(key)){
+            cache.put(key, value);
+            makeRecent(key);
+            return;
+        }
+        if(cache.size()>=capacity){
+            int oldestKey = cache.keySet().iterator().next();
+            // int oldestValue = cache.get(oldestKey);
+            cache.remove(oldestKey);
+            cache.put(key, value);
+            return;
+        }
+        cache.put(key, value);
+        return;
+    }
+    private void makeRecent(int key){
+        //int oldestKey = cache.keySet().iterator.hasNext();
+        int value = cache.get(key);
+        cache.remove(key);
+        cache.put(key, value);
+    }
+}
+
+//还行，半小时内做出来的吧，只是忘了int oldestKey = cache.keySet().iterator().next()的写法，
+//以及忘了在key已存在时更新value
 }

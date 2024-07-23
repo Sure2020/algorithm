@@ -73,6 +73,8 @@ while(current!=b){
 2024.06.12,LC162寻找峰值，判断mid和left，right的大小关系太复杂，上面就是反例，关键思路是换个角度，判断mid和mid+1的大小关系
 
 2024.06.13，LC146，LRU，我觉得很重要，只要记住一点，要用到linkedhashmap
+2024.07.22, LC146,LRU，这个语法总是记不住：int oldestKey = cache.keySet().iterator().next();
+让我们默写一遍：cache.keySet().iterator.next()
 
 2024.06.17.LC5，最长回文字串，记住双指针，然后从中心向两边扩散
 
