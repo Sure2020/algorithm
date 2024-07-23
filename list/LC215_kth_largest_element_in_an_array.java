@@ -17,6 +17,7 @@
  */
 
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -133,4 +134,42 @@ public class LC215_kth_largest_element_in_an_array {
         }
     }
 //利用小顶堆
+
+
+    class Solution202407232115 {
+        public int findKthLargest(int[] nums, int k) {
+            Queue<Integer> queue = new PriorityQueue<>((a, b)->b-a);
+
+            for(int i=0;i<nums.length;i++){
+                queue.offer(nums[i]);
+            }
+            int count = 1;
+            int i = 0;
+            while(count <k){
+                queue.poll();
+                // queue.offer(nums[i]);
+                // i++;
+                count++;
+
+            }
+            return queue.poll();
+        }
+    }
+//第一眼是动态规划，但没想起来用大顶堆这个奇技淫巧
+//过程中的总结：记错了，大顶堆（优先队列）应该是PriorityQueue，而不是PriorityLinkedList,
+//而且别忘了new 一下，自定义比较函数为(a,b)->b-a,意思是较大的优先
+
+    class Solution202407232120 {
+        public int findKthLargest(int[] nums, int k) {
+            Queue<Integer> queue = new PriorityQueue<>((a,b)->a-b);
+            for(int i=0;i<nums.length;i++){
+                queue.offer(nums[i]);
+                if(queue.size()>k){
+                    queue.poll();
+                }
+            }
+            return queue.peek();
+        }
+    }
+//做上一遍的时候就感觉到写复杂了，其实就是利用小顶堆，每次放入元素后再拿出元素，最后只剩下k个，那此时顶部的元素就是所求
 }
