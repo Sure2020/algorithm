@@ -237,4 +237,41 @@ public class LC25_reverse_nodes_in_k_group {
     }
 //先前进k个节点，然后记录第k个节点后面那个节点successor，再翻转1-k个节点，再将successor节点与之拼接
 //稀里糊涂调了很久，都是小细节，再练练吧。
+
+
+    class Solution20240724 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            // return reverse(head, null);
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode p = head;
+            for(int i=1;i<=k;i++){
+                if(p==null){
+                    // 原来是这里，没有将其返回导致不该翻转的部分也翻转了。但！这顺便解决了“不足k个也翻转”的问题！
+                    // break;
+                    return head;
+                }
+                p=p.next;
+            }
+            ListNode newHead = reverse(head, p);
+            // if(p==null){
+            //     return newHead;
+            // }
+            head.next = reverseKGroup(p,k);
+            return newHead;
+        }
+        public ListNode reverse(ListNode node1, ListNode node2){
+            ListNode previous=null, current = node1,next=null;
+            //这里又差点踩坑，边界是node2而不是null
+            while(current!=node2){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
+//需要利用迭代式的翻转链表函数
 }
