@@ -212,4 +212,35 @@ public class LC21_merge_two_sorted_lists {
         }
     }
 //双指针，最后再处理一下比较长的那个链表
+
+    class Solution20240724 {
+        public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+            if(list1==null){
+                return list2;
+            }else if(list2==null){
+                return list1;
+            }
+            ListNode dummy = new ListNode();
+            ListNode p1=list1,p2=list2,p3=dummy;
+            while(p1!=null && p2!=null){
+                if(p1.val<p2.val){
+                    p3.next = p1;
+                    p1=p1.next;
+                }else {
+                    p3.next=p2;
+                    p2=p2.next;
+                }
+                p3=p3.next;
+            }
+            if(p1!=null){
+                p3.next = p1;
+            }
+            if(p2!=null){
+                p3.next=p2;
+            }
+            return dummy.next;
+        }
+    }
+//双指针
+//事后：还行昂，一次通过
 }
