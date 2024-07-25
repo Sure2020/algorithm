@@ -121,4 +121,42 @@ public class LC5_longest_palindromic_substring {
         }
     }
 //这个刚做不久，印象挺深，双指针，关键是从中间向两边查找
+
+    class Solution20240725 {
+        int start = 0;
+        int maxLength=1;
+        public String longestPalindrome(String s) {
+            for(int i=0;i<s.length();i++){
+                lengthOfPalindrome(s, i,i);
+                lengthOfPalindrome(s, i,i+1);
+            }
+            return s.substring(start, start + maxLength);
+        }
+        public void lengthOfPalindrome(String s, int left, int right){
+            //int left = mid,right=mid;
+            while(left>=0 && right<s.length()){
+                //System.out.println("left: " + s.charAt(left));
+                //System.out.println("right: " + s.charAt(right));
+                //这里要用==来判断，因为考虑bb这个测试用例，就没有!=的时候
+                if(s.charAt(left)==s.charAt(right)){
+                    if(right-left>=maxLength){
+                        start = left;
+                        maxLength = right-left+1;
+                        //System.out.println("left: " + s.charAt(left) + "  right: " + s.charAt(right));
+                    }
+                    // break;
+                }else{
+                    //忘了break
+                    break;
+                }
+                left--;
+                right++;
+            }
+            //System.out.println("#############");
+            //return right-left;
+        }
+    }
+//有印象，关键是从中间向两边寻找
+//事中：搞了半天，没弄清楚substring(a,b)的用法，是取区间[a,b)的字符串，注意是左闭右开
+//事后：我觉得问题的关键是搞错了substring(a,b)的用法！
 }

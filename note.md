@@ -105,3 +105,9 @@ while(current!=b){
 语法熟悉：
 1.set取第一个key：set.keySet().iterator().next();
 2.优先队列：Queue<Object> queue = new PriorityQueue<>((a,b)->a-b);小顶堆这么写
+3.Math.max(a,b)
+4.Integer.MAX_VALUE
+5.String s;   s.length()
+6.List s;   s.size()
+
+7.substring(a,b)取的是区间[a,b)之间的子串，注意是左闭右开
