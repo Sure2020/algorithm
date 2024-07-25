@@ -106,4 +106,21 @@ public class LC1_two_sum {
         }
     }
 //这个我印象很深刻，不能一次性都放到map中，否则会将同一个元素使用两次，应该边判断边放
+
+
+    class Solution20240725 {
+        public int[] twoSum(int[] nums, int target) {
+            Map<Integer, Integer> map = new HashMap<>();
+            for(int i=0;i<nums.length;i++){
+                int need = target - nums[i];
+                if(map.containsKey(need)){
+                    return new int[]{i,map.get(need)};
+                }else{
+                    map.put(nums[i], i);
+                }
+            }
+            return new int[]{-1,-1};
+        }
+    }
+//有印象，map
 }
