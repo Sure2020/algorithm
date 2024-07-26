@@ -168,4 +168,56 @@ public class LC33_search_in_rotated_sorted_array {
 //先根据mid和left比较，判断断崖在哪边，
 //mid>left,断崖在mid右边，left->mid递增，在此区间按二分查找。。。另一边丢给下一次循环
 //mid<left,断崖在mid左边，mid->right递增，在此区间按二分查找。。。另一边丢给下一次循环
+
+    class Solution20240726 {
+        public int search(int[] nums, int target) {
+            if(nums.length==1 &&target==nums[0]){
+                return 0;
+            }
+            int left=0,right=nums.length-1;
+            while(left<=right){
+                int mid = left+(right-left)/2;
+                //System.out.println("left: " +left + " right: " + right + " mid: " + mid);
+                if(nums[mid]==target){
+                    return mid;
+                }
+                //断崖在mid右边，left-mid是单调递增
+                else if(nums[mid]>=nums[left]){
+                    //target在单调增区间，二分查找
+                    if(nums[left]<=target && target<nums[mid]){
+                        right = mid-1;
+                    }
+
+                    // else if(nums[left]==target){
+                    //     return left;
+                    // }
+                    //target在有断层的那一部分，交给下次循环去处理
+                    else/* if (nums[left]> target)*/{
+                        left = mid+1;
+                    }
+                }
+                //断崖在mid左边，mid-right是单调递增
+                else if(nums[mid]<nums[left]){
+                    //target在单调增区间，二分查找
+                    if(nums[mid]<target && target<=nums[right]){
+                        left=mid+1;
+                    }
+                    // else if(nums[mid]==target){
+                    //     return mid;
+                    // }
+                    else/* if(nums[mid]>target)*/{
+                        right = mid-1;
+                    }
+                }
+                // else if(nums[mid]==nums[left]){
+                //     left=mid+1;
+                // }
+
+            }
+            return -1;
+        }
+    }
+//搜索旋转数组。用mid与left比较，先确定断崖在哪边。
+//如果找峰值，就要mid与mid+1做比较，找出趋势
+//事后：主要是当判断target是否在left--mid或mid--right之间时，要严谨判断：nums[left]<=target<=nums[mid],nums[mid]<=target<=nums[right]
 }

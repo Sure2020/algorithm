@@ -98,6 +98,10 @@ while(current!=b){
 1.while条件用current!=node2，返回 previous
 2.swap(head,p),   swapK(p,k)
 
+2024.07.25,LC33，搜索旋转数组。用mid与left比较，先确定断崖在哪边。
+如果找峰值，就要mid与mid+1做比较，找出趋势
+********有阻力，写出来了但花了大量时间调试，而且是剽窃的上次提交
+********主要是当判断target是否在left--mid或mid--right之间时，要严谨判断：nums[left]<=target<=nums[mid],nums[mid]<=target<=nums[right]
 
 铁律：1.不要复制粘贴上面的代码到下面，容易引入很多坑！无论什么情况，都不要复制粘贴
 
