@@ -139,4 +139,41 @@ public class LC88_merge_sorted_array {
         }
     }
 //双指针，nums1从尾部写入
+
+
+    class Solution20240729 {
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+            //在搞什么，这里错写成了m+1
+            int index1=m-1,index2=n-1,index3=m+n-1;
+            // if(m<=0){
+            //     while(index2>=0){
+            //         nums1[index3]=nums2[index2];
+            //         index2--;
+            //         index3--;
+            //     }
+
+            // }
+            while(index2>=0 && index1>=0){
+                //System.out.println("index1: " + nums1[index1] + " index2: " + nums2[index2]);
+                if(nums1[index1]>=nums2[index2]){
+                    nums1[index3]=nums1[index1];
+                    index1--;
+                }else{
+                    nums1[index3]=nums2[index2];
+                    index2--;
+                }
+                index3--;
+            }
+            while(index2>=0){
+                nums1[index3]=nums2[index2];
+                index2--;
+                index3--;
+            }
+
+        }
+    }
+//从后往前，往nums1中塞元素
+//事后：这个破题着实把我坑了一次，忘了处理边缘情况：当两个数组不一样长，最会肯定会剩下一个数组没处理，nums1不用再处理，因为最后就是向nums1中放元素的，剩下没处理也没事。
+//关键是nums2，需要单调处理
 }
