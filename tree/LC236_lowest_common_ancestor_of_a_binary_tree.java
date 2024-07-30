@@ -169,4 +169,36 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
     }
 //让我回忆一下，分两种情况：1.当前根节点是两节点其中之一，那它就是所求；2.当前节点在两节点上面，继续递归寻找；3.
 //如果找不到一个或两个节点，返回null
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     *     int val;
+     *     TreeNode left;
+     *     TreeNode right;
+     *     TreeNode(int x) { val = x; }
+     * }
+     */
+    class Solution20240730 {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            //System.out.println(root.val +"  "+ p.val +"   "+ q.val);
+            if(p.val==root.val || q.val==root.val){
+
+                return root;
+            }
+            TreeNode left = lowestCommonAncestor(root.left, p,q);
+            TreeNode right = lowestCommonAncestor(root.right, p,q);
+            if(left!=null && right !=null){
+                return root;
+            }
+            return left!=null?left:right;
+        }
+    }
+//1.题目说了，p和q都在二叉树中，所以如果根节点是p或q，那么根节点就是所求
+//2.如果根节点的左右子树中能找到p或q，那根节点就是所求。
+
+//事后：卡在了最后那个return语句，注意函数的定义，就是去子树中找p或q,最后要返回找到的值，而非直接返回null
 }
