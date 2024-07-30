@@ -115,4 +115,20 @@ public class LC141_linked_list_cycle {
         }
     }
 //快慢指针，慢走1，快走2
+
+    public class Solution20240730 {
+        public boolean hasCycle(ListNode head) {
+            ListNode fast = head,slow=head;
+            while(fast!=null && fast.next!=null){
+                fast = fast.next.next;
+                slow = slow.next;
+                if(fast==slow){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+//快慢指针，快1慢2，判断相遇
+//事后：我的妈，从开始敲到提交，可能都不到一分钟，一次过
 }
