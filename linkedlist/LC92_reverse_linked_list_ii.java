@@ -442,4 +442,46 @@ public class LC92_reverse_linked_list_ii {
         }
     }
 //利用递归，将left递归到==1，再利用翻转前N个节点的函数
+
+    class Solution20240731 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            //return reverseK(head, right);
+            if(head==null||head.next==null){
+                return head;
+            }
+            //System.out.println("left: " + left + " right: " + right);
+            //base case
+            if(left==1){
+                //head.next = reverseK(head.next, right);
+                // return head;
+                // 注意，这里想清楚要干嘛，如果left==1，那就是翻转前k个，肯定要从head开始翻转，而不是从head.next!
+                return reverseK(head, right);
+            }
+            head.next = reverseBetween(head.next, left-1,right-1);
+
+            return head;
+
+        }
+        public ListNode reverseK(ListNode head, int k){
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode previous=null,current=head,next=null;
+            while(k>=1){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+                k--;
+            }
+            head.next = next;
+            return previous;
+        }
+    }
+//利用迭代的方式翻转
+//翻转left到right，相当于。。。翻转1到right-left。先前进left步，我记得前进的方式有讲究，用递归的方式前进
+//转换成翻转前k个节点
+
+//事后：注意两点，1.搞清楚base case。2.翻转前N个节点的函数，记得拼接后面未翻转的.3.注意reverseK从head开始而不是从Head.next
+//这题克我，做过很多遍，每次都纠结好久，练！
 }
