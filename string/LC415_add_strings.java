@@ -203,4 +203,41 @@ public class LC415_add_strings {
 //用一个变量记录进位的值
 //计算当前char对应的int，用char='0'
 //搞错了，指针要从后往前遍历
+
+    class Solution20240731 {
+        public String addStrings(String num1, String num2) {
+            int index1=num1.length()-1,index2=num2.length()-1;
+            StringBuilder sb = new StringBuilder();
+
+
+            int moreThanTen=0;
+            while(index1>=0 || index2>=0 || moreThanTen>0){
+                char c1='0',c2='0';
+                //System.out.println("index1: " + index1 + " index2: " + index2);
+                int n1=0,n2=0,sum=0,value=0;
+                if(index1>=0){
+                    c1 = num1.charAt(index1);
+                    index1--;
+                }
+                if(index2>=0){
+                    c2 = num2.charAt(index2);
+                    index2--;
+                }
+                n1 = c1-'0';
+                n2 = c2-'0';
+                //System.out.println("n1: " + n1 + " n2: " + n2);
+                sum = n1 + n2 + moreThanTen;
+                moreThanTen = sum /10;
+                value = sum%10;
+                //System.out.println("sum: " + sum + " moreThanTen: "+moreThanTen + " value: " + value);
+                sb.append(value);
+            }
+
+            return sb.reverse().toString();
+        }
+    }
+
+//双指针。瞟到了上次的思路：求当前char对应的int，用c-'0';
+//要从字符串的后面往前算了
+//事后：又增加一条铁律：尽量缩小变量作用域，即使每次循环都声明一次变量又如何？
 }
