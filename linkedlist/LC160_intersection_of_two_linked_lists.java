@@ -233,4 +233,33 @@ public class LC160_intersection_of_two_linked_lists {
     }
 //双指针，各走完A再走B
 //确实有几处细节，主要是判空、判等的位置，有讲究，不用硬记，面向测试用例编程即可~
+
+    public class Solution20240731 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode p1 = headA, p2 = headB;
+            while (p1 != null && p2 != null) {
+                //System.out.println("p1: " + p1.val + " p2: " + p2.val);
+                if (p1 == p2) {
+                    return p1;
+                }
+
+                p1 = p1.next;
+                p2 = p2.next;
+
+                if(p1==null && p2==null){
+                    return null;
+                }
+                if (p1 == null) {
+                    p1 = headB;
+                }
+                if (p2 == null) {
+                    p2 = headA;
+                }
+
+            }
+            return null;
+        }
+    }
+// 思路是两条链表拼接成一条链表
+//事后：搞清楚两条链表拼接后的样子，思路就顺畅了，可借助纸笔
 }
