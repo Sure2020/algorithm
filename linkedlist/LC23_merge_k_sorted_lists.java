@@ -304,4 +304,35 @@ public class LC23_merge_k_sorted_lists {
         }
     }
 //嗯，小顶堆
+
+    class Solution20240731 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            Queue<ListNode> queue = new PriorityQueue<>((a,b)->a.val-b.val);
+            ListNode dummy = new ListNode();
+            ListNode p = dummy;
+            for(int i=0;i<lists.length;i++){
+                //System.out.println(lists[i].val);
+                ListNode tempNode = lists[i];
+                if(tempNode!=null){
+                    //System.out.println(lists[i].val);
+                    queue.offer(lists[i]);
+                }
+
+            }
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                for(int i=0;i<size;i++){
+                    ListNode tempNode = queue.poll();
+                    p.next = tempNode;
+                    p=p.next;
+                    if(tempNode.next!=null){
+                        queue.offer(tempNode.next);
+                    }
+                }
+            }
+            return dummy.next;
+        }
+    }
+//小顶堆
+//事后：不错，几次就调试出来了
 }
