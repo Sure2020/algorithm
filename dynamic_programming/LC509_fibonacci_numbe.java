@@ -153,4 +153,15 @@ public class LC509_fibonacci_numbe {
         }
     }
 //DP经典入门
+
+    class Solution20240801 {
+        public int fib(int n) {
+            if(n==0||n==1){
+                return n;
+            }
+            return fib(n-1)+fib(n-2);
+        }
+    }
+//斐波那契数列，从0开始。爬楼梯那个是从1开始
+//f(0)=0,f(1)=1,f(2)=1,f(3)=2,f(4)=3
 }
