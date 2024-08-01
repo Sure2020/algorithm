@@ -119,6 +119,7 @@ while(current!=b){
 1.不要复制粘贴上面的代码到下面，容易引入很多坑！无论什么情况，都不要复制粘贴
 2.尽量缩小变量作用域，即使每次循环都声明一次变量又如何？
 3.返回值为boolean的问题，不能对比==就随便返回true，因为可能当前为true，后面为false。应该遇到false时返回false！
+4.求最大值的问题，给result赋值要用Math.max挑战后赋值，而不是直接赋值！
 
 语法熟悉：
 1.set取第一个key：set.keySet().iterator().next();
