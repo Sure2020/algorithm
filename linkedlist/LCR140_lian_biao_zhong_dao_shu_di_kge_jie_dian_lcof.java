@@ -149,4 +149,21 @@ public class LCR140_lian_biao_zhong_dao_shu_di_kge_jie_dian_lcof {
 //递归
 //递归的结果用ListNode result来承接，比较好理解
 
+    class Solution20240801 {
+        public ListNode trainingPlan(ListNode head, int cnt) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode slow = head, fast=head;
+            for(int i=1;i<cnt;i++){
+                fast = fast.next;
+            }
+            while(fast.next!=null){
+                slow = slow.next;
+                fast=fast.next;
+            }
+            return slow;
+        }
+    }
+//特么的，差点没想起来，原来是快慢指针
 }
