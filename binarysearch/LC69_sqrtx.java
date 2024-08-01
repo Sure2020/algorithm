@@ -165,4 +165,36 @@ public class LC69_sqrtx {
         }
     }
 //二分查找，找k*k<=x的最大k
+
+    class Solution20240801 {
+
+        public int mySqrt(int x) {
+            long left=1,right=x,mid=0;
+            int max=0;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                long n = mid*mid;
+                //System.out.println("mid: " + mid + " n: " + n + " x: " + x);
+                if(n==x){
+                    return (int)mid;
+                }else if(n>x){
+                    //System.out.println("n>x");
+                    right = mid-1;
+                }else{
+                    //System.out.println("n<x");
+                    max = (int)mid;
+                    left = mid+1;
+                }
+            }
+            return (int)max;
+            // double a = 1073697800;
+            // double b = a*a;
+            // double c = 2147395599;
+            // System.out.println("c: " + c + " b: " + b);
+            // System.out.println(c>b);
+            // return 1;
+        }
+    }
+//二分查找
+//事后：不能用double类型，否则小数点会带来麻烦，用long即可
 }
