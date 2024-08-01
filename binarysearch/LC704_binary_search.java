@@ -155,4 +155,23 @@ public class LC704_binary_search {
             return -1;
         }
     }
+
+    class Solution20240801 {
+        public int search(int[] nums, int target) {
+            int left = 0,right = nums.length-1,mid=0;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                //System.out.println("value: " + nums[mid]);
+                if(nums[mid]==target){
+                    return mid;
+                }else if(nums[mid]<target){
+                    left = mid+1;
+                }else {
+                    right = mid-1;
+                }
+            }
+            return -1;
+        }
+    }
+//事后：有点惊险，原来是弄错了><号的方向
 }
