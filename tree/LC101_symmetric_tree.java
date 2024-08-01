@@ -230,4 +230,28 @@ class LC101_symmetric_tree {
             return judge(node1.left, node2.right) && judge(node1.right, node2.left);
         }
     }
+
+    class Solution20240801 {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return false;
+            }
+            return compare(root,root);
+        }
+        public boolean compare(TreeNode node1, TreeNode node2){
+            if(node1==null && node2==null){
+                return true;
+            }
+            if(node1==null || node2==null){
+                return false;
+            }
+            //败笔在这里，不能对比==就随便返回true，因为可能当前为true，后面为false。应该遇到false时返回false！
+            if(node1.val!=node2.val){
+                return false;
+            }
+            return compare(node1.left,node2.right) && compare(node1.right, node2.left);
+        }
+    }
+//反正不能用层序遍历，要用迭代，左子树和右子树对比，右子树和左子树对比
+//事后：不能对比==就随便返回true，因为可能当前为true，后面为false。应该遇到false时返回false！
 }
