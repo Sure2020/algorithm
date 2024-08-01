@@ -30,4 +30,21 @@ public class LC70_climbing_stairs{
 //1,1,2
 //2,1,1
 //2,2
+class Solution20240801 {
+    public int climbStairs(int n) {
+        int n1 = 1,n2=2,n3=0;
+        if(n==1||n==2){
+            return n;
+        }
+        for(int i=3;i<=n;i++){
+            n3 = n1+n2;
+            n1=n2;
+            n2=n3;
+        }
+        return n3;
+    }
+}
+//斐波那契数列
+//f(1)=1,f(2)=2,f(3)=3,f(4)=5
+//事后：用迭代的算法直接秒了
 }
