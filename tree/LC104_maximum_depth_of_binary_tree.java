@@ -253,4 +253,25 @@ public class LC104_maximum_depth_of_binary_tree {
 //递归的入门级
 //事后：小看人，还说人家入门级，结果卡了一下子
 //求最大值的问题，给result赋值要用Math.max挑战后赋值，而不是直接赋值！
+
+    class Solution20240803 {
+        public int maxDepth(TreeNode root) {
+            return height(root,1);
+        }
+        public int height(TreeNode root,int currentHeight){
+            //base case
+            if(root==null){
+                return 0;
+            }
+            //base case
+            if(root.left==null && root.right==null){
+                return 1;
+            }
+            int left = height(root.left, currentHeight+1);
+            int right = height(root.right, currentHeight+1);
+            return(Math.max(left, right)+1);
+        }
+    }
+
+//以后就用这种方式求最值，就是避免用全局变量，全局变量容易影响别的东西。
 }
