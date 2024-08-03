@@ -223,4 +223,32 @@ public class LC110_balanced_binary_tree {
         }
     }
 //分解的思路
+
+    class Solution20240803 {
+        public boolean isBalanced(TreeNode root) {
+            heigth(root,1);
+            return result;
+        }
+        boolean result = true;
+        public int heigth(TreeNode root,int currentHeight){
+            if(root==null){
+                return 0;
+            }
+            //到达叶子节点
+            if(root.left==null&& root.right==null){
+                return 1;
+            }
+            int left = heigth(root.left, currentHeight+1);
+            int right = heigth(root.right, currentHeight+1);
+            if(Math.abs(left-right)>1){
+                result=false;
+                return 0;
+            }
+            return Math.max(left,right)+1;
+        }
+    }
+
+//用到了那个铁律，不要随便返回true，而当判断到false时可立即返回
+//重来：总会拿到left和right然后取较大，再+1就是高度，那就在这个时机判断
+//第二天事后：感觉是失误在树高度的算法上，以后不用全局变量的算法了，全局变量容易影响其他。还有，搞清楚递归的base case。
 }
