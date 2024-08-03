@@ -173,4 +173,29 @@ public class LC543_diameter_of_binary_tree {
         }
     }
 //分解的思路，有个内部最大值和外部最大值
+
+    class Solution20240803 {
+        int result = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            max(root,1);
+            return result;
+        }
+        //函数定义，返回左子树和右子树中较深的那个深度
+        //在得到left和right后，根据题意进行差异化计算
+        public int max(TreeNode root, int currentMax){
+            if(root==null){
+                return 0;
+            }
+            if(root.left==null && root.right==null){
+                return 1;
+            }
+            int left = max(root.left, currentMax+1);
+            int right = max(root.right, currentMax+1);
+            //System.out.println("root: "+root.val+" left: "+left + " right: "+right);
+            result = Math.max(result, (left+right));
+            return Math.max(left,right)+1;
+        }
+    }
+//分解的思路，和用分解的思路求二叉树的高度差不多的思路，只是在left和right的处理上有点区别
+//在利用left和right进行差异计算时，想清楚要求什么
 }
