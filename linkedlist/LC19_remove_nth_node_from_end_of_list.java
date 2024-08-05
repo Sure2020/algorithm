@@ -209,4 +209,37 @@ public class LC19_remove_nth_node_from_end_of_list {
 
 //哈哈。。。。难道这就是无招胜有招？？一开始思路一团糟，后来慢慢想到利用递归，可以从后往前计数，关键是计数到第n个时，返回head.next，相当于跳过了当前节点。
 //关键还是对后续遍历的理解，count++放在递归调用的后面！
+
+    class Solution2024080501 {
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return null;
+            }
+            ListNode dummy=new ListNode();
+            dummy.next = head;
+            ListNode slow=dummy,fast=dummy;
+            //System.out.println("fast: " + fast.val);
+            //System.out.println("fast.next: " + fast.next.val);
+            for(int i=1;i<=n;i++){
+                //System.out.println("fast: testing:   " + fast.val + "  i: " + i);
+                //System.out.println(fast.next.val);
+                fast=fast.next;
+            }
+            // if(fast==null){
+            //     System.out.println("nul");
+            // }
+            //System.out.println("fast: " + fast.val);
+            while(fast!=null && fast.next!=null){
+                slow=slow.next;
+                fast=fast.next;
+            }
+            // System.out.println("slow: " + slow.val);
+            //System.out.println("slow: " + slow.val+" fast: " + fast.val);
+            slow.next=slow.next.next;
+            return dummy.next;
+        }
+    }
+//递归。有一处返回head.next，就达到跳过倒数第n个节点的效果
+//...没做出来，换个思路，先找到倒数N个节点
+//事后：太慌了，心不静，太着急了，搞错很多出细节，而且忘了dummy，对dummy这个技巧不敏感
 }
