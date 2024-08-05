@@ -237,4 +237,38 @@ public class LC142_linked_list_cycle_ii {
 //当两者相遇，假如走了则慢针走了k步，，快针走了2k步，假设相遇点距离成环点x，
 //慢针再从头开始走k-x步，快针继续往前走k-x步，则第二次相遇的点即为所求
 //注意，第二次相遇前，两指针每次都只走一步！
+
+    public class Solution20240805 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            ListNode slow=head, fast=head;
+            while(fast!=null && fast.next!=null){
+                slow=slow.next;
+                fast=fast.next.next;
+                //这里没处理好
+                if(fast==null || fast.next==null){
+                    return null;
+                }
+                if(fast==slow){
+                    break;
+                }
+                //System.out.println("slow: "+slow.val + " fast: " + fast.val);
+            }
+            //System.out.println("slow: "+slow.val + " fast: " + fast.val);
+            slow=head;
+            while(slow!=fast){
+                // if(slow==null || fast==null ){
+                //     break;
+                // }
+                //System.out.println("slow: "+slow.val + " fast: " + fast.val);
+                slow=slow.next;
+                fast=fast.next;
+            }
+            return slow;
+        }
+    }
+//这个印象比较深刻，快慢指针，快走2，慢走1，找到相遇点，慢再从head开始，快慢都走1
+//稍微纠结了一下，在判断返回null时没处理好，fast==null || fast.next==null都应返回null
 }
