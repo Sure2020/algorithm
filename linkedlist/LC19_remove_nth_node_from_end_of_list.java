@@ -242,4 +242,26 @@ public class LC19_remove_nth_node_from_end_of_list {
 //递归。有一处返回head.next，就达到跳过倒数第n个节点的效果
 //...没做出来，换个思路，先找到倒数N个节点
 //事后：太慌了，心不静，太着急了，搞错很多出细节，而且忘了dummy，对dummy这个技巧不敏感
+
+    class Solution2024080502 {
+        int k=0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            //base case
+            if(head==null){
+                return null;
+            }
+
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+
+            head.next=removeNthFromEnd(head.next,n);
+            k++;
+            if(k==n){
+                return head.next;
+            }
+            return dummy.next;
+        }
+    }
+//重来：如果需要计算正数n个，就把count+1并作为参数传入下一次递归；如果要计算倒数n个，就搞个全局count变量来记录，count在递归内部++；
+//这里关键是k++在递归函数之后，是为了先让递归函数去触发base case，让递归开始逐层返回，开始返回了，才可以开始count++。或者这么说，都是需要先触发base case，再进行特殊处理。
 }
