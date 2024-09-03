@@ -197,4 +197,16 @@ public class LC206_reverse_linked_list {
         }
     }
     //head.next.next = head?
+
+    class Solution20240903 {
+        public ListNode reverseList(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode newHead = reverseList(head.next);
+            head.next.next=head;
+            head.next=null;
+            return newHead;
+        }
+    }
 }
