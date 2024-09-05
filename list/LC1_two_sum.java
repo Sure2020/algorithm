@@ -123,4 +123,24 @@ public class LC1_two_sum {
         }
     }
 //有印象，map
+
+    class Solution20240904 {
+        public int[] twoSum(int[] nums, int target) {
+            int[] result = new int[2];
+            //int index = 0;
+            Map<Integer, Integer> map = new HashMap<>();
+            for(int i=0;i<nums.length;i++){
+                int need = target-nums[i];
+                if(map.containsKey(need)){
+                    // result[0]=i;
+                    // result[1]=map.get(need);
+                    return new int[]{i, map.get(need)};
+                }else{
+                    map.put(nums[i], i);
+                }
+            }
+            return new int[]{-1,-1};
+        }
+    }
+//根据当前的值，求需要的值，并去map中找，找不到就把当前值放入map，继续判断下一个元素。
 }
