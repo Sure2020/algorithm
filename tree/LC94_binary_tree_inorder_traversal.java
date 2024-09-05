@@ -112,4 +112,18 @@ public class LC94_binary_tree_inorder_traversal {
         }
     }
 //竟然卡了一小会儿。。。原因是没有把result变量放在函数外面
+
+    class Solution20240906 {
+        List<Integer> result = new ArrayList<Integer>();
+        public List<Integer> inorderTraversal(TreeNode root) {
+
+            if(root==null){
+                return result;
+            }
+            inorderTraversal(root.left);
+            result.add(root.val);
+            inorderTraversal(root.right);
+            return result;
+        }
+    }
 }
