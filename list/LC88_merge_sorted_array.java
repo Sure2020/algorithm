@@ -175,5 +175,31 @@ public class LC88_merge_sorted_array {
     }
 //从后往前，往nums1中塞元素
 //事后：这个破题着实把我坑了一次，忘了处理边缘情况：当两个数组不一样长，最会肯定会剩下一个数组没处理，nums1不用再处理，因为最后就是向nums1中放元素的，剩下没处理也没事。
-//关键是nums2，需要单调处理
+//关键是nums2，需要单独处理
+
+    class Solution20240907 {
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+            int index1 = m-1,index2=n-1,index3=m+n-1;
+            while(index1>=0&&index2>=0){
+                int value1=nums1[index1];
+                int value2=nums2[index2];
+                //System.out.println(value1 + "   " + value2);
+                if(value1>=value2){
+                    nums1[index3]=value1;
+                    index1--;
+                }else if(value1<value2 ){
+                    nums1[index3]=value2;
+                    index2--;
+                }
+                index3--;
+            }
+            while(index3>=0 && index2>=0){
+                nums1[index3]=nums2[index2];
+                index2--;
+                index3--;
+            }
+        }
+    }
+//从后往前塞元素
+//教训就是，是在原基础上继续补救，还是重写新思路
 }
