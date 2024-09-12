@@ -262,4 +262,36 @@ public class LC160_intersection_of_two_linked_lists {
     }
 // 思路是两条链表拼接成一条链表
 //事后：搞清楚两条链表拼接后的样子，思路就顺畅了，可借助纸笔
+
+    public class Solution20240912 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            if(headA==null || headB==null){
+                return null;
+            }
+
+            ListNode p1 = headA,p2=headB;
+            if(p1==p2){
+                return p1;
+            }
+            while(p1!=null){
+                p1=p1.next;
+                p2=p2.next;
+                if(p1==p2){
+                    return p1;
+                }
+                if(p1==null){
+                    p1=headB;
+                }
+                if(p2==null){
+                    p2=headA;
+                }
+                if(p1==p2){
+                    return p1;
+                }
+            }
+            return null;
+        }
+    }
+//快慢指针先相遇，然后任意一个指针从头开始，另一个不变，同步前进再次相遇就是交叉点。
+//搞错了，没注意审题。此题方法是拼起来
 }
