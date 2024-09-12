@@ -131,4 +131,21 @@ public class LC141_linked_list_cycle {
     }
 //快慢指针，快1慢2，判断相遇
 //事后：我的妈，从开始敲到提交，可能都不到一分钟，一次过
+
+    public class Solution20240912 {
+        public boolean hasCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return false;
+            }
+            ListNode p1=head,p2=head;
+            while(p2!=null && p2.next!=null){
+                p2=p2.next.next;
+                p1=p1.next;
+                if(p1==p2){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
