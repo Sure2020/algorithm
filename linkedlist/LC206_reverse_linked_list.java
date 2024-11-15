@@ -209,4 +209,20 @@ public class LC206_reverse_linked_list {
             return newHead;
         }
     }
+
+    class Solution20241115 {
+        public ListNode reverseList(ListNode head) {
+            if(head==null||head.next==null){
+                return head;
+            }
+            ListNode previous = null,current=head,next=null;
+            while(current!=null){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current =next;
+            }
+            return previous;
+        }
+    }
 }
