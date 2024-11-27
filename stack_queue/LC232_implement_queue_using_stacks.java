@@ -73,4 +73,38 @@ public class LC232_implement_queue_using_stacks {
  * int param_3 = obj.peek();
  * boolean param_4 = obj.empty();
  */
+
+class MyQueue20241127 {
+    private Stack<Integer> s1;
+    private Stack<Integer> s2;
+    public MyQueue20241127() {
+        s1 = new Stack<>();
+        s2 = new Stack<>();
+
+    }
+
+    public void push(int x) {
+        s1.push(x);
+    }
+
+    public int pop() {
+        peek();
+        return s2.pop();
+    }
+
+    public int peek() {
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+        }
+        return s2.peek();
+    }
+
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
+}
+//主要是pop和peek稍微麻烦一点，关键是先将元素从s1压入s2，s2再出栈，增提就是先进先出了
+//注意初始化stack时指定类型 privste Stack<Integer> s1
 }
