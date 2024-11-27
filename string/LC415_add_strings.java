@@ -240,4 +240,33 @@ public class LC415_add_strings {
 //双指针。瞟到了上次的思路：求当前char对应的int，用c-'0';
 //要从字符串的后面往前算了
 //事后：又增加一条铁律：尽量缩小变量作用域，即使每次循环都声明一次变量又如何？
+
+    class Solution20241127 {
+        public String addStrings(String num1, String num2) {
+            int index1 = num1.length()-1,index2 = num2.length()-1;
+            StringBuilder sb = new StringBuilder();
+            int moreThanTen=0;
+            while(index1>=0 || index2>=0 || moreThanTen>0){
+                char c1='0',c2='0';
+                if(index1>=0){
+                    c1 = num1.charAt(index1);
+                    index1--;
+                }
+                if(index2>=0){
+                    c2 = num2.charAt(index2);
+                    index2--;
+                }
+                int n1=c1-'0',n2=c2-'0';
+                int sum = n1+n2+moreThanTen;
+                int value = sum % 10;
+                moreThanTen = sum / 10;
+                sb.append(value);
+            }
+            return sb.reverse().toString();
+        }
+    }
+
+//双指针。瞟到了上次的思路：求当前char对应的int，用c-'0';
+//要从字符串的后面往前算了
+//事后：又增加一条铁律：尽量缩小变量作用域，即使每次循环都声明一次变量又如何？
 }
