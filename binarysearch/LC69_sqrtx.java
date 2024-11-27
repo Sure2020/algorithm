@@ -197,4 +197,28 @@ public class LC69_sqrtx {
     }
 //二分查找
 //事后：不能用double类型，否则小数点会带来麻烦，用long即可
+
+    class Solution20241127 {
+        public int mySqrt(int x) {
+            int left=0,right=x,mid=0;
+            int max=0;
+            while(left<=right){
+                mid = left+(right-left)/2;
+                //System.out.println("mid: " + mid);
+                //mid*mid后这里要强转一下成long，否则Int的mid相乘的结果仍然会以int存储，造成溢出
+                long temp = (long)mid*mid;
+                //System.out.println("temp: " + temp);
+                if(temp==x){
+                    return (int)mid;
+                }else if (temp>x){
+                    right = mid-1;
+                }else{
+                    max = Math.max(max, mid);
+                    left = mid+1;
+                }
+            }
+            return max;
+        }
+    }
+//mid*mid后这里要强转一下成long，否则Int的mid相乘的结果仍然会以int存储，造成溢出
 }
