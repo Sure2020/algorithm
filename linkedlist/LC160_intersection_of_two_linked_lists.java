@@ -294,4 +294,27 @@ public class LC160_intersection_of_two_linked_lists {
     }
 //快慢指针先相遇，然后任意一个指针从头开始，另一个不变，同步前进再次相遇就是交叉点。
 //搞错了，没注意审题。此题方法是拼起来
+
+    public class Solution20241127_labuladong {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode p1 = headA, p2=headB;
+            while(p1!=p2){
+                if(p1==null){
+                    p1=headB;
+                }else{
+                    p1=p1.next;
+                }
+
+                if(p2==null){
+                    p2=headA;
+                }else{
+                    p2=p2.next;
+                }
+            }
+            return p1;
+        }
+    }
+//搞错了，没注意审题。此题方法是拼起来
+//快慢指针先相遇，再同速前进的是寻找成环的节点
+//labuladong的思路，将两支拼起来，不管相交与否，总会有p1=p2的时候，比如都为null
 }
