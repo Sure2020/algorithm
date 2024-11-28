@@ -198,4 +198,29 @@ public class LC543_diameter_of_binary_tree {
     }
 //分解的思路，和用分解的思路求二叉树的高度差不多的思路，只是在left和right的处理上有点区别
 //在利用left和right进行差异计算时，想清楚要求什么
+
+    class Solution20241128 {
+        int result = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            depth(root);
+            return result;
+        }
+        public int depth(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            // if(root.left==null && root.right==null){
+            //     return 1;
+            // }
+            int left = depth(root.left);
+            int right = depth(root.right);
+            result = Math.max(result, (left+right));
+            return Math.max(left,right)+1;
+        }
+    }
+//分解的思路，和用分解的思路求二叉树的高度差不多的思路，只是在left和right的处理上有点区别
+//在利用left和right进行差异计算时，想清楚要求什么
 }
