@@ -166,4 +166,22 @@ public class LCR140_lian_biao_zhong_dao_shu_di_kge_jie_dian_lcof {
         }
     }
 //特么的，差点没想起来，原来是快慢指针
+
+    class Solution20241128 {
+        public ListNode trainingPlan(ListNode head, int cnt) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode slow=head,fast=head;
+            for(int i=1;i<=cnt;i++){
+                fast=fast.next;
+            }
+            while(fast!=null){
+                fast=fast.next;
+                slow=slow.next;
+            }
+            return slow;
+        }
+    }
+//快慢指针，快指针领先cnt步，当快指针走到头，慢指针位置即为所求
 }
