@@ -65,4 +65,22 @@ public class LC14_longest_common_prefix {
             return sb.toString();
         }
     }
+    class Solution20241201 {
+        public String longestCommonPrefix(String[] strs) {
+            //以第一个字符串为基准
+            String s0 = strs[0];
+            //开始逐个列遍历
+            for(int i=0;i<s0.length();i++){
+                char c = s0.charAt(i);
+                //System.out.println("c: " + c);
+                for(String str : strs){
+                    //System.out.println("d: " + str.charAt(i));
+                    if(i>=str.length()||c!=str.charAt(i)){
+                        return s0.substring(0,i);
+                    }
+                }
+            }
+            return s0;
+        }
+    }
 }
