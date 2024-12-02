@@ -16,6 +16,8 @@
  * --------------------------------------------------------------------
  */
 
+import java.util.Stack;
+
 /**
  * @program: PACKAGE_NAME
  * @description: xxx
@@ -86,6 +88,32 @@ public class LC234_palindrome_linked_list {
                 cur=nxt;
             }
             return pre;
+        }
+    }
+    class Solution20241202 {
+        public boolean isPalindrome(ListNode head) {
+            if(head==null){
+                return false;
+            }
+            Stack<Integer> stack = new Stack<>();
+            ListNode p1=head;
+            while(p1!=null){
+                //System.out.println("val: " + p1.val);
+                stack.push(p1.val);
+                p1=p1.next;
+            }
+            ListNode p2 = head;
+            while(p2!=null){
+                Integer currentPop = stack.pop();
+                //System.out.println("pop: " + currentPop);
+                //System.out.println("p2val: " + p2.val);
+                if(!currentPop.equals(p2.val)){
+                    return false;
+                }
+                //忘了向前推进指针。。。
+                p2 = p2.next;
+            }
+            return true;
         }
     }
 }
