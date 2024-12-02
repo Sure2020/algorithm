@@ -132,4 +132,16 @@ public class LC112_path_sum {
             return hasPathSum(root.left, targetSum-root.val) || hasPathSum(root.right, targetSum-root.val);
         }
     }
+    class Solution20241202 {
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            if(root==null){
+                return false;
+            }
+            //base case
+            if(root.left==null && root.right==null && root.val==targetSum){
+                return true;
+            }
+            return hasPathSum(root.left, targetSum-root.val) || hasPathSum(root.right, targetSum-root.val);
+        }
+    }
 }
