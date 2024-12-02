@@ -116,4 +116,41 @@ public class LC234_palindrome_linked_list {
             return true;
         }
     }
+    class Solution20241202_reverse {
+        public boolean isPalindrome(ListNode head) {
+            if(head==null){
+                return false;
+            }
+            ListNode fast = head,slow = head;
+            while(fast!=null&& fast.next!=null){
+                slow=slow.next;
+                fast = fast.next.next;
+            }
+            ListNode half = reverse(slow);
+            ListNode p1 = head, p2 = half;
+            while(p1!=null && p2!=null){
+                if(p1.val!=p2.val){
+                    return false;
+                }
+                p1 = p1.next;
+                p2 = p2.next;
+            }
+            return true;
+        }
+        public ListNode reverse (ListNode head){
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode previous=null,current = head,next=null;
+            while(current!=null){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
+//找到链表中点，反转中点后面的部分，对比前后两部分
+//事后：根据思路框框写，最后一次通过，一些边界细节就是按直觉来的
 }
