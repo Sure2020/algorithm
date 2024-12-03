@@ -156,4 +156,21 @@ public class LC83_remove_duplicates_from_sorted_list {
     }
 //双指针
 //简单题就是思路很直接，没那么多陷阱和弯弯绕，反正按思路写完，简单调试后就过了
+    class Solution20241203 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode fast = head.next, slow = head;
+            while(fast!=null){
+                while(fast!=null && fast.val==slow.val){
+                    fast = fast.next;
+                }
+                slow.next = fast;
+                slow = slow.next;
+            }
+            return head;
+        }
+    }
+    //注意fast需要连续跳过重复节点，需要用while
 }
