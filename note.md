@@ -140,3 +140,4 @@ while(current!=b){
 6.List s;   s.size()
 
 7.substring(a,b)取的是区间[a,b)之间的子串，注意是左闭右开
+8.int[] nums; nums.length

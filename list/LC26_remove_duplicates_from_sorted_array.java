@@ -46,4 +46,24 @@ public class LC26_remove_duplicates_from_sorted_array {
         }
         return slowerIndex + 1;
     }
+
+    class Solution20241203 {
+        public int removeDuplicates(int[] nums) {
+            if(nums.length==0){
+                return 0;
+            }
+            int fast=0,slow=0;
+            while(fast<nums.length){
+                while(fast<nums.length && nums[slow]==nums[fast]){
+                    fast++;
+                }
+                slow++;
+                if(fast<nums.length){
+                    nums[slow]=nums[fast];
+                }
+            }
+            return slow;
+        }
+    }
+//为了保持和链表删除重复节点的思路一致
 }
