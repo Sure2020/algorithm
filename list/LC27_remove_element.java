@@ -68,4 +68,23 @@ public class LC27_remove_element {
         return slowerIndex;
     }
 
+    class Solution20241203 {
+        public int removeElement(int[] nums, int val) {
+            int length = nums.length;
+            if(length==0){
+                return 0;
+            }
+            int fast=0,slow=0;
+            while(fast<length){
+                if(nums[fast]!=val){
+                    nums[slow]=nums[fast];
+                    slow++;
+                }
+                fast++;
+            }
+            return slow;
+        }
+    }
+//labuladong: 如果遇到需要跳过的，就告诉slow，记录下来并让slow跳过
+//slow所指的位置，要么是原来的值，要么是等于val，可以被覆盖的值。
 }
