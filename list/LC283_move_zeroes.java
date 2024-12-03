@@ -55,4 +55,32 @@ public class LC283_move_zeroes {
 
         return slowerIndex;
     }
+
+    class Solution20241203 {
+        public void moveZeroes(int[] nums) {
+            int length = nums.length;
+            if(length==0){
+                return;
+            }
+            int p = removeElement(nums, 0);
+            for(int i=p;i<length;i++){
+                nums[i]=0;
+            }
+        }
+        public int removeElement(int[] nums, int val){
+            int length = nums.length;
+            if(length==0){
+                return 0;
+            }
+            int slow=0,fast=0;
+            while(fast<length){
+                if(nums[fast]!=val){
+                    nums[slow]=nums[fast];
+                    slow++;
+                }
+                fast++;
+            }
+            return slow;
+        }
+    }
 }
