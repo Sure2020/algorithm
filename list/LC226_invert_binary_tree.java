@@ -62,4 +62,20 @@ public class LC226_invert_binary_tree {
             return root;
         }
     }
+
+    class Solution20241203 {
+        public TreeNode invertTree(TreeNode root) {
+            if(root==null){
+                return null;
+            }
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+
+            invertTree(root.left);
+            invertTree(root.right);
+            return root;
+        }
+    }
+//想复杂了，不像链表那样，不用保持原节点不动。就交换就完了
 }
