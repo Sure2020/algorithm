@@ -274,4 +274,39 @@ public class LC25_reverse_nodes_in_k_group {
         }
     }
 //需要利用迭代式的翻转链表函数
+
+    class Solution20241204 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode a = head, b = head;
+            for(int i=1;i<=k;i++){
+                if(b==null){
+                    // 原来是这里，没有将其返回导致不该翻转的部分也翻转了。但！这顺便解决了“不足k个也翻转”的问题！
+                    //break;
+                    return head;
+                }
+                b = b.next;
+            }
+            ListNode newHead = reverse(head,b);
+            a.next = reverseKGroup(b,k);
+            return newHead;
+        }
+        public ListNode reverse(ListNode a, ListNode b){
+            if(a==null || a.next==null){
+                return a;
+            }
+            ListNode previous=null,current=a,next=null;
+            //注意这里的边界是b
+            while(current!=b){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
+//每k个，反转一次。先写出反转函数，然后递归反转
 }
