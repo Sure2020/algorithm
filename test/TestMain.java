@@ -33,7 +33,7 @@ public class TestMain {
     public static void test1(){
         System.out.println((new Random().nextInt() % 100) < 60 ? "YES" : "NO");
         System.out.println(new Random().nextInt()%100);
-        String str = "yong-liang-ge-zhan-shi-xian-dui-lie-lcof";
+        String str = "LC70_climbing-stairs";
         System.out.println(str.replaceAll("-","_"));
         System.out.println("testing");
         ListNode listNode = new ListNode(-1);
