@@ -244,4 +244,44 @@ class LRUCache20240723 {
 
 //还行，半小时内做出来的吧，只是忘了int oldestKey = cache.keySet().iterator().next()的写法，
 //以及忘了在key已存在时更新value
+
+    class LRUCache20241204 {
+        private LinkedHashMap<Integer, Integer> cache;
+        private int cap;
+        public LRUCache20241204(int capacity) {
+            cap = capacity;
+            cache = new LinkedHashMap<Integer,Integer>();
+        }
+
+        public int get(int key) {
+            //取完要调整为最近使用
+            if(cache.containsKey(key)){
+                makeRecent(key);
+                return cache.get(key);
+            }
+            return -1;
+        }
+
+        public void put(int key, int value) {
+            //1.已存在，需要放完再调整为最近使用。2.已满，需删除LRU，再放3.不存在也没满，直接放
+            if(cache.containsKey(key)){
+                cache.put(key,value);
+                makeRecent(key);
+                return;
+            }
+            if(cache.size()==cap){
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+                cache.put(key,value);
+                return;
+            }
+            cache.put(key,value);
+        }
+        public void makeRecent(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key,value);
+        }
+    }
+//需要做到，每次取或者放，都会造成key是最近被使用过
 }
