@@ -141,3 +141,44 @@ while(current!=b){
 
 7.substring(a,b)取的是区间[a,b)之间的子串，注意是左闭右开
 8.int[] nums; nums.length
+
+
+
+top100,easy
+206. 反转链表,递归，迭代均可
+21. 合并两个有序链表，三个指针，当P1，p2都非null，依次对比拼接，最后判断谁非空谁拼到后面。记得p3搞个dumm节点
+1. 两数之和，搞个map，key是值，value是下标。遍历数组，并得到当前target值，去map中找，找到则返回，找不到则放进map
+**121. 买卖股票的最佳时机, 关键思路是，若想达到最高利润，则一定选择价格最低的交易日买入，可称之为贪心
+20. 有效的括号,利用栈，遍历，先将左括号放入栈中，当遇到右括号，就栈顶找对应的左括号，找到就弹出，否则返回false。最后如果栈是空，就整体合法。
+
+88. 合并两个有序数组，关键是从后往前放。最后如果数组2中还有元素，就直接遍历放入数组1即可。
+不管是合并链表还是数组，都要3指针
+
+141. 环形链表，快慢指针，如果最后相遇，则为环。快走二，慢走一。
+415. 字符串相加，从后往前遍历，当两个下标和进位变量都非零，就继续遍历。中间的逻辑取模，取余即可。
+有两个关键，1.求当前字符对应的数字，用chat-'0'，2.最后要sb.reverse()
+
+160. 相交链表,labuladong的思路，拼起来，那么不论最后相交与否，结束条件都是p1==p2.while(p1!=p2)即可。最后返回p1
+
+94. 二叉树的中序遍历,喜欢
+704. 二分查找，left,right,mid  while(left<=right),开始找。
+*232. 用栈实现队列，两个栈，共pop,peek,push,empty()4个函数，后两者简单，empty判断两个栈都空，则为空。
+思路是，进s1，需要出栈的时候，（前提是s2为空）先将s1的元素全部放入s2，再从s2出栈即可。
+69. x 的平方根，二分查找的变体，需注意的是要强转一下，long temp = (long)mid*mid;
+
+70. 爬楼梯，斐波那契数列，但可以精简，n1,n2,n3.   基础是n1=1,n2=2,以后i=3开始到n,为：n3=n1+n2,n1=n2,n2=n3.
+
+链表中的倒数第k个节点，快慢指针，快先走k步，再同步走，知道快==null，则慢为所求。
+
+
+** 155. 最小栈，中等，搞两个栈，栈2专门放相对栈1当前元素，的最小值。if(minStack.isEmpty() || val<=minStack.peek())
+minStack.push(val);else minStack.push(minStack.peek());
+
+101. 对称二叉树,递归，base case有三个，当都==null,true,其中一个==null，false，val不相等，false。
+然后递归，比较node1.left,node2.right && node1.right,node2.left
+
+144. 二叉树的前序遍历,haha
+104. 二叉树的最大深度,大意了，递归，要用分解的思路，不要用全局变量容易有坑。base case是root==null,return 0,root.left==null && root.right==null,return 1
+然后int left=fun(root.left),int right=fun(root.right),return Math.max(left,right)+1;
+
+110. 平衡二叉树,这次可以搞个全局变量放结果，然后其他细节同上，在拿到left和right后判断Math.abs(left,right)>1
