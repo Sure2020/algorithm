@@ -182,3 +182,47 @@ minStack.push(val);else minStack.push(minStack.peek());
 然后int left=fun(root.left),int right=fun(root.right),return Math.max(left,right)+1;
 
 110. 平衡二叉树,这次可以搞个全局变量放结果，然后其他细节同上，在拿到left和right后判断Math.abs(left,right)>1
+
+543. 二叉树的直径，和求二叉树高度类似，只不过在处理left和right时，多加一步：result=Math.max(result,(left+right))
+
+14. 最长公共前缀,以第一个为基准，比如拿出第一个str的第一个字符，循环对比后面的，不相等就返回。
+
+112. 路径总和，有点巧妙，和自己的直觉思路不对应。还是递归分解的思路，base case是 到达根节点，且target=root,val
+否则判断 return func(root.left,target-root.val) || func(root.right,target-root.val);
+
+5.最长回文子串，有印象，从中间向两边蔓延，而且判断return func(i,i) || func(i,i+1);
+base case 是i<0 || j>s.length()
+
+
+234. 回文链表，用快慢指针找到中点，从slow节点翻转后面的，再两条链表逐个比对。
+
+** 169. 多数元素，直觉是利用map，但labuladong正负电子的思路确实妙。就是把多数元素看作是正电子，其他元素为负电子
+target=0,count=0
+for(int i=0,i<nums.length;i++){
+if(count==0),target=nums[i]
+else if(nums[i]==target),count++
+else count --
+}
+return target
+
+83. 删除排序链表中的重复元素,//注意fast需要连续跳过重复节点，需要用while
+226. 翻转二叉树, 记住不用像链表那样保持节点本身不变，这里可以直接交换两个节点的值。不要想去链接，不要去root.left=xxx
+if(root==null),return null
+用temp变量交换left和right
+func(root.left)
+func(root.right)
+return root;
+
+283. 移动零，关键是复用移除0的方法，先将所有0删除，再最后填补0.
+移动零,双指针，while(fast<length){
+if(nums[fast]!=val)
+    nums[slow]=nums[fast]
+    slow++
+  } 
+  fast++
+}
+return slow
+
+
+26. 删除排序数组中的重复项，思路就是，双指针，如果快慢的值相等，快就一直往前走，当不相等，则slow++后，将nums[slow]=nums[fast]
+最后return slow.  labuladong的思路里面，那个动图做的挺好的。
