@@ -16,6 +16,10 @@
  * --------------------------------------------------------------------
  */
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -29,6 +33,7 @@ public class TestMain {
         test2();
 //        test4();
 //        test5();
+        test10();
     }
     public static void test1(){
         System.out.println((new Random().nextInt() % 100) < 60 ? "YES" : "NO");
@@ -94,5 +99,25 @@ public class TestMain {
         int num1 = Integer.valueOf("");
         System.out.println(num1);
 
+    }
+    public static void test9(){
+        String[] test = new String[]{"",""};
+        System.out.println(test.length);
+        System.out.println(Arrays.asList(test));
+        System.out.println(Arrays.asList(test).contains(""));
+        System.out.println(Arrays.toString(test));
+    }
+    public static void test10(){
+//        String url = "https://a/qianwen/?chatId=4a50c678f9d140b5ab6e57a03536efd4&sessionId=2c4a43f8581a--488f99174306fb615e73";
+        String url = "http://www.test:80/a/b/c---d";
+        try {
+            new URL(url).toURI();
+        } catch (URISyntaxException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        } catch (MalformedURLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }
