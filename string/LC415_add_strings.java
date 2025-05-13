@@ -269,4 +269,31 @@ public class LC415_add_strings {
 //双指针。瞟到了上次的思路：求当前char对应的int，用c-'0';
 //要从字符串的后面往前算了
 //事后：又增加一条铁律：尽量缩小变量作用域，即使每次循环都声明一次变量又如何？
+
+    class Solution20250513 {
+        public String addStrings(String num1, String num2) {
+            int moreThanTen=0;
+            StringBuffer sb = new StringBuffer();
+            int index1=num1.length()-1,index2=num2.length()-1;
+            while(index1>=0||index2>=0||moreThanTen>0){
+                int n1=0,n2=0;
+                if(index1>=0){
+                    char c1=num1.charAt(index1);
+                    n1=c1-'0';
+                }
+                if(index2>=0){
+                    char c2=num2.charAt(index2);
+                    n2 = c2-'0';
+                }
+                int sum = n1+n2+moreThanTen;
+                int currentNum = sum%10;
+                // 12/10=1   12%10=2
+                moreThanTen=sum/10;
+                sb.append(String.valueOf(currentNum));
+                index1--;
+                index2--;
+            }
+            return sb.reverse().toString();
+        }
+    }
 }
