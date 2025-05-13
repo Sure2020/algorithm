@@ -41,4 +41,19 @@ public class LC121_best_time_to_buy_and_sell_stock {
         }
     }
 //由于for循环是不断向前推进的，所以这里不会出现先卖后买的情况。
+
+    class Solution20250513 {
+        public int maxProfit(int[] prices) {
+            if(prices.length<2){
+                return 0;
+            }
+            int result = 0,cost=Integer.MAX_VALUE;
+            for(int price:prices){
+                cost=Math.min(cost,price);
+                result=Math.max(result,price-cost);
+            }
+
+            return result;
+        }
+    }
 }
