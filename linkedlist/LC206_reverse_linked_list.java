@@ -253,4 +253,33 @@ public class LC206_reverse_linked_list {
             return newHead;
         }
     }
+    class Solution20250512 {
+        public ListNode reverseList(ListNode head) {
+            //base case
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode newHead = reverseList(head.next);
+
+            head.next.next=head;
+            head.next=null;
+            return newHead;
+        }
+    }
+
+    class Solution20250513 {
+        public ListNode reverseList(ListNode head) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode previous=null,current=head,next=null;
+            while(current!=null){
+                next=current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+            }
+            return previous;
+        }
+    }
 }
