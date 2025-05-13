@@ -283,4 +283,33 @@ public class LC110_balanced_binary_tree {
 //重来：总会拿到left和right然后取较大，再+1就是高度，那就在这个时机判断
 //第二天事后：感觉是失误在树高度的算法上，以后不用全局变量的算法了，全局变量容易影响其他。还有，搞清楚递归的base case。
 //算是一个小case，当root==null，也认为是平衡二叉树。。。
+
+    class Solution20250513 {
+        boolean result = true;
+        public boolean isBalanced(TreeNode root) {
+            if(root==null){
+                return true;
+            }
+            if(root.left==null && root.right==null){
+                return true;
+            }
+            maxDepth(root);
+            return result;
+
+        }
+        public int maxDepth(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            if(root.left==null && root.right==null){
+                return 1;
+            }
+            int left = maxDepth(root.left);
+            int right = maxDepth(root.right);
+            if(Math.abs(left-right)>1){
+                result = false;
+            }
+            return Math.max(left, right)+1;
+        }
+    }
 }
