@@ -119,7 +119,7 @@ public class LC20_valid_parentheses {
     }
 //利用栈，先将左括号存起来，当遇到右括号的时候，开始从栈中寻找匹配的左括号
 
-    class Solution20250513 {
+    class Solution20250513_wrong {
         public boolean isValid(String s) {
             if(s==null || s.length()<2){
                 return false;
@@ -140,6 +140,37 @@ public class LC20_valid_parentheses {
                 }
             }
             return true;
+        }
+        public char getMatch(char c){
+            if(c==')'){
+                return '(';
+            }else if(c==']'){
+                return '[';
+            }else if(c=='}'){
+                return '{';
+            }
+            return 'e';
+        }
+    }
+
+    class Solution20250513 {
+        public boolean isValid(String s) {
+            if(s==null || s.length()<2){
+                return false;
+            }
+            Stack<Character> stack = new Stack();
+            for(int i=0;i<s.length();i++){
+                char currentChar = s.charAt(i);
+                if(currentChar=='(' || currentChar=='[' || currentChar=='{'){
+                    stack.push(currentChar);
+                    //System.out.println(stack.size());
+                }else if(!stack.isEmpty() && getMatch(currentChar)==stack.peek()){
+                    stack.pop();
+                }else{
+                    return false;
+                }
+            }
+            return stack.isEmpty();
         }
         public char getMatch(char c){
             if(c==')'){
