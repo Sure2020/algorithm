@@ -291,4 +291,19 @@ public class LC104_maximum_depth_of_binary_tree {
     }
 //以后就用这种方式求最值，就是避免用全局变量，全局变量容易影响别的东西。
 //看了labuladong，原来这个思路叫动态规划，还有个回溯的思路，暂不研究吧
+
+    class Solution20250513 {
+        int result = 0;
+        public int maxDepth(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            if(root.left==null && root.right==null){
+                return 1;
+            }
+            int left = maxDepth(root.left);
+            int right = maxDepth(root.right);
+            return Math.max(left,right)+1;
+        }
+    }
 }
