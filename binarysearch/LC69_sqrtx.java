@@ -221,4 +221,29 @@ public class LC69_sqrtx {
         }
     }
 //mid*mid后这里要强转一下成long，否则Int的mid相乘的结果仍然会以int存储，造成溢出
+
+
+    class Solution20250513 {
+        public int mySqrt(int x) {
+            long left = 0,right=x,mid=0;
+
+            while(left<=right){
+                mid = left+(right-left)/2;
+                long temp = mid*mid;
+                if(temp == x){
+                    return (int)mid;
+                }
+                if(temp<x){
+                    left = mid+1;
+                }else{
+                    right = mid-1;
+                }
+            }
+            if(mid*mid>x){
+                return (int)(mid-1);
+            }else{
+                return (int)mid;
+            }
+        }
+    }
 }
