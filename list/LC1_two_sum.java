@@ -158,4 +158,19 @@ public class LC1_two_sum {
             return new int[]{-1,-1};
         }
     }
+    class Solution20250513 {
+        public int[] twoSum(int[] nums, int target) {
+            int[] result = new int[]{-1,-1};
+            Map<Integer,Integer> map = new HashMap<>();
+            for(int i=0;i<nums.length;i++){
+                int nead = target-nums[i];
+                if(map.containsKey(nead)){
+                    return new int[]{i,map.get(nead)};
+                }else{
+                    map.put(nums[i],i);
+                }
+            }
+            return result;
+        }
+    }
 }
