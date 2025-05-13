@@ -276,4 +276,26 @@ class LC101_symmetric_tree {
         }
     }
 //递归，我大概回忆起了一半以上，搞个函数，入参是两个节点，函数内对比并递归对比入参1的左节点和入参2的右节点，入参2的右节点和入参1的左节点。
+
+    class Solution20250513 {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return false;
+            }
+            return compare(root.left, root.right);
+
+        }
+        public boolean compare(TreeNode node1, TreeNode node2){
+            if(node1==null && node2==null){
+                return true;
+            }
+            if(node1==null || node2==null){
+                return false;
+            }
+            if(node1.val!=node2.val){
+                return false;
+            }
+            return compare(node1.left, node2.right) && compare(node1.right, node2.left);
+        }
+    }
 }
