@@ -184,4 +184,22 @@ public class LCR140_lian_biao_zhong_dao_shu_di_kge_jie_dian_lcof {
         }
     }
 //快慢指针，快指针领先cnt步，当快指针走到头，慢指针位置即为所求
+
+    class Solution20250513 {
+        public ListNode trainingPlan(ListNode head, int cnt) {
+            if(head==null){
+                return head;
+            }
+            ListNode fast = head;
+            for(int i=1;i<=cnt;i++){
+                fast = fast.next;
+            }
+            ListNode slow = head;
+            while(fast!=null){
+                slow = slow.next;
+                fast = fast.next;
+            }
+            return slow;
+        }
+    }
 }
