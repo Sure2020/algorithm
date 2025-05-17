@@ -239,3 +239,13 @@ return slow
 
 102. 二叉树的层序遍历，借助queue保存每一层的节点，然后遍历queue，遍历时再把当前节点的左右子节点都放入queue。
 踩坑点： size要提取算，不能在for循环中算，因为那时候已经有下一层的插入queue了
+33. 搜索旋转排序数组
+2024.07.25,LC33，搜索旋转数组。用mid与left比较，先确定断崖在哪边。
+    //关键思路是通过比较mid和Left,确定mid在断崖的哪边
+    //mid大于left，mid在断崖左边，left---mid递增
+    //mid等于left，仍然可以认为left---mid递增
+        //left<target<mid，大胆地收缩右边界，否则，收缩左边界，交由下次循环，再次判断mid与left的关系去处理
+        //否则收缩左边界
+    //mid小于left，mid在断崖右边，mid---right递增
+        //mid<target<right,收缩左边界
+        //否则收缩右边界
