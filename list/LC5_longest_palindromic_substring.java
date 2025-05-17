@@ -186,4 +186,26 @@ public class LC5_longest_palindromic_substring {
 //有印象，关键是从中间向两边寻找
 //事中：搞了半天，没弄清楚substring(a,b)的用法，是取区间[a,b)的字符串，注意是左闭右开
 //事后：我觉得问题的关键是搞错了substring(a,b)的用法！
+    class Solution20250517 {
+        public String longestPalindrome(String s) {
+            if(s.length() <=1){
+                return s;
+            }
+            String result="";
+            for(int i=0;i<s.length();i++){
+                String s1=findLongest(s,i,i);
+                String s2=findLongest(s,i,i+1);
+                result = result.length()>s1.length() ? result : s1;
+                result = result.length()>s2.length() ? result : s2;
+            }
+            return result;
+        }
+        public String findLongest(String s, int left, int right){
+            while(left>=0&&right<s.length() && s.charAt(left)==s.charAt(right)){
+                left--;
+                right++;
+            }
+            return s.substring(left+1, right);
+        }
+    }
 }
