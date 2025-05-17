@@ -279,4 +279,34 @@ public class LC102_binary_tree_level_order_traversal {
     }
 //时间久了还是一时间没想起来，这次把思路写清楚些：
 //利用queue，先把root塞进去，再开始遍历queue，记录值的同时，再把左右子树塞进queue
+    class Solution20250517 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                List<Integer> tempList = new ArrayList<>();
+                //size要提取算，不能在for循环中算，因为那时候已经有下一层的插入queue了
+                int size = queue.size();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+
+                    tempList.add(tempNode.val);
+
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(tempList);
+            }
+            return result;
+        }
+    }
 }
