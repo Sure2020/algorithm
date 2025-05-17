@@ -186,4 +186,16 @@ public class LC215_kth_largest_element_in_an_array {
         }
     }
 //做上一遍的时候就感觉到写复杂了，其实就是利用小顶堆，每次放入元素后再拿出元素，最后只剩下k个，那此时顶部的元素就是所求
+    class Solution20250517 {
+        public int findKthLargest(int[] nums, int k) {
+            Queue<Integer> queue = new PriorityQueue<>((a,b)->a-b);
+            for(int i: nums){
+                queue.offer(i);
+                if(queue.size()>k){
+                    queue.poll();
+                }
+            }
+            return queue.peek();
+        }
+    }
 }

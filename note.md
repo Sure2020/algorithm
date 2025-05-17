@@ -227,3 +227,11 @@ return slow
 
 26. 删除排序数组中的重复项，思路就是，双指针，如果快慢的值相等，快就一直往前走，当不相等，则slow++后，将nums[slow]=nums[fast]
 最后return slow.  labuladong的思路里面，那个动图做的挺好的。
+
+##top,mid
+3. 无重复字符的最长子串，思路是滑动窗口，一左一右两个指针，用set记录遍历过的char,
+    set中没有，就加入set，并扩张窗口（right++），set中有，把当前left指向的char删掉,再缩小窗口（left++）。
+146. LRU缓存机制。关键是哈希链表这个数据结构，linkedHashMap。
+    还有关键的函数，mackRecently，将get或put过的，都变成最进使用过的。
+215. 数组中的第K个最大元素。用小顶堆，priorityQueue,先往里放，最大的自动会沉到底部，
+    边放边判断，元素个数大于k了，就poll。最后的对顶，就是第K大的。
