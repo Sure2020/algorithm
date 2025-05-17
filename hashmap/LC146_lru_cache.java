@@ -283,5 +283,76 @@ class LRUCache20240723 {
             cache.put(key,value);
         }
     }
-//需要做到，每次取或者放，都会造成key是最近被使用过
+//需要知道，每次取或者放，都会造成key是最近被使用过
+    class LRUCache20250517 {
+        private int cap;
+        private LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+
+        public LRUCache20250517(int capacity) {
+            this.cap = capacity;
+        }
+
+        public int get(int key) {
+            if(!cache.containsKey(key)){
+                return -1;
+            }
+            mackRecently(key);
+            return cache.get(key);
+        }
+
+        public void put(int key, int value) {
+            if(cache.containsKey(key)){
+                cache.put(key,value);
+                mackRecently(key);
+                return;
+            }
+            if(cache.size()>=cap){
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+            }
+            cache.put(key,value);
+        }
+
+        public void mackRecently(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key,value);
+        }
+    }
+
+    class LRUCache20250517v2 {
+        private int cap;
+        private LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+
+        public LRUCache20250517v2(int capacity) {
+            cap = capacity;
+        }
+
+        public void makeRecently(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key,value);
+        }
+
+        public int get(int key) {
+            if(!cache.containsKey(key)){
+                return -1;
+            }
+            makeRecently(key);
+            return cache.get(key);
+        }
+
+        public void put(int key, int value) {
+            if(cache.containsKey(key)){
+                cache.put(key,value);
+                makeRecently(key);
+                return;
+            }
+            if(cache.size()>=cap){
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+            }
+            cache.put(key, value);
+        }
+    }
 }
