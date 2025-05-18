@@ -279,4 +279,30 @@ public class LC2_add_two_numbers {
         }
     }
 //就是双指针，再用个变量保存进位，我记得while循环结束条件是两指针非空，或进位变量非0
+
+
+    // 就是1，两数之和的变种
+    class Solution20250518 {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode();
+            ListNode p1 = l1, p2 = l2, p3 = dummy;
+            int moreThanTen = 0;
+            while(p1 != null || p2 != null || moreThanTen != 0){
+                int sum = moreThanTen;
+                if(p1 != null){
+                    sum += p1.val;
+                    p1 = p1.next;
+                }
+                if(p2 != null){
+                    sum += p2.val;
+                    p2 = p2.next;
+                }
+                int val = sum % 10;
+                moreThanTen = sum / 10;
+                p3.next = new ListNode(val);
+                p3 = p3.next;
+            }
+            return dummy.next;
+        }
+    }
 }
