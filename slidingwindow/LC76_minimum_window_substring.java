@@ -400,8 +400,14 @@ public class LC76_minimum_window_substring {
 
     class Solution20240708 {
         public String minWindow(String s, String t) {
+            //valid 变量表示窗口中满足 need 条件的字符个数
+            // 如果 valid 和 need.size 的大小相同，则说明窗口已满足条件，已经完全覆盖了串 T
+
+            // start 记录最短子串的起始位置
             int left=0,right=0, start=0,valid=0, minLen=Integer.MAX_VALUE;
+            // 记录所需的字符出现次数
             Map<Character, Integer> need = new HashMap<>();
+            // 记录 window 中的字符出现次数
             Map<Character, Integer> window = new HashMap<>();
             for(int i=0;i<t.length();i++){
                 char c = t.charAt(i);
@@ -444,4 +450,109 @@ public class LC76_minimum_window_substring {
         }
     }
 //滑动窗口，我还是有点自信的。这个题，搞个need和window Map。用一个start记录最短子串的起始位置
+
+
+
+    // 看labuladong的解法加的注释
+    class Solution20250518 {
+        public String minWindow(String s, String t) {
+            // 记录所需的字符出现次数
+            Map<Character, Integer> need = new HashMap<>();
+            // 记录 window 中的字符出现次数
+            Map<Character, Integer> window = new HashMap<>();
+
+            for(int i=0;i<t.length();i++){
+                char c = t.charAt(i);
+                need.put(c, need.getOrDefault(c, 0) + 1);
+            }
+
+            int left = 0, right = 0;
+            // valid 变量表示窗口中满足 need 条件的字符个数
+            int valid = 0;
+            // 记录最小覆盖子串的起始索引及长度
+            int start = 0, minLen = Integer.MAX_VALUE;
+            while(right < s.length()){
+                // c 是将移入窗口的字符
+                char c = s.charAt(right);
+                // 扩大窗口
+                right ++;
+                // 进行窗口内数据的一系列更新
+                if(need.containsKey(c)){
+                    window.put(c, window.getOrDefault(c,0)+1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid ++;
+                    }
+                }
+
+                // 判断左侧窗口是否要收缩
+                while(valid == need.size()){
+                    // 在这里更新最小覆盖子串
+                    if(right - left < minLen){
+                        start = left;
+                        minLen = right - left;
+                    }
+
+                    // d 是将移出窗口的字符
+                    char d = s.charAt(left);
+                    // 缩小窗口（这里错写成了left --。。。。。）
+                    left ++;
+                    if(need.containsKey(d)){
+                        if(window.get(d).equals(need.get(d))){
+                            valid --;
+                        }
+                        window.put(d, window.get(d) - 1);
+                    }
+                }
+
+
+            }
+
+            // 返回最小覆盖子串
+            return minLen==Integer.MAX_VALUE?"":s.substring(start, start+minLen);
+        }
+    }
+
+
+    class Solution20250518v2 {
+        public String minWindow(String s, String t) {
+            Map<Character, Integer> window = new HashMap<>();
+            Map<Character, Integer> need = new HashMap<>();
+            for(char c: t.toCharArray()){
+                need.put(c, need.getOrDefault(c, 0) + 1);
+            }
+            int left = 0, right = 0;
+            int valid = 0;
+            int start = 0, minLen = Integer.MAX_VALUE;
+
+            while(right < s.length()){
+                char c = s.charAt(right);
+                right ++;
+
+                if(need.containsKey(c)){
+                    window.put(c, window.getOrDefault(c, 0) + 1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid ++;
+                    }
+                }
+
+                while(valid == need.size()){
+                    if(right - left < minLen){
+                        start = left;
+                        minLen = right - left;
+                    }
+
+                    char d = s.charAt(left);
+                    left ++;
+                    if(need.containsKey(d)){
+                        if(window.get(d).equals(need.get(d))){
+                            valid --;
+                        }
+                        window.put(d, window.get(d) - 1);
+                    }
+                }
+            }
+
+            return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+        }
+    }
 }
