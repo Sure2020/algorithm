@@ -352,3 +352,18 @@ return slow
          root.right = build(preorder, preEnd-rightLength+1, preEnd, inorder, rootIndex+1, inEnd);
          return root;
      }
+
+     129. 求根节点到叶节点数字之和
+         递归
+          public void sum(TreeNode root, int current){
+          if(root==null){
+            return;
+          }
+          current = current * 10 + root.val;
+          if(root.left==null && root.right==null){
+            result += current;
+            return;
+          }
+          sum(root.left, current);
+          sum(root.right, current);
+          }

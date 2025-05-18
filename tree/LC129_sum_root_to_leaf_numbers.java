@@ -274,4 +274,28 @@ public class LC129_sum_root_to_leaf_numbers {
     }
 //递归的思路。
 //也是调试了1个小时，总结起来就是，静下心来调试
+
+
+    class Solution {
+        int result = 0;
+        public int sumNumbers(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            sum(root,0);
+            return result;
+        }
+        public void sum(TreeNode root, int current){
+            if(root==null){
+                return;
+            }
+            current = current * 10 + root.val;
+            if(root.left==null && root.right==null){
+                result += current;
+                return;
+            }
+            sum(root.left, current);
+            sum(root.right, current);
+        }
+    }
 }
