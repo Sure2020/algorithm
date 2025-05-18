@@ -311,3 +311,20 @@ return slow
         fast=fast.next;
 
 
+25. K 个一组翻转链表
+    先写出翻转两个节点间的函数，再
+    //翻转整个链表相当于翻转从Head到null之间的链表，稍作修改就能写出翻转从head到p节点之间节点的方法
+    //然后不断调用reverseBetween达到最终效果
+    ListNode p = head;
+    for(int i=1;i<=k;i++){
+        if(p==null){
+            return head;
+        }
+        p = p.next;
+    }
+    ListNode newHead = reverseBetween(head,p);
+    head.next = reverseKGroup(p,k);
+    return newHead;
+
+
+24. 两两交换链表中的节点
