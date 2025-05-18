@@ -213,4 +213,32 @@ public class LC24_swap_nodes_in_pairs {
     //先写k个一组交换，再把k置为2
     //需要利用迭代的方式交换两个节点间的节点
     //走k步，再交换（head, head-->k）
+
+    class Solution20250518 {
+        public ListNode swapPairs(ListNode head) {
+            if(head == null || head.next == null){
+                return head;
+            }
+            ListNode p = head;
+            for(int i=1; i<=2; i++){
+                if(p == null){
+                    return head;
+                }
+                p = p.next;
+            }
+            ListNode newHead = reverseBetween(head, p);
+            head.next = swapPairs(p);
+            return newHead;
+        }
+        public ListNode reverseBetween(ListNode node1, ListNode node2){
+            ListNode previous = null, current = node1, next = null;
+            while(current != node2){
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
 }
