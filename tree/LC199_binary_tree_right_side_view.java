@@ -219,4 +219,32 @@ public class LC199_binary_tree_right_side_view {
         }
     }
 //关键字，队列queue
+
+
+    class Solution20250518 {
+        public List<Integer> rightSideView(TreeNode root) {
+            List<Integer> result = new ArrayList<>();
+            if(root == null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                for(int i=1; i<=size; i++){
+                    TreeNode tempNode = queue.poll();
+                    if(i == size){
+                        result.add(tempNode.val);
+                    }
+                    if(tempNode.left != null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right != null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+            }
+            return result;
+        }
+    }
 }
