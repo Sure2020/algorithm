@@ -279,3 +279,16 @@ return slow
             return null;
         }
      }
+
+
+19. 删除链表的倒数第N个节点
+    用快慢指针的方式完全可以，但还可以用递归：
+    //删除链表的题目，首先直接一个dummy节点写出来。。。
+    //删除倒数第n个，那对于head.next,就是删除倒数第n-1个，对于某个head,就是删除自己
+    dummy.next=head;
+    head.next = removeNthFromEnd(head.next,n);
+    count++;
+    if(count==n){
+        return head.next;
+    }
+    return dummy.next;

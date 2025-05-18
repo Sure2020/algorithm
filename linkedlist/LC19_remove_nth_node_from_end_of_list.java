@@ -264,4 +264,23 @@ public class LC19_remove_nth_node_from_end_of_list {
     }
 //重来：如果需要计算正数n个，就把count+1并作为参数传入下一次递归；如果要计算倒数n个，就搞个全局count变量来记录，count在递归内部++；
 //这里关键是k++在递归函数之后，是为了先让递归函数去触发base case，让递归开始逐层返回，开始返回了，才可以开始count++。或者这么说，都是需要先触发base case，再进行特殊处理。
+
+    class Solution20250518 {
+        int count=0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return null;
+            }
+            ListNode dummy = new ListNode();
+            //删除链表的题目，首先直接一个dummy节点写出来。。。
+            //删除倒数第n个，那对于head.next,就是删除倒数第n-1个，对于某个head,就是删除自己
+            dummy.next=head;
+            head.next = removeNthFromEnd(head.next,n);
+            count++;
+            if(count==n){
+                return head.next;
+            }
+            return dummy.next;
+        }
+    }
 }
