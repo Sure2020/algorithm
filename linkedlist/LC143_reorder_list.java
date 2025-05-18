@@ -257,4 +257,30 @@ public class LC143_reorder_list {
         }
     }
 //双指针，我想到了，用栈缓存，没想到
+
+
+    //一句话就能明白思路：因为题目要求后半部分是倒叙穿插到前半部分，所以用栈把后半部分节点压入，再逐个弹出。来自题解，用户：算法什么时候能搞定啊
+    class Solution20250518 {
+        public void reorderList(ListNode head) {
+            if(head==null || head.next==null){
+                return;
+            }
+            Stack<ListNode> stack = new Stack<>();
+            ListNode p = head;
+            while(p!=null){
+                stack.push(p);
+                p=p.next;
+            }
+            ListNode left = head, right = null;
+            //这个while 条件值得记忆，分别对于链表偶数和奇数个的情况，注意是或的关系。
+            while(left.next!=right || left.next.next!=right){
+                right = stack.pop();
+                right.next = left.next;
+                left.next = right;
+                left=right.next;
+            }
+            //这是关键的一步，最后断开和后面的连接，否则会形成环
+            left.next=null;
+        }
+    }
 }
