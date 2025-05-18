@@ -220,4 +220,33 @@ public class LC82_remove_duplicates_from_sorted_list_ii {
 //还有，利用while跳过重复节点
 
 //厉害厉害，以后就这么干。这个题目，做了好多次，直到有个什么什么技巧，但过段时间就是用不出来！还是用自己的思路舒服！
+
+
+    // 没有用自己的那个借助hasSkiped的思路，而用通用思路，降低向其他人的解释成本
+    class Solution20250518 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(head==null|| head.next==null){
+                return head;
+            }
+            ListNode dummy = new ListNode();
+            dummy.next = head;
+            //slow要从dummy开始，适配第一个节点就重复的情况，还是那句话，slow要永远落后于fast
+            ListNode slow=dummy,fast=head;
+            while(fast!=null){
+                while(fast.next!=null && fast.val==fast.next.val){
+                    fast = fast.next;
+                }
+                //只有当slow和fast之间没元素，slow才移动。
+                if(slow.next==fast){
+                    slow = slow.next;
+                }else{
+                    //跳过重复的节点，但此时slow仍没动，保持slow落后于fast
+                    slow.next=fast.next;
+                }
+                //fast日常移动，在没重复节点时的移动
+                fast=fast.next;
+            }
+            return dummy.next;
+        }
+    }
 }
