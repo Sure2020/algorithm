@@ -330,4 +330,37 @@ public class LC103_binary_tree_zigzag_level_order_traversal {
     }
 
 //这个题记个星星吧，因为瞟到了之前的思路，linkedlist支持头插和尾插
+
+    class Solution20250518 {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            boolean isLeftToRight = true;
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                LinkedList<Integer> levelList = new LinkedList<>();
+                for(int i=1;i<=size;i++){
+                    TreeNode tempNode = queue.poll();
+                    if(isLeftToRight){
+                        levelList.addLast(tempNode.val);
+                    }else{
+                        levelList.addFirst(tempNode.val);
+                    }
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                isLeftToRight = !isLeftToRight;
+                result.add(levelList);
+            }
+            return result;
+        }
+    }
 }
