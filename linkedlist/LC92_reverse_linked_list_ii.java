@@ -484,4 +484,34 @@ public class LC92_reverse_linked_list_ii {
 
 //事后：注意两点，1.搞清楚base case。2.翻转前N个节点的函数，记得拼接后面未翻转的.3.注意reverseK从head开始而不是从Head.next
 //这题克我，做过很多遍，每次都纠结好久，练！
+
+
+    class Solution20250518 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            if(head == null || head.next == null){
+                return head;
+            }
+            if(left==1){
+                return reverseK(head,right);
+            }
+            head.next = reverseBetween(head.next,left-1,right-1);
+            return head;
+        }
+        public ListNode reverseK(ListNode head, int k){
+            if(head==null || head.next==null){
+                return head;
+            }
+            ListNode previous=null,current=head,next=null;
+            while(k>=1){
+                next=current.next;
+                current.next=previous;
+                previous = current;
+                current = next;
+                k--;
+            }
+            // 将翻转后的链表和未翻转的链表连起来
+            head.next=next;
+            return previous;
+        }
+    }
 }

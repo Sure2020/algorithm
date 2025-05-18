@@ -257,3 +257,11 @@ return slow
 
 *****236. 二叉树的最近公共祖先
     //搞清楚递归函数的含义，不要去想递归运行起来的细节；递归，是从最底层开始向上返回的，会把最近公共祖先一层层返回上来。
+
+92. 反转链表 II,//思路：先实现reverseN，也就是翻转前N个，再将head前进到left的位置，调用reverseN.
+    reverseK，最后记得head.next=next,将翻转后的链表和未翻转的链表连起来
+    前进到left:
+    if(left==1){
+        return reverseK(head,right);
+    }
+    head.next = reverseBetween(head.next,left-1,right-1);
