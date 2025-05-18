@@ -346,4 +346,50 @@ public class LC34_find_first_and_last_position_of_element_in_sorted_array {
     }
 //寻找左右边界的结合体
 
+
+
+    // 寻找左右边界结合，就按下面这个来吧，简单，没那么多细节需要处理，代码清爽
+    class Solution20250518 {
+        int[] result = new int[]{-1,-1};
+        public int[] searchRange(int[] nums, int target) {
+            leftBound(nums, target);
+            rightBound(nums, target);
+            return result;
+        }
+        public void leftBound(int[] nums, int target){
+            int left = 0,right = nums.length-1, mid=0;
+            boolean founded = false;
+            while(left<=right){
+                mid = left + (right - left) / 2;
+                if(nums[mid] == target){
+                    founded = true;
+                    //收缩右边界
+                    right = mid - 1;
+                } else if(nums[mid] > target){
+                    right = mid - 1;
+                }else {
+                    left = mid + 1;
+                }
+            }
+            result[0] = founded?left:-1;
+        }
+
+        public void rightBound(int[] nums, int target){
+            int left = 0, right = nums.length - 1, mid = 0;
+            boolean founded = false;
+            while(left<=right){
+                mid = left + (right - left) / 2;
+                if(nums[mid] == target){
+                    founded = true;
+                    left = mid + 1;
+                }else if(nums[mid] > target){
+                    right = mid - 1;
+                }else{
+                    left = mid + 1;
+                }
+            }
+            result[1] = founded ? right : -1;
+        }
+    }
+
 }

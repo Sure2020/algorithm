@@ -367,3 +367,7 @@ return slow
           sum(root.left, current);
           sum(root.right, current);
           }
+34. 在排序数组中查找元素的第一个和最后一个位置
+    // 寻找左右边界结合
+    找边界，注意找到==target后，就要收缩左边界（left=mid+1）或右边界（right=mid-1）
+    左编辑，右边界函数，搞个founded标志位记录是否找到，没找到就赋值-1
