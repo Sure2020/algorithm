@@ -127,6 +127,8 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
     }
 
     //思路，去左右子树中找p或q，情况1，当前root就是p或q，直接返回root；情况2，左右子树中找到p或q的节点，则root就是所求
+
+
     class Solution20240604 {
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
             if(root==null){
@@ -201,4 +203,45 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
 //2.如果根节点的左右子树中能找到p或q，那根节点就是所求。
 
 //事后：卡在了最后那个return语句，注意函数的定义，就是去子树中找p或q,最后要返回找到的值，而非直接返回null
+
+
+    //让我回忆一下，分两种情况：1.当前根节点是两节点其中之一，那它就是所求；2.当前节点在两节点上面，继续递归寻找；3.
+    //如果找不到一个或两个节点，返回null
+    //诀窍就是搞清楚递归函数的定义，
+    //又看了sun的题解
+    /*
+    * 解题思路：
+两个节点 p,q 分为两种情况：
+
+p 和 q 在相同子树中
+p 和 q 在不同子树中
+从根节点遍历，递归向左右子树查询节点信息
+递归终止条件：如果当前节点为空或等于 p 或 q，则返回当前节点
+
+递归遍历左右子树，如果左右子树查到节点都不为空，则表明 p 和 q 分别在左右子树中，因此，当前节点即为最近公共祖先；
+如果左右子树其中一个不为空，则返回非空节点。
+
+作者：Sun
+链接：https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/solutions/24970/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-jian-j/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    * */
+    class Solution20250518 {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            if(root==p || root==q){
+                return root;
+            }
+            //这里返回的是p或者q
+            TreeNode left = lowestCommonAncestor(root.left,p,q);
+            TreeNode right = lowestCommonAncestor(root.right,p,q);
+            //p和q在子树异侧，则root就是所求
+            if(left!=null && right!=null){
+                return root;
+            }
+            return left!=null?left:right;
+        }
+    }
 }
