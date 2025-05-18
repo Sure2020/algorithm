@@ -190,4 +190,35 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
 //3.计算右子树的边界：
 //右子树的前序边界，就用preEnd和rightLen算，别扯其他的！
 //右子树的中序边界，就用inEnd和rootIndex算，别扯其他的！
+    /*{
+        int leftLength = rootIndex-inStrat;
+        int rightLength = inEnd-rootIndex;
+        //这里根节点的值错写成了preorder[0]
+        TreeNode root = new TreeNode(preorder[preStart]);
+        root.left = build(preorder,preStart+1,preStart+leftLength,inorder,inStrat, rootIndex-1);
+        root.right = build(preorder,preEnd-rightLength+1, preEnd,inorder,rootIndex+1,inEnd);
+    }*/
+
+    class Solution20250518 {
+        Map<Integer, Integer> inorderMap = new HashMap<>();
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            for(int i=0;i<inorder.length;i++){
+                inorderMap.put(inorder[i], i);
+            }
+            return build(preorder, 0, preorder.length-1, inorder, 0, inorder.length-1);
+        }
+        public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd){
+            if(preStart>preEnd || inStart>inEnd){
+                return null;
+            }
+            int rootIndex = inorderMap.get(preorder[preStart]);
+            int leftLength = rootIndex-inStart;
+            int rightLength = inEnd - rootIndex;
+            TreeNode root = new TreeNode(preorder[preStart]);
+            root.left = build(preorder, preStart+1, preStart+leftLength, inorder, inStart, rootIndex-1);
+            // 这里竟然错把rightLength写成了leftLength
+            root.right = build(preorder, preEnd-rightLength+1, preEnd, inorder, rootIndex+1, inEnd);
+            return root;
+        }
+    }
 }

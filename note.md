@@ -335,3 +335,20 @@ return slow
 
 2. 两数相加
    // 就是1，两数之和的变种
+
+
+105. 从前序与中序遍历序列构造二叉树
+    //诀窍是借助一个三层的满二叉树，来分析各个下标
+    public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd){
+         if(preStart>preEnd || inStart>inEnd){
+            return null;
+         }
+         int rootIndex = inorderMap.get(preorder[preStart]);
+         int leftLength = rootIndex-inStart;
+         int rightLength = inEnd - rootIndex;
+         TreeNode root = new TreeNode(preorder[preStart]);
+         root.left = build(preorder, preStart+1, preStart+leftLength, inorder, inStart, rootIndex-1);
+         // 这里竟然错把rightLength写成了leftLength
+         root.right = build(preorder, preEnd-rightLength+1, preEnd, inorder, rootIndex+1, inEnd);
+         return root;
+     }
