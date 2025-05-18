@@ -271,4 +271,31 @@ public class LC142_linked_list_cycle_ii {
     }
 //这个印象比较深刻，快慢指针，快走2，慢走1，找到相遇点，慢再从head开始，快慢都走1
 //稍微纠结了一下，在判断返回null时没处理好，fast==null || fast.next==null都应返回null
+
+    //
+    public class Solution20250518 {
+        public ListNode detectCycle(ListNode head) {
+            if(head==null || head.next==null){
+                return null;
+            }
+            ListNode slow=head,fast=head;
+            while(fast!=null && fast.next!=null){
+                slow = slow.next;
+                fast = fast.next.next;
+                // 错把slow!=fast当成了结束循环的条件，应该放在这里，原因。。。
+                if(slow==fast){
+                    break;
+                }
+            }
+            if(fast==null||fast.next==null){
+                return null;
+            }
+            slow=head;
+            while(slow!=fast){
+                slow=slow.next;
+                fast = fast.next;
+            }
+            return slow;
+        }
+    }
 }

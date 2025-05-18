@@ -271,3 +271,11 @@ return slow
      所以用栈把后半部分节点压入，再逐个弹出。来自题解，用户：算法什么时候能搞定啊
     两个注意点，while(left.next!=right || left.next.next!=right),对应偶数和奇数，或的关系
     循环外，left.next=null，断开和后面的连接，否则会成环。
+
+142. 环形链表 II
+     快慢指针，快走2，慢走1，找到相遇点，慢再从head开始，快慢都走1.
+    //注意点，循环结束条件这么写，whlie(fast!=null || fast.next!=null){
+        if(fast==slow){
+            return null;
+        }
+     }
