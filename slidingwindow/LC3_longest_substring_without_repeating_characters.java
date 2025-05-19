@@ -333,4 +333,30 @@ public class LC3_longest_substring_without_repeating_characters {
             return result;
         }
     }
+
+    class Solution20250519v2 {
+        public int lengthOfLongestSubstring(String s) {
+            if(s==null || s.length()==0){
+                return 0;
+            }
+            Set<Character> set = new HashSet<>();
+            int left=0,right=0;
+            int result = 0;
+            while(right<s.length()){
+                char c = s.charAt(right);
+                //right++;
+                if(!set.contains(c)){
+                    set.add(c);
+                    //right要写到里面
+                    right++;
+                    result = Math.max(result, set.size());
+                }else{
+                    char d = s.charAt(left);
+                    left++;
+                    set.remove(d);
+                }
+            }
+            return result;
+        }
+    }
 }
