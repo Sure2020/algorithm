@@ -355,4 +355,42 @@ class LRUCache20240723 {
             cache.put(key, value);
         }
     }
+
+    class LRUCache20250520 {
+
+        LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+        int cap;
+        public LRUCache20250520(int capacity) {
+            cap = capacity;
+        }
+
+        public void mackRecent(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key,value);
+        }
+
+        public int get(int key) {
+            if(cache.containsKey(key)){
+                mackRecent(key);
+                return cache.get(key);
+            }else{
+                return -1;
+            }
+        }
+
+        public void put(int key, int value) {
+            if(cache.containsKey(key)){
+                mackRecent(key);
+                cache.put(key,value);
+                return;
+            }
+            if(cache.size()>=cap){
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+            }
+            //put要写到if外面
+            cache.put(key, value);
+        }
+    }
 }
