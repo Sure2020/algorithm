@@ -275,6 +275,7 @@ return slow
 103. 二叉树的锯齿形层次
 //坑点：1.记住LinkedList有方法可以头插或者尾插！自然就可以控制方向了，需要将临时list定义为LinkedList类型；2.
     isLeftToRight的取反，要放在for循环之外
+坑点：每层list要用链表：LinkedList<Integer> levelList = new LinkedList<>();
 
 
 *****236. 二叉树的最近公共祖先

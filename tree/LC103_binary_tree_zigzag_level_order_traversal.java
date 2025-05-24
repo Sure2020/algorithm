@@ -363,4 +363,39 @@ public class LC103_binary_tree_zigzag_level_order_traversal {
             return result;
         }
     }
+
+    class Solution20250525 {
+        public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            boolean isLeftToRight = true;
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                LinkedList<Integer> levelList = new LinkedList<>();
+                for(int i=0;i<size;i++){
+
+                    TreeNode tempNode = queue.poll();
+                    if(isLeftToRight){
+                        levelList.addLast(tempNode.val);
+                    }else{
+                        levelList.addFirst(tempNode.val);
+                    }
+
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                isLeftToRight = !isLeftToRight;
+                result.add(levelList);
+            }
+            return result;
+        }
+    }
 }
