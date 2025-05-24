@@ -309,4 +309,31 @@ public class LC102_binary_tree_level_order_traversal {
             return result;
         }
     }
+
+    class Solution20250524 {
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> result = new ArrayList<>();
+            if(root==null){
+                return result;
+            }
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                List<Integer> levelList = new ArrayList<>();
+                for(int i=0;i<size;i++){
+                    TreeNode tempNode = queue.poll();
+                    levelList.add(tempNode.val);
+                    if(tempNode.left!=null){
+                        queue.offer(tempNode.left);
+                    }
+                    if(tempNode.right!=null){
+                        queue.offer(tempNode.right);
+                    }
+                }
+                result.add(levelList);
+            }
+            return result;
+        }
+    }
 }
