@@ -239,6 +239,13 @@ return slow
      if(queue.size()>k){
          queue.poll();
      }
+
+25. K 个一组翻转链表
+坑点：
+    if(p==null){
+        //break;
+        return head;
+    }
 5. 最长回文子串。就是一次判断i,i 和 i,i+1两个起点向外扩展，能找到的最长回文子串。
 
 102. 二叉树的层序遍历，借助queue保存每一层的节点，然后遍历queue，遍历时再把当前节点的左右子节点都放入queue。

@@ -337,4 +337,33 @@ public class LC25_reverse_nodes_in_k_group {
             return previous;
         }
     }
+
+    class Solution20250524 {
+        public ListNode reverseKGroup(ListNode head, int k) {
+            if(head==null||head.next==null){
+                return head;
+            }
+            ListNode p = head;
+            for(int i=1;i<=k;i++){
+                if(p==null){
+                    //break;
+                    return head;
+                }
+                p = p.next;
+            }
+            ListNode newHead = reverseList(head, p);
+            head.next = reverseKGroup(p,k);
+            return newHead;
+        }
+        public ListNode reverseList(ListNode node1, ListNode node2){
+            ListNode previous = null,current = node1, next = null;
+            while(current != node2){
+                next=current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            return previous;
+        }
+    }
 }
