@@ -183,4 +183,41 @@ public class LC20_valid_parentheses {
             return 'e';
         }
     }
+
+    class Solution20250524 {
+        public boolean isValid(String s) {
+            if(s==null || s.length()<=1){
+                return false;
+            }
+            Stack<Character> stack = new Stack<>();
+            for(int i=0;i<s.length();i++){
+                char c = s.charAt(i);
+                if(c=='(' || c=='[' || c=='{'){
+                    stack.push(c);
+                }else{
+                    char d = getMatch(c);
+                    // 下面这组if else有讲究
+                    if(!stack.isEmpty() && d==stack.peek()){
+                        stack.pop();
+                    }else{
+                        return false;
+                    }
+                }
+            }
+            if(stack.isEmpty()){
+                return true;
+            }
+            return false;
+        }
+        public char getMatch(char c){
+            if(c==')'){
+                return '(';
+            }else if(c==']'){
+                return '[';
+            }else if(c=='}'){
+                return '{';
+            }
+            return ' ';
+        }
+    }
 }
