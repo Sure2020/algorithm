@@ -261,6 +261,7 @@ return slow
     //mid小于left，mid在断崖右边，mid---right递增
         //mid<target<right,收缩左边界
         //否则收缩右边界
+坑点：right = num.length-1，忘了-1
 
 103. 二叉树的锯齿形层次
 //坑点：1.记住LinkedList有方法可以头插或者尾插！自然就可以控制方向了，需要将临时list定义为LinkedList类型；2.
