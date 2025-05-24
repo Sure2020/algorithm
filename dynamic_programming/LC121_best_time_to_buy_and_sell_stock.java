@@ -56,4 +56,15 @@ public class LC121_best_time_to_buy_and_sell_stock {
             return result;
         }
     }
+    class Solution20250525 {
+        public int maxProfit(int[] prices) {
+            // cost默认值要搞个大值
+            int result = 0,cost=Integer.MAX_VALUE;
+            for(int i=0;i<prices.length;i++){
+                cost = Math.min(prices[i], cost);
+                result = Math.max(result, prices[i]-cost);
+            }
+            return result;
+        }
+    }
 }
