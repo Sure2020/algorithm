@@ -393,4 +393,40 @@ class LRUCache20240723 {
             cache.put(key, value);
         }
     }
+
+    class LRUCache20250524 {
+        int cap = 0;
+        LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+
+        public LRUCache20250524(int capacity) {
+            cap = capacity;
+        }
+        public void mackRecent(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key,value);
+        }
+
+        public int get(int key) {
+            if(!cache.containsKey(key)){
+                return -1;
+            }
+            mackRecent(key);
+            return cache.get(key);
+        }
+
+        public void put(int key, int value) {
+            if(cache.containsKey(key)){
+                mackRecent(key);
+                cache.put(key,value);
+                return ;
+            }
+            if(cache.size()>=cap){
+                //看了labuladong知道了，链表头部元素，就是最久没使用的，也就是，链表采用的是尾插法
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+            }
+            cache.put(key,value);
+        }
+    }
 }
