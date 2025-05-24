@@ -198,4 +198,18 @@ public class LC215_kth_largest_element_in_an_array {
             return queue.peek();
         }
     }
+
+    class Solution20250524 {
+        public int findKthLargest(int[] nums, int k) {
+            PriorityQueue<Integer> queue = new PriorityQueue<>((a,b)->a-b);
+            for(int i=0;i<nums.length;i++){
+                queue.offer(nums[i]);
+                //这里不要写>=k,要时刻清楚要干嘛，而不是机械地去输出
+                if(queue.size()>k){
+                    queue.poll();
+                }
+            }
+            return queue.peek();
+        }
+    }
 }
