@@ -28,6 +28,7 @@ public class LC236_lowest_common_ancestor_of_a_binary_tree {
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
             return dfs(root, p.val, q.val);
         }
+
         public TreeNode dfs(TreeNode root, int val1, int val2){
             if(root ==null){
                 return null;
@@ -238,6 +239,23 @@ p 和 q 在不同子树中
             TreeNode left = lowestCommonAncestor(root.left,p,q);
             TreeNode right = lowestCommonAncestor(root.right,p,q);
             //p和q在子树异侧，则root就是所求
+            if(left!=null && right!=null){
+                return root;
+            }
+            return left!=null?left:right;
+        }
+    }
+
+    class Solution20250525 {
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+            if(root==null){
+                return null;
+            }
+            if(root==p||root==q){
+                return root;
+            }
+            TreeNode left = lowestCommonAncestor(root.left, p,q);
+            TreeNode right = lowestCommonAncestor(root.right,p,q);
             if(left!=null && right!=null){
                 return root;
             }
