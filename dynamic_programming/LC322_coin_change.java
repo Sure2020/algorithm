@@ -232,4 +232,38 @@ public class LC322_coin_change {
 //一次失败的尝试，时间跨度太大，最后放弃
 //两处失误，一个是没搞清楚base case，amount<0要返回-1,amount==0要返回0;另一个是，返回结果时要判断要不要返回-1
 //其实太遗憾了，仅仅差一步之遥，就是忘了一个base case，遗憾了
+
+
+    class Solution20250525 {
+        int[] memo;
+        public int coinChange(int[] coins, int amount) {
+            memo = new int[amount+1];
+            Arrays.fill(memo, -888);
+
+            return dp(coins, amount);
+        }
+        public int dp(int[] coins, int amount){
+            if(amount==0){
+                return 0;
+            }
+            if(amount<0){
+                return -1;
+            }
+            if(memo[amount]!=-888){
+                return memo[amount];
+            }
+            int result = Integer.MAX_VALUE;
+            for(int coin:coins){
+                int subProblem = dp(coins, amount-coin);
+                if(subProblem==-1){
+                    continue;
+                }
+                // 这里要取两者的最小值，用min
+                result = Math.min(result, subProblem+1);
+            }
+            // 根据题意，没有就返回-1
+            memo[amount] = result==Integer.MAX_VALUE?-1:result;
+            return memo[amount];
+        }
+    }
 }
