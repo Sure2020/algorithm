@@ -514,4 +514,29 @@ public class LC92_reverse_linked_list_ii {
             return previous;
         }
     }
+
+    class Solution20250525 {
+        public ListNode reverseBetween(ListNode head, int left, int right) {
+            if(head==null || head.next==null){
+                return head;
+            }
+            if(left==1){
+                return reverseK(head,right);
+            }
+            head.next = reverseBetween(head.next, left-1, right-1);
+            return head;
+        }
+        public ListNode reverseK(ListNode head, int k){
+            ListNode previous=null, current=head, next=null;
+            while(k>=1){
+                next=current.next;
+                current.next=previous;
+                previous=current;
+                current=next;
+                k--;
+            }
+            head.next=next;
+            return previous;
+        }
+    }
 }
