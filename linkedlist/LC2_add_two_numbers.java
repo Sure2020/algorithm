@@ -305,4 +305,28 @@ public class LC2_add_two_numbers {
             return dummy.next;
         }
     }
+
+    class Solution20250525 {
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode();
+            ListNode p1=l1,p2=l2,p3=dummy;
+            int moreThanTen = 0;
+            while(p1!=null || p2!=null || moreThanTen>0){
+                int currentSum=moreThanTen;
+                if(p1!=null){
+                    currentSum+=p1.val;
+                    p1=p1.next;
+                }
+                if(p2!=null){
+                    currentSum+=p2.val;
+                    p2=p2.next;
+                }
+                int val = currentSum%10;
+                moreThanTen = currentSum/10;
+                p3.next=new ListNode(val);
+                p3=p3.next;
+            }
+            return dummy.next;
+        }
+    }
 }
