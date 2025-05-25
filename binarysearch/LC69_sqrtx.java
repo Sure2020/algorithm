@@ -246,4 +246,27 @@ public class LC69_sqrtx {
             }
         }
     }
+
+    class Solution20250525 {
+        public int mySqrt(int x) {
+            long left=0,right=x,mid=0;
+            while(left<=right){
+                mid=left+(right-left)/2;
+                long temp = mid*mid;
+                if(temp==x){
+                    return (int)mid;
+                }
+                if(temp>x){
+                    right=mid-1;
+                }else{
+                    left=mid+1;
+                }
+            }
+            if(mid*mid>x){
+                return (int)(mid-1);
+            }else{
+                return (int)mid;
+            }
+        }
+    }
 }
