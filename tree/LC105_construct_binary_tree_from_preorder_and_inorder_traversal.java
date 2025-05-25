@@ -221,4 +221,32 @@ public class LC105_construct_binary_tree_from_preorder_and_inorder_traversal {
             return root;
         }
     }
+
+
+    class Solution20250525 {
+        Map<Integer, Integer> map = new HashMap<>();
+        public TreeNode buildTree(int[] preorder, int[] inorder) {
+            for(int i=0;i<inorder.length;i++){
+                map.put(inorder[i], i);
+            }
+            return build(preorder, 0, preorder.length-1, inorder, 0, inorder.length-1);
+        }
+        public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd){
+            if(preStart>preEnd || inStart>inEnd){
+                return null;
+            }
+            int rootIndex = map.get(preorder[preStart]);
+            int leftLen = rootIndex-inStart;
+            int rightLen = inEnd-rootIndex;
+            TreeNode root = new TreeNode(preorder[preStart]);
+            //root.left=build(preorder, preStart+1, preStart+leftLen, inorder, inStart, inStart+leftLen);
+            root.left=build(preorder, preStart+1, preStart+leftLen, inorder, inStart, rootIndex-1);
+            //root.right=build(preorder, preEnd-rightLen, preEnd, inorder, rootIndex+1, inEnd);
+            root.right=build(preorder, preEnd-rightLen+1, preEnd, inorder, rootIndex+1, inEnd);
+            return root;
+        }
+    }
+// 总结就是左右子树的长度，和各个起点，还是有坑。
+// 左右子树的长度，就用rootIndex和inStart和inEnd算，把范围控制在中序遍历数组中
+// 各个起点，前序的起点和终点，就用起终点与len算，中序的起点和终点，就用起终点与rootIndex算。。。
 }

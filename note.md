@@ -369,7 +369,7 @@ ListNode slow=dummy,fast=head;
    // 就是1，两数之和的变种
 
 
-105. 从前序与中序遍历序列构造二叉树
+********* 105. 从前序与中序遍历序列构造二叉树
     //诀窍是借助一个三层的满二叉树，来分析各个下标
     public TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd){
          if(preStart>preEnd || inStart>inEnd){
