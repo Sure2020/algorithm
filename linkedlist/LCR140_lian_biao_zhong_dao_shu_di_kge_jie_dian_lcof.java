@@ -202,4 +202,23 @@ public class LCR140_lian_biao_zhong_dao_shu_di_kge_jie_dian_lcof {
             return slow;
         }
     }
+
+    class Solution20250525 {
+        public ListNode trainingPlan(ListNode head, int cnt) {
+            if(head==null){
+                return null;
+            }
+            ListNode slow=head,fast=head;
+            int count = 1;
+            while(count<=cnt && fast!=null){
+                fast=fast.next;
+                count++;
+            }
+            while(fast!=null){
+                fast=fast.next;
+                slow=slow.next;
+            }
+            return slow;
+        }
+    }
 }
