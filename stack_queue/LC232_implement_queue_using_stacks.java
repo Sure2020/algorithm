@@ -139,4 +139,35 @@ class MyQueue20241127 {
             return s1.isEmpty() && s2.isEmpty();
         }
     }
+
+    class MyQueue20250525 {
+        private Stack<Integer> s1 = new Stack<>();
+        private Stack<Integer> s2 = new Stack<>();
+        public MyQueue20250525() {
+
+        }
+
+        public void push(int x) {
+            s1.push(x);
+        }
+
+        public int pop() {
+            peek();
+            return s2.pop();
+        }
+
+        public int peek() {
+            if(!s2.isEmpty()){
+                return s2.peek();
+            }
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+            return s2.peek();
+        }
+
+        public boolean empty() {
+            return s1.isEmpty() && s2.isEmpty();
+        }
+    }
 }
