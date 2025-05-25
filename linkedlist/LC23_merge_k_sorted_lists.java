@@ -335,4 +335,28 @@ public class LC23_merge_k_sorted_lists {
     }
 //小顶堆
 //事后：不错，几次就调试出来了
+
+    class Solution20250525 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if(lists.length==0){
+                return null;
+            }
+            ListNode dummy = new ListNode(),p=dummy;
+            PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a,b)->(a.val-b.val));
+            for(ListNode head:lists){
+                if(head!=null){
+                    queue.offer(head);
+                }
+            }
+            while(!queue.isEmpty()){
+                ListNode tempNode = queue.poll();
+                p.next = tempNode;
+                p=p.next;
+                if(tempNode.next!=null){
+                    queue.offer(tempNode.next);
+                }
+            }
+            return dummy.next;
+        }
+    }
 }
