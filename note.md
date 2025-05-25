@@ -309,7 +309,7 @@ return slow
      }
 
 
-19. 删除链表的倒数第N个节点
+***19. 删除链表的倒数第N个节点
     用快慢指针的方式完全可以，但还可以用递归：
     //删除链表的题目，首先直接一个dummy节点写出来。。。
     //删除倒数第n个，那对于head.next,就是删除倒数第n-1个，对于某个head,就是删除自己
@@ -325,18 +325,21 @@ return slow
     //双指针
     //简单题就是思路很直接，没那么多陷阱和弯弯绕，反正按思路写完，简单调试后就过了
     //注意fast需要连续跳过重复节点，需要用while
-    82. 删除排序链表中的重复元素 II
-    //两个原则，slow要永远落后于fast，在dummy节点就开始；
-    ListNode slow=dummy,fast=head;
-    //只有当slow和fast之间没元素，slow才移动。
-        if(slow.next==fast){
-            slow = slow.next;
-        }else{
-            //跳过重复的节点，但此时slow仍没动，保持slow落后于fast
-            slow.next=fast.next;
-        }
-        //fast日常移动，在没重复节点时的移动
-        fast=fast.next;
+
+***** 82. 删除排序链表中的重复元素 II
+//两个原则，slow要永远落后于fast，在dummy节点就开始；
+ListNode slow=dummy,fast=head;
+//只有当slow和fast之间没元素，slow才移动。
+    if(slow.next==fast){
+        slow = slow.next;
+    }else{
+        //跳过重复的节点，但此时slow仍没动，保持slow落后于fast
+        slow.next=fast.next;
+    }
+    //fast日常移动，在没重复节点时的移动
+    fast=fast.next;
+
+记忆点：20250525，上面slow移动的细节
 
 
 25. K 个一组翻转链表
