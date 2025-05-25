@@ -298,4 +298,26 @@ class LC101_symmetric_tree {
             return compare(node1.left, node2.right) && compare(node1.right, node2.left);
         }
     }
+
+    class Solution20250525 {
+        public boolean isSymmetric(TreeNode root) {
+            if(root==null){
+                return false;
+            }
+            return judge(root.left, root.right);
+
+        }
+        public boolean judge(TreeNode node1, TreeNode node2){
+            if(node1==null && node2==null){
+                return true;
+            }
+            if(node1==null || node2==null){
+                return false;
+            }
+            if(node1.val != node2.val){
+                return false;
+            }
+            return judge(node1.left, node2.right) && judge(node2.left, node1.right);
+        }
+    }
 }
