@@ -410,6 +410,7 @@ ListNode slow=dummy,fast=head;
 76. 最小覆盖子串
     直接看注释
     近期的错误：缩小窗口时把left++错写成了left --。。。。。
+坑点：20250525：whlie循环的结束条件，顺势写成了left<=right，你以为你在搞二分搜索？你在遍历！
 
 
 ###top hard

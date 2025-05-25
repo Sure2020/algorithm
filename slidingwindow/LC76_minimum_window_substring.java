@@ -641,4 +641,47 @@ public class LC76_minimum_window_substring {
             return minLen==Integer.MAX_VALUE?"":s.substring(start, start+minLen);
         }
     }
+
+    class Solution20250525 {
+        public String minWindow(String s, String t) {
+            Map<Character, Integer> window = new HashMap<>();
+            Map<Character, Integer> need = new HashMap<>();
+            for(char c:t.toCharArray()){
+                need.put(c, need.getOrDefault(c,0)+1);
+            }
+            int left=0,right=0;
+            int valid=0;
+            //服了，这里竟然把minLen赋值成MIN_VALUE
+            int start=0,minLen=Integer.MAX_VALUE;
+            // 这里顺势写成了left<=right，你以为你在搞二分搜索？你在遍历！
+            while(right<s.length()){
+                char c = s.charAt(right);
+                right++;
+
+                if(need.containsKey(c)){
+                    window.put(c, window.getOrDefault(c, 0)+1);
+                    if(window.get(c).equals(need.get(c))){
+                        valid++;
+                    }
+                }
+                while(valid==need.size()){
+                    if(right-left<minLen){
+                        minLen=right-left;
+                        start=left;
+                    }
+                    char d = s.charAt(left);
+                    left++;
+
+                    if(need.containsKey(d)){
+                        if(window.get(d).equals(need.get(d))){
+                            valid--;
+                        }
+                        window.put(d, window.get(d)-1);
+                    }
+                }
+            }
+
+            return minLen==Integer.MAX_VALUE?"":s.substring(start, start+minLen);
+        }
+    }
 }
