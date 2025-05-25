@@ -296,4 +296,28 @@ public class LC415_add_strings {
             return sb.reverse().toString();
         }
     }
+
+    class Solution20250525 {
+        public String addStrings(String num1, String num2) {
+            int index1=num1.length()-1,index2=num2.length()-1;
+            int moreThanTen=0;
+            StringBuilder sb = new StringBuilder();
+            while(index1>=0 || index2>=0 || moreThanTen >0){
+                int currentSum = moreThanTen;
+
+                if(index1>=0){
+                    currentSum += (num1.charAt(index1)-'0');
+                    index1--;
+                }
+                if(index2>=0){
+                    currentSum += (num2.charAt(index2)-'0');
+                    index2--;
+                }
+                int currentValue = currentSum%10;
+                moreThanTen = currentSum/10;
+                sb.append(currentValue);
+            }
+            return sb.reverse().toString();
+        }
+    }
 }
