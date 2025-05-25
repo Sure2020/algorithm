@@ -283,4 +283,22 @@ public class LC19_remove_nth_node_from_end_of_list {
             return dummy.next;
         }
     }
+
+    class Solution20250525 {
+        int count=0;
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if(head==null){
+                return null;
+            }
+            ListNode dummy=new ListNode();
+            dummy.next=head;
+            head.next=removeNthFromEnd(head.next,n);
+            count++;
+            if(count==n){
+                return head.next;
+            }
+            //相当于return head
+            return dummy.next;
+        }
+    }
 }
