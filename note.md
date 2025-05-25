@@ -294,6 +294,10 @@ return slow
      所以用栈把后半部分节点压入，再逐个弹出。来自题解，用户：算法什么时候能搞定啊
     两个注意点，while(left.next!=right || left.next.next!=right),对应偶数和奇数，或的关系
     循环外，left.next=null，断开和后面的连接，否则会成环。
+记忆点：利用栈，节点全压入栈，再取出，达到倒叙的目的。后面再拼接
+坑点：或的关系：while(left.next!=right || left.next.next!=right)。
+    解释：当有4个节点，循环结束一次后，其实此时是left.next.next=right的，还要继续循环处理一次。所以要或
+
 
 142. 环形链表 II
      快慢指针，快走2，慢走1，找到相遇点，慢再从head开始，快慢都走1.

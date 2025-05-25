@@ -283,4 +283,27 @@ public class LC143_reorder_list {
             left.next=null;
         }
     }
+
+    class Solution20250525 {
+        public void reorderList(ListNode head) {
+            if(head==null || head.next==null){
+                return;
+            }
+            Stack<ListNode> stack = new Stack<>();
+            ListNode p = head;
+            while(p!=null){
+                stack.push(p);
+                p=p.next;
+            }
+            ListNode left=head,right=null;
+            //注意是或的关系。当有4个节点，循环结束一次后，其实此时是left.next.next=right的，还要继续循环处理一次。所以要或
+            while(left.next!=right || left.next.next!=right){
+                right = stack.pop();
+                right.next = left.next;
+                left.next=right;
+                left=right.next;
+            }
+            left.next=null;
+        }
+    }
 }
