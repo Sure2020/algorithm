@@ -68,4 +68,39 @@ public class LC225_implement_stack_using_queues {
  * int param_3 = obj.top();
  * boolean param_4 = obj.empty();
  */
+
+
+    class MyStack20250525 {
+        Queue<Integer> queue = new LinkedList<>();
+        int temp_top;
+
+        public MyStack20250525() {
+
+        }
+
+        public void push(int x) {
+            queue.offer(x);
+            //把这个忘了
+            temp_top=x;
+        }
+
+        public int pop() {
+            int count = queue.size();
+            while(count>2){
+                queue.offer(queue.poll());
+                count--;
+            }
+            temp_top=queue.peek();
+            queue.offer(queue.poll());
+            return queue.poll();
+        }
+
+        public int top() {
+            return temp_top;
+        }
+
+        public boolean empty() {
+            return queue.isEmpty();
+        }
+    }
 }
