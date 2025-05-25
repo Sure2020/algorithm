@@ -205,4 +205,28 @@ public class LC124_binary_tree_maximum_path_sum {
         }
     }
 //分解的递归。有一处我记得是返回0
+
+    class Solution20250525 {
+        // 这里，求最值时，尤其注意result的默认值，要取边界，不要随便等于0
+        int result = Integer.MIN_VALUE;
+        public int maxPathSum(TreeNode root) {
+            if(root==null){
+                return 0;
+            }
+            dfs(root);
+            return result;
+        }
+        public int dfs(TreeNode root){
+            if(root==null){
+                return 0;
+            }
+            int left=dfs(root.left);
+            int right = dfs(root.right);
+            int innerMax = root.val+left+right;
+            result = Math.max(result, innerMax);
+
+            int outerMax = Math.max(left, right)+root.val;
+            return outerMax>0?outerMax:0;
+        }
+    }
 }
