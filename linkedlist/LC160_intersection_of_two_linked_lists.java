@@ -340,4 +340,35 @@ public class LC160_intersection_of_two_linked_lists {
             return p1;
         }
     }
+
+    public class Solution20250525 {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            if(headA==null || headB==null){
+                return null;
+            }
+            ListNode p1 = headA,p2=headB;
+            while(p1!=p2){
+                // 这里每次只能走一步
+                // if(p1==null){
+                //     p1=headB;
+                // }
+                // if(p2==null){
+                //     p2=headA;
+                // }
+                // p1=p1.next;
+                // p2=p2.next;
+                if(p1==null){
+                    p1=headB;
+                }else{
+                    p1=p1.next;
+                }
+                if(p2==null){
+                    p2=headA;
+                }else{
+                    p2=p2.next;
+                }
+            }
+            return p1;
+        }
+    }
 }

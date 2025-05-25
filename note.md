@@ -170,6 +170,7 @@ top100,easy
 
 160. 相交链表,labuladong的思路，拼起来，那么不论最后相交与否，结束条件都是p1==p2.while(p1!=p2)即可。最后返回p1
     2025.05.13补充：要确保循环一次只走一步，比如只有当p1==null，才p1=headB，!=null，就向后走。而不能if(p1==null){p1=headB;} p1=p1.next;
+坑点：过了几天再次踩坑，详见上一行字
 
 94. 二叉树的中序遍历,喜欢
 704. 二分查找，left,right,mid  while(left<=right),开始找。
