@@ -429,4 +429,41 @@ class LRUCache20240723 {
             cache.put(key,value);
         }
     }
+
+    class LRUCache20250530 {
+        int cap;
+        LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+        public LRUCache20250530(int capacity) {
+            cap = capacity;
+        }
+
+        public void makeRecent(int key){
+            int value = cache.get(key);
+            cache.remove(key);
+            cache.put(key, value);
+        }
+
+        public int get(int key) {
+            if(cache.containsKey(key)){
+                makeRecent(key);
+                return cache.get(key);
+            }
+            return -1;
+        }
+
+        public void put(int key, int value) {
+            if(cache.containsKey(key)){
+                makeRecent(key);
+                cache.put(key,value);
+                return;
+            }
+            if(cap<=cache.size()){
+                int oldestKey = cache.keySet().iterator().next();
+                cache.remove(oldestKey);
+            }
+            //makeRecent(key);
+            //链表采用的是尾插法，所以尾部是最新的，这里不用mackRecent
+            cache.put(key,value);
+        }
+    }
 }
