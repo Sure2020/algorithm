@@ -233,4 +233,29 @@ public class LC5_longest_palindromic_substring {
             return s.substring(left+1, right);
         }
     }
+
+    class Solution20250530 {
+        public String longestPalindrome(String s) {
+            if(s.length()==0){
+                return "";
+            }
+            String result = "";
+            for(int i=0;i<s.length();i++){
+                String s1 = find(s,i,i);
+                String s2 = find(s,i,i+1);
+                result = result.length()>s1.length()?result:s1;
+                result = result.length()>s2.length()?result:s2;
+            }
+            return result;
+        }
+        public String find(String s, int i1, int i2){
+            int left=i1, right=i2;
+            while(left>=0 && right<s.length() && s.charAt(left)==s.charAt(right)){
+                left--;
+                right++;
+            }
+            return s.substring(left+1, right);
+        }
+
+    }
 }
