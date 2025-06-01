@@ -415,6 +415,13 @@ ListNode slow=dummy,fast=head;
 *****322. 零钱兑换
     动态规划的思路，用递归的思路吧，比较好理解
 坑点：20250601，result只对当前递归生效，不要搞成全局；result默认取int最大值，因为要求最小值
+*****300,最长递增子序列
+    很难没错了，直接记忆吧，看labuladong的思路。关键：
+for(int j=0;j<i;j++){
+    if(nums[i]>nums[j]){
+        dp[i]=Math.max(dp[i],dp[j]+1);
+    }
+}
 
 ###top hard
 23. 合并 K 个升序链表
