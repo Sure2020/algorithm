@@ -414,6 +414,7 @@ ListNode slow=dummy,fast=head;
 
 *****322. 零钱兑换
     动态规划的思路，用递归的思路吧，比较好理解
+坑点：20250601，result只对当前递归生效，不要搞成全局；result默认取int最大值，因为要求最小值
 
 ###top hard
 23. 合并 K 个升序链表
