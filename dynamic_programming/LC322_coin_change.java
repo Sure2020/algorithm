@@ -330,4 +330,34 @@ public class LC322_coin_change {
         }
     }
 
+    class Solution20250605 {
+        int[] memo;
+        public int coinChange(int[] coins, int amount) {
+            memo = new int[amount+1];
+            Arrays.fill(memo, -999);
+            return dp(coins, amount);
+        }
+        public int dp(int[] coins, int amount){
+            if(amount==0){
+                return 0;
+            }
+            if(amount<0){
+                return -1;
+            }
+            if(memo[amount]!=-999){
+                return memo[amount];
+            }
+            int result = Integer.MAX_VALUE;
+            for(int coin:coins){
+                int subProblem = dp(coins, amount-coin);
+                if(subProblem==-1){
+                    continue;
+                }
+                result = Math.min(result, subProblem+1);
+            }
+            memo[amount] = result==Integer.MAX_VALUE?-1:result;
+            return memo[amount];
+        }
+    }
+
 }
