@@ -84,6 +84,31 @@ public class Ali_DP {
         return false;
     }
 
+    //practise
+    static Map<String, Boolean> memo3 = new HashMap<>();
+    public static boolean canFormString3(String str, List<String> dict) {
+        return canForm3(str,dict);
+    }
+    public static boolean canForm3(String str, List<String> dict){
+        if(str.length()==0){
+            return true;
+        }
+        if(memo3.containsKey(str)){
+            return memo3.get(str);
+        }
+        for(String word: dict){
+            if(str.startsWith(word)){
+                String remaining = str.substring(word.length());
+                if(canForm3(remaining, dict)){
+                    memo3.put(str, true);
+                    return true;
+                }
+            }
+        }
+        memo3.put(str, false);
+        return false;
+    }
+
     public static void main(String[] args) {
         String str = "leetcode";
         List<String> dict = Arrays.asList("leet", "code");
